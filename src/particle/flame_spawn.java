@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
+import static main.display.correct_int;
 
 public class flame_spawn {
     public int time,time_max,time_delete,time_sound,brightness;
@@ -33,7 +34,7 @@ public class flame_spawn {
         this.time -= 1;
         if(this.time <0){
             this.time = this.time_max;
-            Main.flame_obj.add(new flame((int)((this.x+ rand.rand(-20,20))/1.24),(int)((this.y+rand.rand(-20,20))/1.24)));
+            Main.flame_obj.add(new flame((int)((this.x+ rand.rand(-20,20))/correct_int),(int)((this.y+rand.rand(-20,20))/correct_int)));
         }
     }
     public void clear_obj(int i, ArrayList<flame_spawn>obj){
@@ -53,7 +54,7 @@ public class flame_spawn {
     }
     public void center_render(){
         double[]xy = Main.rc.get(0).render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]/1.24* Game.zoom);
-        this.y_rend = (int)(xy[1]/1.24* Game.zoom);
+        this.x_rend = (int)(xy[0]/correct_int* Game.zoom);
+        this.y_rend = (int)(xy[1]/correct_int* Game.zoom);
     }
 }

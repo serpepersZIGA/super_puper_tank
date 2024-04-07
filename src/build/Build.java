@@ -8,6 +8,8 @@ import particle.particle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static main.display.correct_int;
+
 public abstract class Build implements Serializable {
     public double rotation;
     public int width,height,x,y,time_flame,width_2,height_2,x_rend,y_rend,width_render,height_render,brightness_max = 240,brightness;
@@ -32,10 +34,10 @@ public abstract class Build implements Serializable {
                 int z = rand.rand(1,4);
                 this.time_flame -= 1;
                 switch (z){
-                    case 1->{part.add(new flame_static(this.x/1.23+rand.rand(-this.width_2,this.width_2),this.y/1.23+this.height_2));}
-                    case 2->{part.add(new flame_static(this.x/1.23+rand.rand(-this.width_2,this.width_2),this.y/1.23-this.height_2));}
-                    case 3->{part.add(new flame_static(this.x/1.23+this.width_2,this.y/1.23+rand.rand(-this.height_2,this.height_2)));}
-                    case 4->{part.add(new flame_static(this.x/1.23-this.width_2/2,this.y/1.23+rand.rand(-this.height_2,this.height_2)));}
+                    case 1->{part.add(new flame_static(this.x/correct_int+rand.rand(-this.width_2,this.width_2),this.y/correct_int+this.height_2));}
+                    case 2->{part.add(new flame_static(this.x/correct_int+rand.rand(-this.width_2,this.width_2),this.y/correct_int-this.height_2));}
+                    case 3->{part.add(new flame_static(this.x/correct_int+this.width_2,this.y/correct_int+rand.rand(-this.height_2,this.height_2)));}
+                    case 4->{part.add(new flame_static(this.x/correct_int-this.width_2/2,this.y/correct_int+rand.rand(-this.height_2,this.height_2)));}
                 }
             }
         }

@@ -12,6 +12,7 @@ public class display {
     public static Game data;
     public static JLabel paint_1,paint_2,get_mouse;
     public static JPanel panel;
+    public static double correct_int = 1.25;
     public static void display_create() throws IOException {
         panel = new JPanel();
         paint_1 = new JLabel();
@@ -19,6 +20,7 @@ public class display {
         get_mouse = new JLabel();
         display = new JFrame();
         display.setSize(width,height);
+        System.out.println(display.getSize());
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         data = new Game();
         display.add(paint_1);

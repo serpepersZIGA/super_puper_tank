@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
+import static main.display.correct_int;
 
 public abstract class Bull implements Serializable {
     public double x,y,speed,damage,penetration,rotation,r,g,b,speed_x,speed_y,damage_fragment,penetration_fragment,t_damage;
@@ -42,7 +43,7 @@ public abstract class Bull implements Serializable {
         if(this.time<=0){
             for(int i3 = 0;i3<this.amount_fragment;i3++){
             Main.bull_obj.add(new bull_fragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
-            Main.bang_obj.add(new bang(this.x/1.23,this.y/1.23,this.color,4));
+            Main.bang_obj.add(new bang(this.x/correct_int,this.y/correct_int,this.color,4));
             this.clear_sost = 1;}
 
     }
@@ -70,7 +71,7 @@ public abstract class Bull implements Serializable {
     }
     public void spawn_acid(){
         if(1 == rand.rand(1,4)){
-            Main.liquid_obj.add(new acid(this.x/1.23,this.y/1.23));
+            Main.liquid_obj.add(new acid(this.x/correct_int,this.y/correct_int));
         }
     }
     public void clear(int i){
@@ -139,7 +140,7 @@ public abstract class Bull implements Serializable {
                     for (int i3 = 0; i3 < this.amount_fragment; i3++) {
                         Main.bull_obj.add(new bull_fragment(this.x, this.y, this.damage_fragment, this.penetration_fragment, this.type_team));
                     }
-                    Main.bang_obj.add(new bang(this.x / 1.23, this.y / 1.23, this.color, 4));
+                    Main.bang_obj.add(new bang(this.x / correct_int, this.y / correct_int, this.color, 4));
                     this.clear_sost = 1;
                 }
             }
@@ -191,7 +192,7 @@ public abstract class Bull implements Serializable {
         boolean z;
         for(int i2 = 0;i2<obj_2.size();i2++) {
 
-            z = rect_bull((int)obj_2.get(i2).x, (int)obj_2.get(i2).y,(int)(obj_2.get(i2).corpus_width/1.23),(int)(obj_2.get(i2).corpus_height/1.23),(int)this.x,(int)this.y,
+            z = rect_bull((int)obj_2.get(i2).x, (int)obj_2.get(i2).y,(int)(obj_2.get(i2).corpus_width/correct_int),(int)(obj_2.get(i2).corpus_height/correct_int),(int)this.x,(int)this.y,
                     this.size,-obj_2.get(i2).rotation_corpus);
             if (z && this.type_team != obj_2.get(i2).team) {
                 obj_2.get(i2).time_trigger_bull_bot = obj_2.get(i2).time_trigger_bull;
@@ -211,7 +212,7 @@ public abstract class Bull implements Serializable {
     public void metod_mortar(){
         for(int i3 = 0;i3<this.amount_fragment;i3++){
             Main.bull_obj.add(new bull_fragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
-        Main.bang_obj.add(new bang(this.x/1.23,this.y/1.23,this.color,4));
+        Main.bang_obj.add(new bang(this.x/correct_int,this.y/correct_int,this.color,4));
         this.clear_sost = 1;
 
     }

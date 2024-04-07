@@ -5,6 +5,8 @@ import main.Main;
 
 import java.awt.*;
 
+import static main.display.correct_int;
+
 public class bang extends particle {
     public bang(double x, double y, Color color,double size){
         this.x = x;
@@ -25,6 +27,6 @@ public class bang extends particle {
         center_render();
         //this.x += this.size/2;
         //this.y += this.size/2;
-        g.drawOval((int)(((this.x_rend-(this.size_2* Game.zoom))/1.23)),(int)(((this.y_rend-(this.size_2* Game.zoom))/1.23)),this.size_render,this.size_render);
+        g.drawOval((int)(((this.x_rend-(this.size_2* Game.zoom))/correct_int)),(int)(((this.y_rend-(this.size_2* Game.zoom))/correct_int)),this.size_render,this.size_render);
     }
 }

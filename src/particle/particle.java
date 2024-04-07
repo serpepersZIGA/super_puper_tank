@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static java.sql.Types.NULL;
+import static main.display.correct_int;
 
 public abstract class particle {
     public double x,y,size,size_2,speed_x,speed_y,r,g,b,interval_rise_size,size_3,v;
@@ -52,7 +53,7 @@ public abstract class particle {
         }
     }
     public void center_render(){
-        double[]xy = Main.rc.get(0).render_obj(this.x*1.24,this.y*1.24);
+        double[]xy = Main.rc.get(0).render_obj(this.x*correct_int,this.y*correct_int);
         this.x_rend = (int)(xy[0]* Game.zoom);
         this.y_rend = (int)(xy[1]* Game.zoom);
         this.size_render = Main.rc.get(0).render_size(this.size);

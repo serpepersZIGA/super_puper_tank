@@ -1,13 +1,15 @@
 package block;
 
+import main.Game;
+import main.Main;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import main.Main;
-import main.Game;
 
 import static java.lang.StrictMath.pow;
 import static java.lang.StrictMath.sqrt;
 import static java.sql.Types.NULL;
+import static main.display.correct_int;
 
 public abstract class Block {
     public int x,y,x_rend,y_rend;
@@ -17,7 +19,7 @@ public abstract class Block {
 
     public void update(Graphics2D g){
         center_render();
-        g.drawImage(this.img,(int)((this.x_rend/1.24)* Game.zoom),(int)((this.y_rend/1.24)* Game.zoom),(int)(this.width* Game.zoom),(int)(this.height* Game.zoom),null);
+        g.drawImage(this.img,(int)((this.x_rend/correct_int)* Game.zoom),(int)((this.y_rend/correct_int)* Game.zoom),(int)(this.width* Game.zoom),(int)(this.height* Game.zoom),null);
 
     }
     public void all_action(Graphics2D g){
@@ -26,7 +28,7 @@ public abstract class Block {
     public void update_air(Graphics2D g) {
         this.radius = NULL;
         for (i = 0; i < Main.flame_spawn.size(); i++) {
-            int gh = (int) sqrt(pow(Main.flame_spawn.get(i).x_rend * 1.24 - this.x, 2) + pow(Main.flame_spawn.get(i).y_rend * 1.24 - this.y, 2));
+            int gh = (int) sqrt(pow(Main.flame_spawn.get(i).x_rend * correct_int - this.x, 2) + pow(Main.flame_spawn.get(i).y_rend * correct_int - this.y, 2));
             if (this.radius == NULL || this.radius > gh) {
                 this.radius = gh;
 

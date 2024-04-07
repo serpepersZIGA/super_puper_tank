@@ -27,6 +27,7 @@ import java.util.Objects;
 
 import static java.lang.StrictMath.*;
 import static java.sql.Types.NULL;
+import static main.display.correct_int;
 
 public abstract class Transport implements Serializable {
 
@@ -1418,17 +1419,17 @@ public abstract class Transport implements Serializable {
         }
     }
     public void borders_display(){
-        if(this.x> display.width*1.23+10){
+        if(this.x> display.width*correct_int+10){
             this.x = 0;
         }
         else if(this.x<-10){
-            this.x = display.width*1.23+10;
+            this.x = display.width*correct_int+10;
         }
-        if(this.y> display.height*1.23+10){
+        if(this.y> display.height*correct_int+10){
             this.y = 0;
         }
         else if(this.y<-10){
-            this.y = display.height*1.23+10;
+            this.y = display.height*correct_int+10;
         }
     }
 

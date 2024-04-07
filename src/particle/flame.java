@@ -5,6 +5,8 @@ import metod.rand;
 
 import java.awt.*;
 
+import static main.display.correct_int;
+
 public class flame extends particle {
     public flame(double x, double y){
         this.x = x;
@@ -33,7 +35,7 @@ public class flame extends particle {
     public void update(Graphics2D g){
         center_render();
         g.setColor(this.color);
-        g.fillOval((int)(this.x_rend/1.24),(int)(this.y_rend/1.24),this.size_render,this.size_render);
+        g.fillOval((int)(this.x_rend/correct_int),(int)(this.y_rend/correct_int),this.size_render,this.size_render);
     }
 
 }
