@@ -130,6 +130,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
             }
         }
         for (i = 0; i< Main.BuildingList.size(); i++){
+            PacketBuildServer(i);
             Main.BuildingList.get(i).all_action(i);}
         Render.end();
 
@@ -173,16 +174,8 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
             for (i = 0; i < Main.PlayerList.size(); i++) {
                 packet_player_server();
             }
-            PacketDebris.clear();
-            for (i = 0; i < Main.DebrisList.size(); i++) {
-                packet_debris_server();
-            }
             EnumerationList = false;
         }
-        for(i = 0;i< BuildingList.size();i++){
-            PacketBuildServer(i);
-        }
-
         PacketServer.debris = PacketDebris;
         PacketServer.soldat = PacketSoldat;
         PacketServer.player = PacketPlayer;

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.BuildingList;
+import static com.mygdx.game.main.Main.PlayerList;
 import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
 
 public class ServerMain extends Listener {
@@ -101,19 +102,20 @@ public class ServerMain extends Listener {
             Main.MouseYClient = ((Packet_client) p).mouse_y;
             Main.RightMouseClient = ((Packet_client) p).right_mouse;
             Main.LeftMouseClient = ((Packet_client) p).left_mouse;
-            if(Main.PlayerList.size() >1) {
-                Main.PlayerList.get(1).rotation_tower = ((Packet_client) p).rotation_tower_client;
+            for(int i2 = 0;i2<PlayerList.size();i2++) {
+                if (!PlayerList.get(i2).host) {
+                    Main.PlayerList.get(i2).rotation_tower = ((Packet_client) p).rotation_tower_client;
 
-                if (Main.PlayerList.get(1).tower_obj.size() < ((Packet_client) p).rot_tower.size()) {
-                    for (int i = 0; i < Main.PlayerList.get(1).tower_obj.size(); i++) {
-                        Main.PlayerList.get(1).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
-                    }
-                }
-                else{
-                    for (int i = 0; i < ((Packet_client) p).rot_tower.size(); i++) {
-                        Main.PlayerList.get(1).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
-                    }
+                    if (Main.PlayerList.get(i2).tower_obj.size() < ((Packet_client) p).rot_tower.size()) {
+                        for (int i = 0; i < Main.PlayerList.get(i2).tower_obj.size(); i++) {
+                            Main.PlayerList.get(i2).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
+                        }
+                    } else {
+                        for (int i = 0; i < ((Packet_client) p).rot_tower.size(); i++) {
+                            Main.PlayerList.get(i2).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
+                        }
 
+                    }
                 }
             }
         }

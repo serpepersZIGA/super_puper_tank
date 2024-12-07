@@ -1177,9 +1177,9 @@ public abstract class Transport{
     }
     protected void transport_delete(int i,ArrayList<Transport>obj){
         if(this.hp<0){
-            event_dead();
             Main.DebrisList.add(new DebrisTransport(this.x,this.y,this.rotation_corpus,this.speed,this.rotation_inert,this.speed_inert,
                     this.corpus_img,this.corpus_width,this.corpus_height,this.type_unit));
+            event_dead();
             obj.remove(i);
             EnumerationList = true;
         }

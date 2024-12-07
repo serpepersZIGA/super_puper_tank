@@ -134,7 +134,7 @@ public class ClientMain extends Listener{
 
             PacketDebris = ((PackerServer) p).debris;
             if (PacketDebris.size() == DebrisList.size()) {
-                for (int i = 0; i < PacketDebris.size(); i++) {
+                for (int i = 0; i < DebrisList.size(); i++) {
                     debris_data(i);
                 }
             } else {
@@ -319,6 +319,24 @@ public class ClientMain extends Listener{
             case TrackSoldatT1:
                 DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, TrackSoldatT1.corpus_img,
                         TrackSoldatT1.corpus_width, TrackSoldatT1.corpus_height, UnitType.TrackSoldatT1));
+                break;
+
+
+            case PlayerFlameT1:
+                DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PlayerCannonFlame.corpus_img,
+                        PlayerCannonFlame.corpus_width, PlayerCannonFlame.corpus_height, UnitType.PlayerFlameT1));
+                break;
+            case PlayerT1:
+                DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PlayerCannonBullTank.corpus_img,
+                        PlayerCannonBullTank.corpus_width, PlayerCannonBullTank.corpus_height, UnitType.PlayerT1));
+                break;
+            case PlayerAcidT1:
+                DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PlayerCannonAcid.corpus_img,
+                        PlayerCannonAcid.corpus_width, PlayerCannonAcid.corpus_height, UnitType.PlayerAcidT1));
+                break;
+            case PlayerMortarT1:
+                DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PlayerCannonMortar.corpus_img,
+                        PlayerCannonMortar.corpus_width, PlayerCannonMortar.corpus_height, UnitType.PlayerMortarT1));
                 break;
         }
     }

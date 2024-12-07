@@ -73,8 +73,7 @@ public class Main extends ApplicationAdapter {
 	public static boolean EnumerationList;
 	public static ActionGame ActionGame;
 	public static boolean GameStart;
-	public static boolean GameHost = true;
-	//public static boolean GameHost = false;
+	public static boolean GameHost;
 	public static TransportRegister TransportRegister;
 	public static Content.Soldat.SoldatRegister SoldatRegister;
 	public static int width_2,height_2,x_block,y_block,width_block= 50,height_block =50,width_block_air= 15,height_block_air =15,quantity_width,quantity_height;
