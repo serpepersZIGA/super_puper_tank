@@ -1,0 +1,88 @@
+package com.mygdx.game.menu.button;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.mygdx.game.main.Main;
+import com.mygdx.game.method.Keyboard;
+
+import static com.mygdx.game.main.Main.*;
+import static java.lang.StrictMath.*;
+
+public abstract class Button {
+    public int x,y,width,height,radius,XTXT,YTXT;
+    public static float[] RGBButton1,RGBButton2,RGBButton3,RGBTotal;
+    public String txt;
+    public byte TypeClick;
+    public byte ConfigMenu = 0;
+    public boolean condition;
+    public boolean TipOff;
+    public int widthXY,heightXY,radiusX,radiusY;
+    public void render(int i){
+    }
+    protected void ActionButton(){
+
+    }
+    protected void DataRect(){
+        widthXY = x+width;
+        heightXY = y+height;
+        XTXT = x+width/3;
+        YTXT = (int) (y+height/1.5);
+        RGBTotal = RGBButton3;
+    }
+    protected void DataCircle(){
+        radiusX = x+radius/2;
+        radiusY = y+radius/2;
+        RGBTotal = RGBButton3;
+    }
+    protected void XYDetectedButtonRect(){
+        if(x< Main.MouseX &widthXY>Main.MouseX & y<Main.MouseY & heightXY>Main.MouseY){
+            TipOff = true;
+            RGBTotal = RGBButton2;
+        }
+        else{
+            RGBTotal = RGBButton3;
+            TipOff = false;
+        }
+    }
+    protected void XYDetectedButtonCircle(){
+        if(sqrt(pow((x-Main.MouseX),2)+pow((y-Main.MouseY),2))<radius){
+            TipOff = true;
+            RGBTotal = RGBButton2;
+        }
+        else{
+            RGBTotal = RGBButton3;
+            TipOff = false;
+        }
+    }
+    protected void ActionButton1(){
+        if(TipOff & Main.LeftMouseClick){
+            condition = true;
+            Main.LeftMouseClick = false;
+            RGBTotal = RGBButton1;
+        }
+    }
+    protected void ActionButton2(){
+        if(TipOff & Main.LeftMouseClick & !condition){
+            condition = true;
+            Main.LeftMouseClick = false;
+        }
+        else if(TipOff & Main.LeftMouseClick & condition){
+            condition = false;
+            Main.LeftMouseClick = false;
+        }
+    }
+    protected void RenderButtonRect(){
+        Render.setColor(RGBTotal[0],RGBTotal[1],RGBTotal[2],1f);
+        Render.rect(this.x,this.y,this.width,this.height);
+    }
+    protected void RenderButtonCircle(){
+        Render.setColor(RGBTotal[0],RGBTotal[1],RGBTotal[2],1f);
+        Render.circle(this.x,this.y,radius);
+    }
+    public void TXTRender(){
+        font.setColor(0.1f,0.9f,0.8f,1f);
+        font.draw(Batch,txt,XTXT,YTXT);
+    }
+
+}
