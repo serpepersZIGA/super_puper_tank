@@ -7,7 +7,7 @@ import static Data.DataColor.*;
 
 
 public class FlameStatic extends Particle {
-    public FlameStatic(double x, double y){
+    public FlameStatic(float x, float y){
         this.x = x;
         this.y = y;
         this.size = 14+rand.rand(10);

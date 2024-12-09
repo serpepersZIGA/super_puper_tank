@@ -4,18 +4,19 @@ import Content.Particle.Flame;
 import Content.Particle.FlameParticle;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.Method;
-import com.mygdx.game.method.Sound;
+import com.mygdx.game.method.SoundPlay;
 import com.mygdx.game.method.move;
 import com.mygdx.game.method.rand;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
-import static java.lang.StrictMath.pow;
+import static com.mygdx.game.method.Option.SoundConst;
+import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 import static java.sql.Types.NULL;
 
 public abstract class Particle {
-    public double x,y,size,size_2,speed_x,speed_y,interval_rise_size,size_3;
+    public float x,y,size,size_2,speed_x,speed_y,interval_rise_size,size_3;
     protected float r;
     protected float g;
     protected float b;
@@ -31,7 +32,7 @@ public abstract class Particle {
     public int x_rend,y_rend,size_render;
     public float[]rgb;
 
-    protected void timer(int i, ArrayList<Particle>obj){
+    protected void timer(int i, LinkedList<Particle> obj){
         this.time_delete -= 1;
         if(this.time_delete <= 0){
             obj.remove(i);
@@ -48,10 +49,10 @@ public abstract class Particle {
         sound_time +=1;
         if(sound_time_max == sound_time) {
             double[]xy = Main.RC.render_obj(this.x,this.y);
-            rad = (float) (sqrt(pow(xy[0],2)+pow(xy[1],2))/-60);
+            rad = 1-((float) sqrt(pow2(xy[0]) + pow2(xy[1]))/SoundConst);
             sound_time = 0;
-            if(rad>-80) {
-                Sound.sound(Main.SA.get(0).flame_sound,rad);
+            if(rad>0) {
+                SoundPlay.sound(Main.SA.get(0).flame_sound,rad);
             }
         }
     }
@@ -64,7 +65,7 @@ public abstract class Particle {
         this.size_2 = this.size/2;
         this.size_3 = this.size_2-2;
     }
-    protected void liquid_physic(int i,ArrayList<Particle>liquid_obj){
+    protected void liquid_physic(int i,LinkedList<Particle>liquid_obj){
          int[]rg= Method.detection_near_particle_xy_def(liquid_obj,i,liquid_obj);
          if(rg[0]!=NULL) {
              double RotationXY = (-rg[1] - 90)*3.1415926535 /180;
@@ -81,7 +82,7 @@ public abstract class Particle {
              }
          }
     }
-    protected void flame_physic(int i,ArrayList<Particle>flame_obj){
+    protected void flame_physic(int i,LinkedList<Particle>flame_obj){
         int[]rg= Method.detection_near_particle_xy_def(flame_obj,i,flame_obj);
         if(rg[0]!=NULL) {
             double RotationXY = (-rg[1] - 90)*3.1415926535 /180;
@@ -104,7 +105,7 @@ public abstract class Particle {
         this.size_2 = this.size/2;
         this.size_3 = this.size_2/2;
     }
-    protected void size_rise_delete(ArrayList<Particle>part, int i){
+    protected void size_rise_delete(LinkedList<Particle>part, int i){
 
         this.size -= this.interval_rise_size;
         if(this.size < 4){
@@ -125,7 +126,7 @@ public abstract class Particle {
         this.x += this.speed_x;
         this.y += this.speed_y;
     }
-    protected void create_flame_particle(ArrayList<Particle>obj){
+    protected void create_flame_particle(LinkedList<Particle>obj){
         this.time_spawn -= 1;
         if(this.time_spawn <= 0){
             obj.add(new FlameParticle(this.x,this.y));

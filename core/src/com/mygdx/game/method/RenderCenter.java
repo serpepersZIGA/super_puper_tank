@@ -5,12 +5,12 @@ import com.mygdx.game.main.Main;
 import static com.mygdx.game.main.Main.UpdateBlockReg;
 
 public class RenderCenter {
-    public double x,y,x2,y2;
-    public double width_2 = (double) Main.screenWidth/2,height_2 = (double) Main.screenHeight/2;
-    public double width_render = Main.screenWidth,height_render = Main.screenHeight;
+    public float x,y,x2,y2;
+    public float width_2 = Main.screenWidth/2f,height_2 = Main.screenHeight/2f;
+    public float width_render = Main.screenWidth,height_render = Main.screenHeight;
     public int render_x_max,render_x_min,render_y_max,render_y_min;
     public int block_i_x_max,block_i_y_max;
-    public RenderCenter(double x, double y){
+    public RenderCenter(float x, float y){
         this.x = x;
         this.y = y;
     }

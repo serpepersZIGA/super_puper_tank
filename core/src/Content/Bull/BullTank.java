@@ -4,7 +4,7 @@ import com.mygdx.game.bull.Bull;
 import com.mygdx.game.main.Main;
 
 public class BullTank extends Bull {
-    public BullTank(double x, double y, double rotation, double damage, double penetration, byte type_time, byte height){
+    public BullTank(float x, float y, float rotation, float damage, float penetration, byte type_time, byte height){
         this.x = x;
         this.y = y;
         this.rotation = rotation;

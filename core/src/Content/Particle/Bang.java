@@ -6,7 +6,7 @@ import com.mygdx.game.particle.Particle;
 
 
 public class Bang extends Particle {
-    public Bang(double x, double y, double size){
+    public Bang(float x, float y, float size){
         this.x = x;
         this.y = y;
         this.size = size;

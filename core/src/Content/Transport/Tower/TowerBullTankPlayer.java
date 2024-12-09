@@ -1,5 +1,6 @@
 package Content.Transport.Tower;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
@@ -9,8 +10,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class TowerBullTankPlayer extends Transport {
-    public TowerBullTankPlayer(double x_const, double y_const, int difference, int difference_2, double reload_max, double speed_rotation, double damage, double penetration,
-                               int ind_unit, byte height, byte team, Sprite str, ArrayList<Transport> spisok, File sound){
+    public TowerBullTankPlayer(float x_const, float y_const, int difference, int difference_2, float reload_max, float speed_rotation, float damage, float penetration,
+                               int ind_unit, byte height, byte team, Sprite str, ArrayList<Transport> spisok, Sound sound){
         this.tower_x_const = x_const;
         this.tower_y_const = y_const;
         this.spisok = spisok;
@@ -35,7 +36,7 @@ public class TowerBullTankPlayer extends Transport {
 
 
     }
-    public void tower_action(int i,double x,double y,double rotation,boolean sost_fire_bot) {
+    public void tower_action(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -47,7 +48,7 @@ public class TowerBullTankPlayer extends Transport {
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
 
     }
-    public void tower_action_client(int i,double x,double y,double rotation,boolean sost_fire_bot) {
+    public void tower_action_client(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -58,7 +59,7 @@ public class TowerBullTankPlayer extends Transport {
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
 
     }
-    public void tower_action_client_1(int i,double x,double y,double rotation,boolean sost_fire_bot) {
+    public void tower_action_client_1(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -67,7 +68,7 @@ public class TowerBullTankPlayer extends Transport {
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
     }
-    public void tower_action_client_2(int i,double x,double y,double rotation,boolean sost_fire_bot) {
+    public void tower_action_client_2(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;

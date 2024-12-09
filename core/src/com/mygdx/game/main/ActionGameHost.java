@@ -42,25 +42,23 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
                 if(timer <= 0) {
 
                     if (LeftMouse) {
-                        Main.FlameSpawnList.add(new FlameSpawn(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2));
+                        Main.FlameSpawnList.add(new FlameSpawn((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
                         timer = 30;
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
 
 
                     }
                     if (RightMouse) {
                         //main.Main.bang_obj.add(new particle.bang(mouse_x,mouse_y,new Color(236,124,38),12));
-                        Main.LiquidList.add(new Acid(MouseX / Main.Zoom + Main.RC.x2, MouseY / Main.Zoom + Main.RC.y2));
+                        Main.LiquidList.add(new Acid((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
@@ -78,16 +76,9 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         //Main.player_obj.get(1).all_action_client(Main.left_mouse_client, Main.right_mouse_client, Main.mouse_x_client,
                 //Main.mouse_y_client, Main.press_w_client, Main.press_a_client, Main.press_s_client, Main.press_d_client);
         if(Transport.ai_sost != 0){Transport.ai_sost-=1;}
-        Gdx.gl.glClearColor(0, 0 ,0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Batch.begin();
         Render.begin(ShapeRenderer.ShapeType.Filled);
         Main.RC.render_block();
-//        for (i= 0; i< matrix.size(); i++){
-//            for (int i2= 0; i2< matrix.get(i).size(); i2++) {
-//                matrix.get(i).get(i2).all_action();
-//            }
-//        }
         Batch.end();
         for (i= 0; i< Main.LiquidList.size(); i++){
             Main.LiquidList.get(i).all_action(i);}
@@ -132,10 +123,9 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         for (i = 0; i< Main.BuildingList.size(); i++){
             PacketBuildServer(i);
             Main.BuildingList.get(i).all_action(i);}
+        Batch.draw(textureBuffer,100,100,100,100);
         Render.end();
 
-        Batch.draw(new Texture("badlogic.jpg"),100,100,100,100);
-        //batch.end();
         Render.begin(ShapeRenderer.ShapeType.Filled);
 
         for (i = 0; i< Main.BullList.size(); i++){

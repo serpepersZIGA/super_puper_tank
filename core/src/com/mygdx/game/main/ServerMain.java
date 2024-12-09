@@ -7,7 +7,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
-import com.mygdx.game.method.Sound;
+import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
@@ -40,7 +40,7 @@ public class ServerMain extends Listener {
         Server.getKryo().register(BullPacket.class);
         Server.getKryo().register(ArrayList.class);
         Server.getKryo().register(DebrisTransport.class);
-        Server.getKryo().register(Sound.class);
+        Server.getKryo().register(SoundPlay.class);
         Server.getKryo().register(SoldatPacket.class);
         Server.getKryo().register(DebrisPacket.class);
         Server.getKryo().register(SoldatFlame.class);

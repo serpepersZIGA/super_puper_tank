@@ -9,7 +9,7 @@ import com.mygdx.game.transport.Transport;
 import com.mygdx.game.transport.UnitType;
 
 public class PlayerCannonAcid extends Transport {
-    public PlayerCannonAcid(double x, double y, ArrayList<Transport> tr, boolean host){
+    public PlayerCannonAcid(float x, float y, ArrayList<Transport> tr, boolean host){
         this.type_unit = UnitType.PlayerAcidT1;
         this.x = x;this.y = y;
         this.host = host;
@@ -20,7 +20,7 @@ public class PlayerCannonAcid extends Transport {
         this.spisok = tr;
         this.armor = 50;
         this.penetration = 20;
-        this.acceleration = 0.2;
+        this.acceleration = 0.2f;
         this.rotation_tower = 0;
         this.rotation_corpus = 0;
         this.team = 1;

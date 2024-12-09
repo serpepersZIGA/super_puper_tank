@@ -6,7 +6,7 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 
 public class BigBuildingWood1 extends Building {
-    public BigBuildingWood1(int x, int y, double rotation){
+    public BigBuildingWood1(int x, int y, float rotation){
         name = BuildType.BigBuildingWood1;
         this.x = x;
         this.y = y;

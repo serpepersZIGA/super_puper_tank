@@ -13,10 +13,11 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public abstract class Building implements Serializable {
-    public double rotation;
+    public float rotation;
     public int width,height,x,y,time_flame,width_2,height_2,x_rend,y_rend,width_render,height_render,brightness_max = 240,brightness;
     public static float[]rgb = {(float)1/255 * 236, (float) 1/255 * 124, (float) 1/255 * 38};
     //public float[]rgb = {(float)1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250)};
@@ -88,7 +89,7 @@ public abstract class Building implements Serializable {
     }
 
 
-    public void flame_build(ArrayList<Particle>part){
+    public void flame_build(LinkedList<Particle> part){
         if(this.time_flame>0){
             iteration_light_build();
             for (int[] ints : xy_light_render) {

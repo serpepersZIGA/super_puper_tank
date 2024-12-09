@@ -7,6 +7,7 @@ import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -14,7 +15,7 @@ import static java.lang.StrictMath.*;
 import static java.sql.Types.NULL;
 
 public class Method {
-    public static double tower(double x, double y, double x_2, double y_2, double rotation_tower, double speed_tower) {
+    public static float tower(double x, double y, double x_2, double y_2, float rotation_tower, float speed_tower) {
         double gh = atan2(y - y_2, x - x_2) / 3.1415926535 *180;
         gh +=90;
         if(gh>180 && rotation_tower<0){
@@ -32,31 +33,31 @@ public class Method {
         }
         return rotation_tower;
     }
-    public static double difference_rotation_sin(double x,double difference,double rotation){
-        return x - (difference * sin(rotation * 3.1415926535 / 180.0));
+    public static float difference_rotation_sin(float x,float difference,float rotation){
+        return (float) (x - (difference * sin(rotation * 3.1415926535 / 180.0)));
     }
-    public static double difference_rotation_cos(double x,double difference,double rotation){
-        return x - (difference * cos(rotation * 3.1415926535 / 180.0));
+    public static float difference_rotation_cos(float x,float difference,float rotation){
+        return (float) (x - (difference * cos(rotation * 3.1415926535f / 180.0f)));
     }
-    public static double[]tower_xy(double x,double y,double fire_x,double fire_y,double difference,double rotation){
-        double tower_x = difference_rotation_sin(x+fire_x,-difference,rotation);
-        double tower_y = difference_rotation_cos(y+fire_y,-difference,rotation);
-        double[]xy = {tower_x,tower_y};
+    public static float[]tower_xy(float x,float y,float fire_x,float fire_y,float difference,float rotation){
+        float tower_x = difference_rotation_sin(x+fire_x,-difference,rotation);
+        float tower_y = difference_rotation_cos(y+fire_y,-difference,rotation);
+        float[]xy = {tower_x,tower_y};
         return xy;
     }
-    public static double[]tower_xy_2(double x,double y,double fire_x,double fire_y,double difference,double difference_2,double rotation){
-        double tower_x = difference_rotation_sin(x+fire_x,-difference,rotation);
-        double tower_y = difference_rotation_cos(y+fire_y,-difference,rotation);
+    public static float[]tower_xy_2(float x,float y,float fire_x,float fire_y,float difference,float difference_2,float rotation){
+        float tower_x = difference_rotation_sin(x+fire_x,-difference,rotation);
+        float tower_y = difference_rotation_cos(y+fire_y,-difference,rotation);
         tower_x = difference_rotation_sin(tower_x,-difference_2,rotation-90);
         tower_y = difference_rotation_cos(tower_y,-difference_2,rotation-90);
-        double[]xy = {tower_x,tower_y};
+        float[]xy = {tower_x,tower_y};
         return xy;
     }
-    public static double tower_player(double x, double y, double rotation_tower, double speed_tower) {
+    public static double tower_player(float x, float y, float rotation_tower, float speed_tower) {
         return tower(x, y, Main.MouseX, Main.MouseY, rotation_tower, speed_tower);
 
     }
-    public static double tower_player_client(double x, double y, double rotation_tower, double speed_tower) {
+    public static double tower_player_client(float x, float y, float rotation_tower, float speed_tower) {
         return tower(x, y, Main.MouseXClient, Main.MouseYClient, rotation_tower, speed_tower);
 
     }
@@ -137,7 +138,7 @@ public class Method {
         }
         return new int[]{ind,radius};
     }
-    public static int[] detection_near_particle_xy_def(ArrayList<Particle> obj_bot, int i, ArrayList<Particle> obj) {
+    public static int[] detection_near_particle_xy_def(LinkedList<Particle> obj_bot, int i, LinkedList<Particle> obj) {
         double g;
         int gh;
         int ind = NULL;

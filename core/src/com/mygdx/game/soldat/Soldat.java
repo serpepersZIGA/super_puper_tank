@@ -44,7 +44,7 @@ public abstract class Soldat implements Serializable {
     }
     public void update(){
         center_render();
-        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,this.rotation+180,this.soldat_image);
+        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,(float)this.rotation+180,this.soldat_image);
     }
     public void move_soldat(ArrayList<Transport>player, int i, double g, double g_left, double g_right) {
         double h = sqrt(pow(this.x - player.get(i).x, 2) + pow(this.y - player.get(i).y, 2));
@@ -63,7 +63,7 @@ public abstract class Soldat implements Serializable {
     public void clear(ArrayList<Soldat>obj,int i){
         if(this.clear_sost == 1){
             for(int i1 =0;i1<12;i1++){
-            Main.LiquidList.add(new Blood(this.x+i1,this.y));}
+            Main.LiquidList.add(new Blood((float) (this.x+i1), (float) this.y));}
             obj.remove(i);
         }
     }
@@ -73,7 +73,7 @@ public abstract class Soldat implements Serializable {
             this.time = this.time_max;
             //int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
-            Main.BullList.add(new BullTank(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullTank((float) this.x,(float)this.y,(float)-this.rotation+180,(float)this.damage,(float)this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
             int i2 = BullList.size()-1;
@@ -86,8 +86,8 @@ public abstract class Soldat implements Serializable {
             this.time = this.time_max;
             //int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
-            Main.BullList.add(new BullFlame(this.x,this.y,-this.rotation+ -15+rand.rand(30)+180,this.damage,this.t_damage,this.penetration,this.team,(byte)1));
-            Main.BullList.add(new BullFlame(this.x,this.y,-this.rotation+ -15+rand.rand(30)+180,this.damage,this.t_damage,this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullFlame((float) this.x, (float) this.y, (float) (-this.rotation+ -15+rand.rand(30)+180), (float) this.damage,(float)this.t_damage,(float)this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullFlame((float) this.x, (float) this.y, (float) (-this.rotation+ -15+rand.rand(30)+180), (float) this.damage,(float)this.t_damage,(float)this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
@@ -102,8 +102,8 @@ public abstract class Soldat implements Serializable {
             this.time = this.time_max;
             ///int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
-            Main.BullList.add(new BullMortar(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.damage_fragmentation,
-                    this.penetration_fragmentation,this.team,(byte)1));
+            Main.BullList.add(new BullMortar((float) this.x, (float) this.y,(float)-this.rotation+180,(float)this.damage,(float)this.penetration,(float)this.damage_fragmentation,
+                    (float)this.penetration_fragmentation,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
             int i2 = BullList.size()-1;
@@ -111,8 +111,8 @@ public abstract class Soldat implements Serializable {
         }
     }
     public void bull_packets(int i1,int i2){
-        PacketBull.get(i1).x = this.x;
-        PacketBull.get(i1).y = this.y;
+        PacketBull.get(i1).x = (float) this.x;
+        PacketBull.get(i1).y = (float) this.y;
         PacketBull.get(i1).rotation = BullList.get(i2).rotation;
         PacketBull.get(i1).time = BullList.get(i2).time;
         PacketBull.get(i1).speed = BullList.get(i2).speed;

@@ -13,7 +13,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
-import com.mygdx.game.method.Sound;
+import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
@@ -30,7 +30,7 @@ import static com.mygdx.game.transport.TransportRegister.*;
 public class ClientMain extends Listener{
     public static Client Client;
     static int udpPort = 27950, tcpPort = 27950;
-    public static String IP;
+    public static String IP = "127.0.0.1";
     private int i;
     public void create() {
         System.out.println("Подключаемся к серверу");
@@ -43,7 +43,7 @@ public class ClientMain extends Listener{
         Client.getKryo().register(BullPacket.class);
         Client.getKryo().register(ArrayList.class);
         Client.getKryo().register(DebrisTransport.class);
-        Client.getKryo().register(Sound.class);
+        Client.getKryo().register(SoundPlay.class);
         Client.getKryo().register(SoldatPacket.class);
         Client.getKryo().register(DebrisPacket.class);
         Client.getKryo().register(SoldatFlame.class);
@@ -167,23 +167,23 @@ public class ClientMain extends Listener{
                 switch (PacketBull.get(i2).type) {
                     case 1:
                         BullList.add(new BullFlame(PacketBull.get(i2).x, PacketBull.get(i2).y,
-                            PacketBull.get(i2).rotation, 0.0, 0.0, 0, PacketBull.get(i2).team, PacketBull.get(i2).height));
+                            PacketBull.get(i2).rotation, 0.0F, 0.0F, 0, PacketBull.get(i2).team, PacketBull.get(i2).height));
                         break;
                     case 2:
                         BullList.add(new BullFragment(PacketBull.get(i2).x, PacketBull.get(i2).y,
-                            0.0, 0.0, PacketBull.get(i2).height));break;
+                                0.0F, 0.0f, PacketBull.get(i2).height));break;
 
                     case 3:
                         BullList.add(new BullMortar(PacketBull.get(i2).x, PacketBull.get(i2).y,
-                                PacketBull.get(i2).rotation, 0.0, 0, 0, 0, PacketBull.get(i2).team
+                                PacketBull.get(i2).rotation, 0.0f, 0f, 0f, 0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 4:
                         BullList.add(new BullAcid(PacketBull.get(i2).x, PacketBull.get(i2).y,
-                                PacketBull.get(i2).rotation, 0.0, 0.0, PacketBull.get(i2).team
+                                PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 5:
                         BullList.add(new BullTank(PacketBull.get(i2).x, PacketBull.get(i2).y,
-                                PacketBull.get(i2).rotation, 0.0, 0.0, PacketBull.get(i2).team
+                                PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                 }
                 try {
@@ -290,7 +290,7 @@ public class ClientMain extends Listener{
             }
         }
     }
-    public void debris_create(int i, double x, double y, double rotation){
+    public void debris_create(int i, float x, float y, float rotation){
 //        System.out.println(packet_enemy.size());
 //        System.out.println(packet_enemy.get(i).name);
 //        System.out.println(packet_enemy.get(i).x);

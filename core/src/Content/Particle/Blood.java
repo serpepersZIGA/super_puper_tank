@@ -7,14 +7,14 @@ import static Data.DataColor.*;
 
 
 public class Blood extends Particle {
-    public Blood(double x, double y){
+    public Blood(float x, float y){
         this.x = x;
         this.y = y;
         this.size = 16+rand.rand(8);
         this.speed_x = 0;
         this.speed_y = 0;
         r = BloodR;g = BloodG;b = BloodB;
-        this.interval_rise_size = 0.02;
+        this.interval_rise_size = 0.02f;
     }
     public void all_action(int i){
         super.liquid_physic(i,Main.LiquidList);

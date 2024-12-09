@@ -9,7 +9,7 @@ import java.awt.geom.Area;
 import java.util.*;
 
 import static com.mygdx.game.main.Main.FlameSpawnList;
-import static java.lang.StrictMath.pow;
+import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 import static java.sql.Types.NULL;
 
@@ -77,9 +77,9 @@ public abstract class Block {
     protected final void UpdateAir(){
         if(h.size() != 0) {
             for (i = 0;i<h.size();i++) {
-                r += rgbl.get(i)[0] * (float) (Main.radius_air_max_zoom / h.get(i));
-                g += rgbl.get(i)[1] * (float) (Main.radius_air_max_zoom / h.get(i));
-                b += rgbl.get(i)[2] * (float) (Main.radius_air_max_zoom / h.get(i));
+                r += rgbl.get(i)[0] * Main.radius_air_max_zoom / h.get(i);
+                g += rgbl.get(i)[1] * Main.radius_air_max_zoom / h.get(i);
+                b += rgbl.get(i)[2] * Main.radius_air_max_zoom / h.get(i);
             }
             rad = ((float) radius/lighting_zoom);
             Main.Render.setColor(r/rad,g/rad,b/rad,0.5f);
@@ -90,33 +90,6 @@ public abstract class Block {
         } else{
             Main.Render.setColor(0, 0, 0,0.8f);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
-        }
-    }
-    public final void ActionAir() {
-        for (i = 0; i < FlameSpawnList.size(); i++) {
-            int gh = (int) sqrt(pow(FlameSpawnList.get(i).x_rend - this.x, 2) + pow(FlameSpawnList.get(i).y_rend - this.y, 2));
-            if(gh <lighting_zoom) {rgbl.add(FlameSpawnList.get(i).rgb);
-                h.add(gh);
-                if (this.radius == NULL || this.radius > gh) {
-                    this.radius = gh;
-                }
-            }
-
-        }
-        for (i = 0; i < Main.BuildingList.size(); i++) {
-            if(Main.BuildingList.get(i).time_flame > 0) {
-                for (int j = 0; j < Main.BuildingList.get(i).xy_light_render.size(); j++) {
-                    int gh = (int) sqrt(pow(Main.BuildingList.get(i).xy_light_render.get(j)[0]*Main.Zoom - this.x, 2) + pow(Main.BuildingList.get(i).xy_light_render.get(j)[1]*Main.Zoom - this.y, 2));
-
-                    if (gh < lighting_zoom) {
-                        rgbl.add(Building.rgb);
-                        h.add(gh);
-                        if (this.radius == NULL || this.radius > gh) {
-                            this.radius = gh;
-                        }
-                    }
-                }
-            }
         }
     }
     public static void LightingAir(int xZOOM, int yZOOM, float[] RGB){
@@ -154,7 +127,7 @@ public abstract class Block {
         }
         for (int i = y_min; i < y_max; i++) {
                 for (int i2 = x_min; i2 < x_max; i2++) {
-                    int gh = (int) sqrt(pow(xZOOM - Main.AirList.get(i).get(i2).x, 2) + pow(yZOOM - Main.AirList.get(i).get(i2).y, 2));
+                    int gh = (int) sqrt(pow2(xZOOM - Main.AirList.get(i).get(i2).x) + pow2(yZOOM - Main.AirList.get(i).get(i2).y));
                     if (gh < lighting_zoom) {
                         Main.AirList.get(i).get(i2).rgbl.add(RGB);
                         Main.AirList.get(i).get(i2).h.add(gh);

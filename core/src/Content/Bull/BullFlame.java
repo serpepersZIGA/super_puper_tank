@@ -7,7 +7,7 @@ import com.mygdx.game.main.Main;
 import static Data.DataColor.*;
 
 public class BullFlame extends Bull {
-    public BullFlame(double x, double y, double rotation, double damage, double t_damage, double penetration, byte type_team, byte height){
+    public BullFlame(float x, float y, float rotation, float damage, float t_damage, float penetration, byte type_team, byte height){
         this.x = x;
         this.y = y;
         this.r = FlameR;this.g = FlameG;this.b = FlameB;

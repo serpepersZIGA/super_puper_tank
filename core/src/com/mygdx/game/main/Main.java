@@ -1,10 +1,9 @@
 package com.mygdx.game.main;
 import Content.Particle.*;
-import Content.Transport.Transport.PanzerFlameT1;
-import Content.Transport.Transport.PlayerCannonAcid;
-import Content.Transport.Transport.TrackRemountT1;
+import Content.Transport.Transport.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -30,6 +29,7 @@ import com.mygdx.game.transport.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class Main extends ApplicationAdapter {
@@ -37,14 +37,14 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<Transport> EnemyList = new ArrayList<>();
 	public static ArrayList<Building> BuildingList = new ArrayList<>();
 	public static ArrayList<Bull> BullList = new ArrayList<>();
-	public static ArrayList<Particle> FlameStaticList = new ArrayList<>();
+	public static LinkedList<Particle> FlameStaticList = new LinkedList<>();
 	public static ArrayList<Button>ButtonList = new ArrayList<>();
-	public static ArrayList<Particle> FlameList = new ArrayList<>();
+	public static LinkedList<Particle> FlameList = new LinkedList<>();
 	public static ArrayList<Soldat> SoldatList = new ArrayList<>();
-	public static ArrayList<Particle> BangList = new ArrayList<>();
-	public static ArrayList<Particle> FlameParticleList = new ArrayList<>();
-	public static ArrayList<Particle> LiquidList = new ArrayList<>();
-	public static ArrayList<Particle> FlameSpawnList = new ArrayList<>();
+	public static LinkedList<Particle> BangList = new LinkedList<>();
+	public static LinkedList<Particle> FlameParticleList = new LinkedList<>();
+	public static LinkedList<Particle> LiquidList = new LinkedList<>();
+	public static LinkedList<Particle> FlameSpawnList = new LinkedList<>();
 	public static ArrayList<Transport> HelicopterList = new ArrayList<>();
 	public static ArrayList<Transport> DebrisList = new ArrayList<>();
 
@@ -65,7 +65,7 @@ public class Main extends ApplicationAdapter {
 	public static boolean LeftMouseClient, RightMouseClient;
 	public static double MouseXClient, MouseYClient;
 	private static int i;
-	public static double Zoom = 1;
+	public static float Zoom = 1;
 	public static int MouseX, MouseY;
 	public static ShapeRenderer Render;
 	public static UpdateRegister UpdateBlockReg;
@@ -79,7 +79,7 @@ public class Main extends ApplicationAdapter {
 	public static int width_2,height_2,x_block,y_block,width_block= 50,height_block =50,width_block_air= 15,height_block_air =15,quantity_width,quantity_height;
 	public int[][]xy;
 	public static int width_block_zoom= 50,height_block_zoom =50,width_block_render= 63,height_block_render =63;
-	public static double radius_air_max = 150,radius_air_max_zoom;
+	public static float radius_air_max = 150,radius_air_max_zoom;
 	public static ServerMain serverMain;
 	public static ClientMain Main_client;
 	public static Option option;
@@ -91,6 +91,7 @@ public class Main extends ApplicationAdapter {
 	public static InputWindow InputWindow;
 	public static int xMaxAir ;
 	public static int yMaxAir ;
+	public static Texture textureBuffer;
 
 
 	public Main(){
@@ -99,8 +100,7 @@ public class Main extends ApplicationAdapter {
 
 
 	public static void spawn_object(){
-		PlayerList.add(new PlayerCannonAcid(200,200, PlayerList,true));
-		//PlayerList.add(new PlayerCannonFlame(200,300, PlayerList,false));
+		PlayerList.add(new PlayerCannonMortar(200,200, PlayerList,true));
 		BuildingList.add(new BigBuildingWood1(500,600,0));
 		BuildingList.add(new BigBuildingWood1(500,1200,0));
 		BuildingList.add(new BigBuildingWood1(1200,1200,0));
@@ -158,6 +158,7 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentBase = new DataImage();
 		Main.SA.add(new DataSound());
 		UpdateBlockReg = new UpdateRegister();
@@ -167,11 +168,8 @@ public class Main extends ApplicationAdapter {
 		Main.RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
 		TXTFont();
-		try {
-			InputWindow = new InputWindow();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		InputWindow = new InputWindow();
+
 		Keyboard = new Keyboard();
 		Gdx.input.setInputProcessor(Keyboard);
 		field(10000, 10000);

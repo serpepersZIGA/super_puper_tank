@@ -18,11 +18,11 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static java.lang.StrictMath.pow;
+import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 
 public abstract class Bull implements Serializable {
-    public double x,y,speed,damage,penetration,rotation,speed_x,speed_y,damage_fragment,penetration_fragment,t_damage;
+    public float x,y,speed,damage,penetration,rotation,speed_x,speed_y,damage_fragment,penetration_fragment,t_damage;
     public int time,size,amount_fragment,x_rend,y_rend,size_render;
     public float r,g,b,r_wane = (float)(1/255*1.5),g_wane= (float)(1/255*1.5),b_wane= (float)(1/255);
     private boolean z;
@@ -264,7 +264,7 @@ public abstract class Bull implements Serializable {
         }
     }
     private boolean circle_bull(int x1,int y1,int size1,int x,int y,int size){
-        return sqrt(pow(x - x1, 2) + pow(y - y1, 2)) < size + size1;
+        return sqrt(pow2(x - x1) + pow2(y - y1)) < size + size1;
     }
 
     protected final boolean rect_bull(int x1,int y1,int width,int height,int x,int y,int size,double rotation){

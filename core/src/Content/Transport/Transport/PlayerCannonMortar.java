@@ -9,7 +9,7 @@ import com.mygdx.game.transport.UnitType;
 import java.util.ArrayList;
 
 public class PlayerCannonMortar extends Transport {
-    public PlayerCannonMortar(double x, double y, ArrayList<Transport> tr, boolean host){
+    public PlayerCannonMortar(float x, float y, ArrayList<Transport> tr, boolean host){
         this.type_unit = UnitType.PlayerMortarT1;
         this.x = x;this.y = y;
         this.host = host;
@@ -20,7 +20,7 @@ public class PlayerCannonMortar extends Transport {
         this.damage = 250;
         this.armor = 50;
         this.penetration = 7;
-        this.acceleration = 0.2;
+        this.acceleration = 0.2f;
         this.rotation_tower = 0;
         this.rotation_corpus = 0;
         this.team = 1;
@@ -46,7 +46,7 @@ public class PlayerCannonMortar extends Transport {
         this.height_tower = 55;
 
 
-        this.speed_tower = 1;this.speed_rotation = 0.5;
+        this.speed_tower = 1;this.speed_rotation = 0.5f;
         data();
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,-12,5,2,20,12, this.id_unit,
                 (byte)1,(byte)1,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).machinegun));
@@ -63,17 +63,16 @@ public class PlayerCannonMortar extends Transport {
         super.motor_player();
         super.fire_player_fragmentation_bull();
         super.build_corpus(Main.BuildingList);
-        corpus_corpus(this.enemy_spisok);
-        corpus_corpus_def_xy(this.enemy_spisok,(byte)1);
+        super.corpus_corpus(this.enemy_spisok);
+        super.corpus_corpus_def_xy(this.spisok,(byte)1);
         super.tower_xy();
         super.tower_player();
-        //corpus_bull(main.Main.bull_obj,this.team);
         Main.RC.x = this.tower_x;
         Main.RC.y = this.tower_y;
         center_render();
-        RenderMethod.transorm_img((int) (this.x_rend), (int)(this.y_rend),this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
+        RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration();
-        RenderMethod.transorm_img((int) (this.x_tower_rend), (int)(this.y_tower_rend),this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
         super.transport_delete(i,this.spisok);
     }

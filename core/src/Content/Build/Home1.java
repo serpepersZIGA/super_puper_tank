@@ -6,7 +6,7 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 
 public class Home1 extends Building {
-    public Home1(int x, int y, double rotation){
+    public Home1(int x, int y, float rotation){
         name = BuildType.Home1;
         this.x = x;
         this.y = y;

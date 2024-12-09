@@ -9,7 +9,7 @@ import com.mygdx.game.transport.UnitType;
 import java.util.ArrayList;
 
 public class PlayerCannonBullTank extends Transport {
-    public PlayerCannonBullTank(double x, double y, ArrayList<Transport> tr, boolean host){
+    public PlayerCannonBullTank(float x, float y, ArrayList<Transport> tr, boolean host){
         this.type_unit = UnitType.PlayerT1;
         this.x = x;this.y = y;
         this.host = host;
@@ -20,7 +20,7 @@ public class PlayerCannonBullTank extends Transport {
         this.armor = 50;
         this.spisok = tr;
         this.penetration = 25;
-        this.acceleration = 0.2;
+        this.acceleration = 0.2f;
         this.rotation_tower = 0;
         this.rotation_corpus = 0;
         this.team = 1;

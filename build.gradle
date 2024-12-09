@@ -14,12 +14,13 @@ buildscript {
     }
 }
 
+
 allprojects {
     apply plugin: "eclipse"
 
     version = '1.0'
     ext {
-        appName = "tank super-puper"
+        appName = "TankSimulator"
         gdxVersion = '1.12.0'
         roboVMVersion = '2.3.19'
         box2DLightsVersion = '1.5'

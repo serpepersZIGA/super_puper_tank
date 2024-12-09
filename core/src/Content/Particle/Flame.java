@@ -8,7 +8,7 @@ import com.mygdx.game.particle.Particle;
 import static Data.DataColor.*;
 
 public class Flame extends Particle {
-    public Flame(double x, double y){
+    public Flame(float x, float y){
         this.x = x;
         this.y = y;
         this.size = 14+rand.rand(10);

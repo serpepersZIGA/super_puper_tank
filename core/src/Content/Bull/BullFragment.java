@@ -8,14 +8,14 @@ import com.mygdx.game.main.Main;
 public class BullFragment extends Bull {
     public int x2,y2;
 
-    public BullFragment(double x, double y, double damage, double penetration, byte type_team){
+    public BullFragment(float x, float y, float damage, float penetration, byte type_team){
         this.x = x;
         this.y = y;
         this.type_team = type_team;
         this.damage = damage;
         this.penetration = penetration;
-        this.speed_x = -8+rand.rand(16.0);
-        this.speed_y = -8+rand.rand(16.0);
+        this.speed_x = (float) (-8+rand.rand(16.0));
+        this.speed_y = (float) (-8+rand.rand(16.0));
         this.x2 = 3+rand.rand(5);
         this.y2 = 3+rand.rand(5);
         this.size = this.x2;

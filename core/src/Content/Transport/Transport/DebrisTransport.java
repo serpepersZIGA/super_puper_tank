@@ -10,8 +10,8 @@ import static com.mygdx.game.main.Main.ContentBase;
 
 public class DebrisTransport extends Transport {
 
-    public DebrisTransport(double x, double y, double rotation, double speed, double inert_rotation,
-                           double inert_speed, Sprite corpus, double width, double height, UnitType type){
+    public DebrisTransport(float x, float y, float rotation, float speed, float inert_rotation,
+                           float inert_speed, Sprite corpus, float width, float height, UnitType type){
 
         this.type_unit = type;
         this.x = x;
@@ -35,7 +35,7 @@ public class DebrisTransport extends Transport {
         data();
         this.height = 1;
         this.team = -1;
-        this.acceleration = 0.1;
+        this.acceleration = 0.1f;
     }
     public void all_action(int i){
         super.all_action(i);

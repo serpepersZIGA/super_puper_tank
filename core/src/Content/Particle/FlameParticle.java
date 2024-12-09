@@ -7,7 +7,7 @@ import com.mygdx.game.particle.Particle;
 import static Data.DataColor.*;
 
 public class FlameParticle extends Particle {
-    public FlameParticle(double x, double y){
+    public FlameParticle(float x, float y){
         this.x = x;
         this.y = y;
         this.time_delete = 25+rand.rand(20);

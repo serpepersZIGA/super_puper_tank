@@ -5,7 +5,7 @@ import com.mygdx.game.method.rand;
 import com.mygdx.game.main.Main;
 
 public class BullAcid extends Bull {
-    public BullAcid(double x, double y, double rotation, double damage, double penetration, byte type_team, byte height){
+    public BullAcid(float x, float y, float rotation, float damage, float penetration, byte type_team, byte height){
         this.x = x;
         this.y = y;
         this.rotation = rotation;

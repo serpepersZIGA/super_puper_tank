@@ -4,7 +4,7 @@ import com.mygdx.game.bull.Bull;
 import com.mygdx.game.main.Main;
 
 public class BullMortar extends Bull {
-    public BullMortar(double x, double y, double rotation, double damage, double penetration, double damage_fragment, double penetration_fragment, byte type_time, byte height){
+    public BullMortar(float x, float y, float rotation, float damage, float penetration, float damage_fragment, float penetration_fragment, byte type_time, byte height){
         this.x = x;this.y = y;
         this.damage = damage;this.penetration = penetration;
         this.speed = 6;

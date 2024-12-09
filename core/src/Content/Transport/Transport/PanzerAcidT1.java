@@ -11,7 +11,7 @@ import com.mygdx.game.transport.Transport;
 import com.mygdx.game.transport.UnitType;
 
 public class PanzerAcidT1 extends Transport {
-    public PanzerAcidT1(double x, double y, ArrayList<Transport> tr){
+    public PanzerAcidT1(float x, float y, ArrayList<Transport> tr){
         this.type_unit = UnitType.PanzerAcidT1;
         this.x = x;this.y = y;
         this.speed_inert = 0;this.speed = 0;
@@ -21,7 +21,7 @@ public class PanzerAcidT1 extends Transport {
         this.armor = 50;
         this.spisok = tr;
         this.penetration = 10;
-        this.acceleration = 0.2;
+        this.acceleration = 0.2f;
         this.rotation_tower = 0;
         this.rotation_corpus = 70;
         this.tower_x = 0;

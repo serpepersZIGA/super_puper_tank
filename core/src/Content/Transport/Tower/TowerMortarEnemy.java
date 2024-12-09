@@ -1,5 +1,6 @@
 package Content.Transport.Tower;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.method.RenderMethod;
 import com.mygdx.game.main.Main;
@@ -9,9 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class TowerMortarEnemy extends Transport {
-    public TowerMortarEnemy(double x_const, double y_const, int difference, int difference_2, double reload_max, double speed_rotation, double damage, double penetration,
-                            double damage_fragment, double penetration_fragment, int ind_unit, byte height, byte team, Sprite str, ArrayList<Transport> spisok
-    , File sound){
+    public TowerMortarEnemy(float x_const, float y_const, int difference, int difference_2, float reload_max, float speed_rotation,float damage, float penetration,
+                            float damage_fragment, float penetration_fragment, int ind_unit, byte height, byte team, Sprite str, ArrayList<Transport> spisok
+    , Sound sound){
 
         this.tower_x_const = x_const;
         this.tower_y_const = y_const;
@@ -40,7 +41,7 @@ public class TowerMortarEnemy extends Transport {
 
 
     }
-    public void tower_action(int i,double x,double y,double rotation,boolean sost,boolean sost_2,double aim_x,double aim_y) {
+    public void tower_action(int i,float x,float y,float rotation,boolean sost,boolean sost_2,float aim_x,float aim_y) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -54,7 +55,7 @@ public class TowerMortarEnemy extends Transport {
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower,this.height_tower,this.rotation_tower,this.tower_img,0,-3* Main.Zoom);
     }
-    public void tower_action_client(int i,double x,double y,double rotation,boolean sost,boolean sost_2) {
+    public void tower_action_client(int i,float x,float y,float rotation,boolean sost,boolean sost_2) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;

@@ -7,7 +7,7 @@ import static Data.DataColor.*;
 
 
 public class Acid extends Particle {
-    public Acid(double x, double y){
+    public Acid(float x, float y){
         this.x = x;
         this.y = y;
         this.size = 16+rand.rand(8);
@@ -15,7 +15,7 @@ public class Acid extends Particle {
         this.speed_x = 0;
         this.speed_y = 0;
         r = AcidR; g = AcidG; b = AcidB;
-        this.interval_rise_size = 0.02;
+        this.interval_rise_size = 0.02F;
 
 
     }

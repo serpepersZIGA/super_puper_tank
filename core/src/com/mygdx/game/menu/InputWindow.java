@@ -1,9 +1,10 @@
 package com.mygdx.game.menu;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.main.ClientMain;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -11,7 +12,7 @@ import java.io.*;
 public class InputWindow{
     public static JButton button;
     public static JFrame frame;
-    public InputWindow() throws IOException {
+    public InputWindow(){
         // Создаем новое окно
         frame = new JFrame("Input Window");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -23,15 +24,10 @@ public class InputWindow{
         //frame.add(button);
 
         // Добавляем текстовое поле и кнопку в окно
-        File BufferIP = new File("Buffer/bufferIP.txt");
-        FileInputStream inputStream = new FileInputStream(BufferIP);
-        byte [] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            ClientMain.IP = new String(buffer, 0, bytesRead);
-        }
+        FileHandle handle = Gdx.files.local("bufferIP.txt");
+        ClientMain.IP = handle.readString();
         JTextField textField = new JTextField(ClientMain.IP,40);
-        inputStream.close();
+
         frame.getContentPane().add(textField, "North");
         frame.getContentPane().add(button, "South");
 
@@ -42,24 +38,8 @@ public class InputWindow{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ClientMain.IP = textField.getText();
-                File BufferFile = new File("Buffer/bufferIP.txt");
-                FileOutputStream outputStream;
-                try {
-                    outputStream = new FileOutputStream(BufferFile);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
-                byte [] buffer = ClientMain.IP.getBytes();
-                try {
-                    outputStream.write(buffer);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-                try {
-                    outputStream.close();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                FileHandle file = Gdx.files.local("bufferIP.txt");
+                file.writeString(ClientMain.IP, false);
                 //"127.0.0.1"
 
             }

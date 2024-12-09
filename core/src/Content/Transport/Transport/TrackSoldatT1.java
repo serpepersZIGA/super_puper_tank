@@ -8,7 +8,7 @@ import com.mygdx.game.transport.UnitType;
 import java.util.ArrayList;
 
 public class TrackSoldatT1 extends Transport {
-    public TrackSoldatT1(double x, double y, ArrayList<Transport> tr) {
+    public TrackSoldatT1(float x, float y, ArrayList<Transport> tr) {
         this.type_unit = UnitType.TrackSoldatT1;
         this.x = x;
         this.y = y;
@@ -21,7 +21,7 @@ public class TrackSoldatT1 extends Transport {
         this.penetration = 20;
         this.max_hp = 1500;
         this.hp = this.max_hp;
-        this.acceleration = 0.2;
+        this.acceleration = 0.2f;
         this.rotation_tower = 0;
         this.rotation_corpus = 70;
         this.difference = 0;
