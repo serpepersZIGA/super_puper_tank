@@ -42,22 +42,22 @@ public class PanzerMortarT1 extends Transport {
         this.distance_target = 150;
         this.distance_target_2 = 30;
 
-        this.tower_img = Main.ContentBase.tower_enemy;
-        this.corpus_img = Main.ContentBase.corpus_enemy;
+        this.tower_img = Main.ContentImage.tower_enemy;
+        this.corpus_img = Main.ContentImage.corpus_enemy;
 
         this.corpus_width = 50;
         this.corpus_height = 129;
         this.width_tower = 35;
         this.height_tower = 55;
         this.speed_tower = 1;this.speed_rotation = 1;
-        this.sound_fire = Main.SA.get(0).cannon;
+        this.sound_fire = Main.ContentSound.get(0).cannon;
         data();
 //        this.tower_obj.add(new tower_flame_enemy(18,55,52,-12,4,2,65,12,2, this.id_unit,
 //                (byte)1,(byte)2,Main.content_base.tower_player_auxiliart_1,this.spisok, Main.sa.get(0).flame_attack));
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
-                (byte)1,(byte)2,Main.ContentBase.tower_enemy_auxiliary_1,this.spisok, Main.SA.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.spisok, Main.ContentSound.get(0).flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
-                (byte)1,(byte)2,Main.ContentBase.tower_enemy_auxiliary_1,this.spisok, Main.SA.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.spisok, Main.ContentSound.get(0).flame_attack));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();

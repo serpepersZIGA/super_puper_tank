@@ -6,7 +6,7 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.transport.Transport;
 import com.mygdx.game.transport.UnitType;
 
-import static com.mygdx.game.main.Main.ContentBase;
+import static com.mygdx.game.main.Main.ContentImage;
 
 public class DebrisTransport extends Transport {
 
@@ -28,7 +28,7 @@ public class DebrisTransport extends Transport {
         this.armor = 5;
         this.teg_unit = "debris";
         if(this.corpus_img == null){
-            this.corpus_img = ContentBase.corpus_enemy;
+            this.corpus_img = ContentImage.corpus_enemy;
             this.corpus_width = 50;
             this.corpus_height = 129;
         }

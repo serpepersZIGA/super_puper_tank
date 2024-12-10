@@ -31,14 +31,14 @@ public class PlayerCannonMortar extends Transport {
         this.tower_y = 0;
         this.reload_max = 120;
         this.height = 1;
-        this.tower_img = Main.ContentBase.tower_player;
-        this.corpus_img = Main.ContentBase.corpus_player;
+        this.tower_img = Main.ContentImage.tower_player;
+        this.corpus_img = Main.ContentImage.corpus_player;
         this.t = 0;
         this.damage_fragment = 12;
         this.penetration_fragment = 4;
         this.x_tower = 15;
         this.y_tower = 20;
-        this.sound_fire = Main.SA.get(0).cannon;
+        this.sound_fire = Main.ContentSound.get(0).cannon;
 
         this.corpus_width = 50;
         this.corpus_height = 129;
@@ -49,9 +49,9 @@ public class PlayerCannonMortar extends Transport {
         this.speed_tower = 1;this.speed_rotation = 0.5f;
         data();
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,-12,5,2,20,12, this.id_unit,
-                (byte)1,(byte)1,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).machinegun));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).machinegun));
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,12,5,2,20,12, this.id_unit,
-                (byte)1,(byte)1,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).machinegun));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).machinegun));
         const_tower_x = 17;
         const_tower_y = 20;
 

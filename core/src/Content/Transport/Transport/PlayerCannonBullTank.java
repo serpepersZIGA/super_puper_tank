@@ -29,8 +29,8 @@ public class PlayerCannonBullTank extends Transport {
         this.tower_y = 0;
         this.reload_max = 120;
         this.height = 1;
-        this.tower_img = Main.ContentBase.tower_player;
-        this.corpus_img = Main.ContentBase.corpus_player;
+        this.tower_img = Main.ContentImage.tower_player;
+        this.corpus_img = Main.ContentImage.corpus_player;
         this.corpus_width = 50;
         this.corpus_height = 129;
         this.width_tower = 35;
@@ -40,13 +40,13 @@ public class PlayerCannonBullTank extends Transport {
         this.x_tower = 15;
         this.y_tower = 20;
         this.t = 0;
-        this.sound_fire = Main.SA.get(0).cannon;
+        this.sound_fire = Main.ContentSound.get(0).cannon;
         this.speed_tower = 1;this.speed_rotation = 1;
         data();
         const_tower_x = 17;
         const_tower_y = 20;
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
-                this.team,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).flame_attack));
+                this.team,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).flame_attack));
 
     }
     public void all_action(int i) {

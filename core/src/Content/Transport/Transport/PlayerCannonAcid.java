@@ -29,8 +29,8 @@ public class PlayerCannonAcid extends Transport {
         this.tower_y = 0;
         this.reload_max = 2;
         this.height = 1;
-        this.tower_img = Main.ContentBase.tower_player;
-        this.corpus_img = Main.ContentBase.corpus_player;
+        this.tower_img = Main.ContentImage.tower_player;
+        this.corpus_img = Main.ContentImage.corpus_player;
         this.corpus_width = 50;
         this.corpus_height = 129;
         this.width_tower = 35;
@@ -41,12 +41,12 @@ public class PlayerCannonAcid extends Transport {
         this.x_tower = 15;
         this.y_tower = 20;
         this.speed_tower = 1;this.speed_rotation = 3;
-        this.sound_fire = Main.SA.get(0).acid_attack;
+        this.sound_fire = Main.ContentSound.get(0).acid_attack;
         data();
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
-                this.team,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).flame_attack));
+                this.team,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).flame_attack));
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
-                this.team,Main.ContentBase.tower_player_auxiliary_1,this.spisok,Main.SA.get(0).flame_attack));
+                this.team,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).flame_attack));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();

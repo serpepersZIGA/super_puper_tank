@@ -11,7 +11,7 @@ public class BigBuildingWood1 extends Building {
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-        this.build_image = Main.ContentBase.build_2;
+        this.build_image = Main.ContentImage.build_2;
         this.width = 500;
         this.height = 300;
         this.width_2 = this.width/2;

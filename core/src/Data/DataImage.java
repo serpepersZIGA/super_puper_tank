@@ -28,4 +28,22 @@ public class DataImage {
         soldat_1 = new Sprite(new Texture("image/infantry/soldat_enemy.png"));
         track_enemy_1lvl = new Sprite(new Texture("image/enemy/machine_enemy_1lvl.png"));
     }
+    public void dispose(){
+        corpus_track_soldat_enemy = null;
+        corpus_track_remount_enemy = null;
+        tower_player = null;
+        tower_enemy = null;
+        corpus_player =null;
+        build_1 = null;
+        build_2 = null;
+        dirt_1 = null;
+        dirt_2 = null;
+        dirt_3 = null;
+        dirt_4 = null;
+        tower_player_auxiliary_1 = null;
+        tower_enemy_auxiliary_1 = null;
+        soldat_1 = null;
+        track_enemy_1lvl = null;
+
+    }
 }

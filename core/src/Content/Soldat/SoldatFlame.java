@@ -11,7 +11,7 @@ public class SoldatFlame extends Soldat {
         this.speed_rotation = 5;
         this.width = 22;
         this.height = 22;
-        this.soldat_image = Main.ContentBase.soldat_1;
+        this.soldat_image = Main.ContentImage.soldat_1;
         this.rotation = 0;
         this.size = 10;
         this.time_max = 2;

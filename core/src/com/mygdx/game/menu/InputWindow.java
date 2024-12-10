@@ -5,9 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.main.ClientMain;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
 
 public class InputWindow{
     public static JButton button;
@@ -34,15 +31,12 @@ public class InputWindow{
         // Создаем переменную для хранения текста
 
         // Добавляем обработчик событий для кнопки
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ClientMain.IP = textField.getText();
-                FileHandle file = Gdx.files.local("bufferIP.txt");
-                file.writeString(ClientMain.IP, false);
-                //"127.0.0.1"
+        button.addActionListener(e -> {
+            ClientMain.IP = textField.getText();
+            FileHandle file = Gdx.files.local("bufferIP.txt");
+            file.writeString(ClientMain.IP, false);
+            //"127.0.0.1"
 
-            }
         });
 
         // Делаем окно видимым

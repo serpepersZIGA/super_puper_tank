@@ -33,7 +33,7 @@ public class TrackRemountT1 extends Transport {
         this.t = 0;
         this.crite_life = 0;
         this.hill = 2;
-        this.corpus_img = Main.ContentBase.track_enemy_1lvl;
+        this.corpus_img = Main.ContentImage.track_enemy_1lvl;
         this.corpus_width = 50;
         this.corpus_height = 129;
 

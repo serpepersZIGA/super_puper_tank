@@ -48,13 +48,13 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<Transport> HelicopterList = new ArrayList<>();
 	public static ArrayList<Transport> DebrisList = new ArrayList<>();
 
-	public static ArrayList<DataSound> SA = new ArrayList<>();
+	public static ArrayList<DataSound> ContentSound = new ArrayList<>();
 	public static ArrayList<ArrayList<Block>> AirList = new ArrayList<>();
 	public static ArrayList<ArrayList<Block>> BlockList2D = new ArrayList<>();
 
 	public static RenderCenter RC;
 	//public static ArrayList<double[]> size_render = new ArrayList<>();
-	public static DataImage ContentBase;
+	public static DataImage ContentImage;
 	public static SpriteBatch Batch;
 	public static Keyboard Keyboard;
 	public static boolean PressW, PressS, PressA, PressD;
@@ -159,21 +159,21 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create () {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
-		ContentBase = new DataImage();
-		Main.SA.add(new DataSound());
+		ContentImage = new DataImage();
+		ContentSound.add(new DataSound());
 		UpdateBlockReg = new UpdateRegister();
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		Render = new ShapeRenderer();
-		Main.RC = new RenderCenter(0,0);
+		RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
-		TXTFont();
+		font = TXTFont(64,"font/Base/BaseFont2.otf");
 		InputWindow = new InputWindow();
 
 		Keyboard = new Keyboard();
 		Gdx.input.setInputProcessor(Keyboard);
 		field(10000, 10000);
-		Main.spawn_object();
+		spawn_object();
 		for(i = 0; i< BlockList2D.size(); i++){
 			for(int i2 = 0; i2< BlockList2D.get(i).size(); i2++){
 				BlockList2D.get(i).get(i2).passability_detected();
@@ -197,13 +197,14 @@ public class Main extends ApplicationAdapter {
 
 
 	}
-	public static void TXTFont(){
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/Base/BaseFont.ttf"));
+	public static BitmapFont TXTFont(int size,String fontPath){
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
-		parameter.size = 64;
-		font = generator.generateFont(parameter); // font size 64 pixels
+		parameter.size = size;
+		BitmapFont font = generator.generateFont(parameter); // font size 64 pixels
 		generator.dispose();
+		return font;
 	}
 	@Override
 	public void render () {
@@ -219,5 +220,20 @@ public class Main extends ApplicationAdapter {
 		Batch.dispose();
 		Render.dispose();
 		font.dispose();
+		ContentImage.dispose();
+		if(ServerMain.Server != null) {
+			try {
+				ServerMain.Server.dispose();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		else if(ClientMain.Client != null) {
+			try {
+				ClientMain.Client.dispose();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 }

@@ -11,7 +11,7 @@ public class Home1 extends Building {
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-        this.build_image = Main.ContentBase.build_1;
+        this.build_image = Main.ContentImage.build_1;
         this.width = 100;
         this.height = 50;
         this.width_2 = this.width/2;

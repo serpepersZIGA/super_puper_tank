@@ -251,7 +251,7 @@ public abstract class Transport{
         this.time_sound_motor -= 1;
         if (this.press_w) {
             if (this.time_sound_motor < 0) {
-                SoundPlay.sound(Main.SA.get(0).motor_back, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
+                SoundPlay.sound(Main.ContentSound.get(0).motor_back, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
                 this.time_sound_motor = this.time_max_sound_motor;
 
             }
@@ -261,7 +261,7 @@ public abstract class Transport{
         }
         if (this.press_s) {
             if (this.time_sound_motor < 0) {
-                SoundPlay.sound(Main.SA.get(0).motor, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
+                SoundPlay.sound(Main.ContentSound.get(0).motor, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
                 this.time_sound_motor = this.time_max_sound_motor;
             }
             if(this.max_speed > this.speed) {
@@ -621,7 +621,7 @@ public abstract class Transport{
                     if (this.speed > this.min_speed) {
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     }
@@ -630,13 +630,13 @@ public abstract class Transport{
                     if (g > distance_target && this.speed < this.max_speed) {
                         this.speed += this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     } else if(this.speed > this.min_speed){
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     }
@@ -645,13 +645,13 @@ public abstract class Transport{
                     if (g > distance_target && this.speed < this.max_speed) {
                         this.speed += this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     } else if (g > distance_target_2 && this.speed > this.min_speed) {
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
 
@@ -659,13 +659,13 @@ public abstract class Transport{
                         if (this.speed < 0) {
                             this.speed -= this.acceleration;
                             if (this.time_sound_motor < 0) {
-                                SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+                                SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
                                 this.time_sound_motor = this.time_max_sound_motor;
                             }
                         } else if (this.speed > 0) {
                             this.speed += this.acceleration;
                             if (this.time_sound_motor < 0) {
-                                SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+                                SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
                                 this.time_sound_motor = this.time_max_sound_motor;
                             }
                         }
@@ -691,7 +691,7 @@ public abstract class Transport{
                     if (this.speed > this.min_speed) {
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     }
@@ -700,13 +700,13 @@ public abstract class Transport{
                     if (g > distance_target && this.speed < this.max_speed) {
                         this.speed += this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     } else if(this.speed > this.min_speed){
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     }
@@ -715,13 +715,13 @@ public abstract class Transport{
                     if (g > distance_target && this.speed < this.max_speed) {
                         this.speed += this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
                     } else if (g > distance_target_2 && this.speed > this.min_speed) {
                         this.speed -= this.acceleration;
                         if (this.time_sound_motor < 0) {
-                            SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                            SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                             this.time_sound_motor = this.time_max_sound_motor;
                         }
 
@@ -729,13 +729,13 @@ public abstract class Transport{
                         if (this.speed < 0) {
                             this.speed -= this.acceleration;
                             if (this.time_sound_motor < 0) {
-                                SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                                SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                                 this.time_sound_motor = this.time_max_sound_motor;
                             }
                         } else if (this.speed > 0) {
                             this.speed += this.acceleration;
                             if (this.time_sound_motor < 0) {
-                                SoundPlay.sound(Main.SA.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                                SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                                 this.time_sound_motor = this.time_max_sound_motor;
                             }
                         }
@@ -790,7 +790,7 @@ public abstract class Transport{
             if (this.speed < this.max_speed) {
                 this.speed += this.acceleration;
                 if (this.time_sound_motor < 0) {
-                    SoundPlay.sound(Main.SA.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                    SoundPlay.sound(Main.ContentSound.get(0).motor, 1f-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                     this.time_sound_motor = this.time_max_sound_motor;
                 }
             }
@@ -1045,7 +1045,7 @@ public abstract class Transport{
                     (int)obj_2.get(i).y,(int)obj_2.get(i).corpus_width,(int)obj_2.get(i).corpus_height,obj_2.get(i).rotation_corpus);
 
             if (z & obj_2.get(i).priority_paint == this.priority_paint) {
-                SoundPlay.sound(Main.SA.get(0).hit,1-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
+                SoundPlay.sound(Main.ContentSound.get(0).hit,1-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
                 metod_1(obj_2, i);
                 physic_collision(obj_2, i);
 
@@ -1060,7 +1060,7 @@ public abstract class Transport{
                         (int) obj_2.get(i).y, (int) obj_2.get(i).corpus_width, (int) obj_2.get(i).corpus_height, obj_2.get(i).rotation_corpus);
 
                 if (z && obj_2.get(i).priority_paint == this.priority_paint) {
-                    SoundPlay.sound(Main.SA.get(0).hit, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+                    SoundPlay.sound(Main.ContentSound.get(0).hit, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
                     if (type == 1) {
                         metod_1(obj_2, i);
                         physic_collision(obj_2, i);
@@ -1220,7 +1220,7 @@ public abstract class Transport{
         Main.BangList.add(new Bang((float) (this.x+corpus_width_2 + -20+rand.rand(40)), (float) (this.y+corpus_height_2 +-20+rand.rand(40)),5));}
         for(int i = 0;i<5;i++){
             Main.FlameSpawnList.add(new FlameSpawn((float) (this.x + -5+rand.rand(50)), (float) (this.y + -5+rand.rand(50))));}
-        SoundPlay.sound(Main.SA.get(0).kill,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+        SoundPlay.sound(Main.ContentSound.get(0).kill,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
     }
     private boolean rect_collision(int x1,int y1,int width,int height,double rotation,
                                   int x2,int y2,int width2,int height2,double rotation_2){
@@ -1279,7 +1279,7 @@ public abstract class Transport{
                         value.area_list.get(j));
                 if (z) {
                     if (this.speed > 2 || this.speed < -2) {
-                        SoundPlay.sound(Main.SA.get(0).break_wooden, 1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+                        SoundPlay.sound(Main.ContentSound.get(0).break_wooden, 1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
                     }
                     metod_1(value.xy_area_list.get(j));
                 }

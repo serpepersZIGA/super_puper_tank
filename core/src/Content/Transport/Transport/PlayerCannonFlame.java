@@ -26,8 +26,8 @@ public class PlayerCannonFlame extends Transport {
         this.tower_y_const = 40;
         this.reload_max = 2;
         this.height = 1;
-        this.tower_img = Main.ContentBase.tower_player;
-        this.corpus_img = Main.ContentBase.corpus_player;
+        this.tower_img = Main.ContentImage.tower_player;
+        this.corpus_img = Main.ContentImage.corpus_player;
         this.t = 0;
         this.t_damage = 1;
         this.x_tower = 15;
@@ -40,14 +40,14 @@ public class PlayerCannonFlame extends Transport {
         this.width_tower = 35;
         this.height_tower = 55;
         this.speed_tower = 1;this.speed_rotation = 1;
-        this.sound_fire = Main.SA.get(0).flame_attack;
+        this.sound_fire = Main.ContentSound.get(0).flame_attack;
         data();
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,-12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentBase.tower_player_auxiliary_1,this.spisok, Main.SA.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok, Main.ContentSound.get(0).cannon));
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentBase.tower_player_auxiliary_1,this.spisok, Main.SA.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok, Main.ContentSound.get(0).cannon));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();
