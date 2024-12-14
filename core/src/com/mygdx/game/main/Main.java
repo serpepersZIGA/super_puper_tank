@@ -10,10 +10,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Map.MapScan;
 import com.mygdx.game.block.Block;
-import Content.Block.Dirt;
+import Content.Block.BlockMap;
 import Content.Block.Air;
 import com.mygdx.game.block.UpdateRegister;
-import Content.Build.BigBuildingWood1;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.bull.Bull;
 import Data.DataImage;
@@ -29,7 +28,6 @@ import Content.Soldat.SoldatRegister;
 import Data.DataSound;
 import com.mygdx.game.transport.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -59,9 +57,7 @@ public class Main extends ApplicationAdapter {
 	//public static ArrayList<double[]> size_render = new ArrayList<>();
 	public static DataImage ContentImage;
 	public static SpriteBatch Batch;
-	public static Keyboard Keyboard;
-	public static boolean PressW, PressS, PressA, PressD;
-	public static boolean LeftMouse, RightMouse,LeftMouseClick, RightMouseClick;
+	public static Keyboard KeyboardObj;
 	public static boolean PressWClient, PressSClient, PressAClient, PressDClient;
 	public static int screenWidth;
 	public static int screenHeight;
@@ -69,7 +65,6 @@ public class Main extends ApplicationAdapter {
 	public static double MouseXClient, MouseYClient;
 	private static int i;
 	public static float Zoom = 1;
-	public static int MouseX, MouseY;
 	public static ShapeRenderer Render;
 	public static UpdateRegister UpdateBlockReg;
 	public static AI Ai;
@@ -103,12 +98,12 @@ public class Main extends ApplicationAdapter {
 
 
 	public static void spawn_object(){
-		PlayerList.add(new PlayerCannonMortar(200,200, PlayerList,true));
+		PlayerList.add(new PlayerCannonFlame(200,200, PlayerList,true));
 //		BuildingList.add(new BigBuildingWood1(500,600,0));
 //		BuildingList.add(new BigBuildingWood1(500,1200,0));
 //		BuildingList.add(new BigBuildingWood1(1200,1200,0));
 //		BuildingList.add(new BigBuildingWood1(1200,600,0));
-		MapScan.MapInput("assets/maps/MapBase.mapt");
+		MapScan.MapInput("maps/MapBase.mapt");
 		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
@@ -136,7 +131,7 @@ public class Main extends ApplicationAdapter {
 
 			for(int i2 = 0;i2<quantity_width;i2++){
 				x_block += width_block;
-				BlockList2D.get(i).add(new Dirt(x_block,y_block));
+				BlockList2D.get(i).add(new BlockMap(x_block,y_block));
 
 
 			}
@@ -166,7 +161,6 @@ public class Main extends ApplicationAdapter {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
 		ContentSound.add(new DataSound());
-		UpdateBlockReg = new UpdateRegister();
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		Render = new ShapeRenderer();
@@ -176,17 +170,12 @@ public class Main extends ApplicationAdapter {
 		font2 = TXTFont(16,"font/Base/BaseFont.ttf");
 		InputWindow = new InputWindow();
 
-		Keyboard = new Keyboard();
-		Gdx.input.setInputProcessor(Keyboard);
+		KeyboardObj = new Keyboard();
+		Gdx.input.setInputProcessor(KeyboardObj);
 		field(10000, 10000);
 		spawn_object();
-		for(i = 0; i< BlockList2D.size(); i++){
-			for(int i2 = 0; i2< BlockList2D.get(i).size(); i2++){
-				BlockList2D.get(i).get(i2).passability_detected();
-			}
-		}
 		option = new Option();
-		Keyboard.zoom_const();
+		KeyboardObj.zoom_const();
 		Ai = new AI();
 		TransportRegister = new TransportRegister();
 		SoldatRegister = new SoldatRegister();
@@ -194,6 +183,8 @@ public class Main extends ApplicationAdapter {
 		ButtonList.add(new PlayHost(100,800,400,120,"HOST",(byte)1));
 		ButtonList.add(new PlayClient(100,600,400,120,"CONNECT",(byte)1));
 		ButtonList.add(new Cancel(100,400,400,120,"CANCEL",(byte)1));
+		ButtonList.add(new Maps(100,400,400,120,"MAPS",(byte)0));
+		ButtonList.add(new Cancel(100,400,400,120,"CANCEL",(byte)3));
 		ActionGame = new ActionMenu();
 		RC.const_xy_block();
 		xMaxAir = Main.AirList.get(0).size();
