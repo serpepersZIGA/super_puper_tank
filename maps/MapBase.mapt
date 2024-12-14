@@ -1,0 +1,10 @@
+/BigBuildingWood1:300:400:;
+/BigBuildingWood1:1000:400:;
+/BigBuildingWood1:1700:400:;
+/BigBuildingWood1:300:850:;
+/BigBuildingWood1:1000:850:;
+/BigBuildingWood1:1700:850:;
+/Asphalt:2:2:>X20;
+/Asphalt:10:2:>Y120;
+/Asphalt:21:2:>Y50;
+/^MapLite;

@@ -11,7 +11,7 @@ public class BullTank extends Bull {
         this.type_team = type_time;
         this.height = height;
 
-        this.size = 10;
+        this.size = 8;
         this.size_render = (int)(size*Main.Zoom);
         this.damage = damage;
         this.penetration = penetration;

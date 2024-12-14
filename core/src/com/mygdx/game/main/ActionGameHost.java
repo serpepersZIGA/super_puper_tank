@@ -9,6 +9,7 @@ import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
 import Content.Soldat.SoldatPacket;
 import com.mygdx.game.build.BuildPacket;
+import com.mygdx.game.method.Keyboard;
 import com.mygdx.game.transport.DebrisPacket;
 import com.mygdx.game.transport.Transport;
 import com.mygdx.game.transport.TransportPacket;
@@ -26,39 +27,39 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
     public void action() {
         RC.metod();
         if(Main.PlayerList.size()==0){
-            if(Main.PressW){
+            if(Keyboard.PressW){
                 Main.RC.y += 10;
             }
-            if(Main.PressS){
+            if(Keyboard.PressS){
                 Main.RC.y -= 10;
             }
-            if(Main.PressA){
+            if(Keyboard.PressA){
                 Main.RC.x -= 10;
             }
-            if(Main.PressD){
+            if(Keyboard.PressD){
                 Main.RC.x += 10;
             }
             try {
                 if(timer <= 0) {
 
-                    if (LeftMouse) {
-                        Main.FlameSpawnList.add(new FlameSpawn((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                    if (Keyboard.LeftMouse) {
+                        Main.FlameSpawnList.add(new FlameSpawn(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2));
                         timer = 30;
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
-                        Main.BullList.add(new BullFragment((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2),40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
 
 
                     }
-                    if (RightMouse) {
+                    if (Keyboard.RightMouse) {
                         //main.Main.bang_obj.add(new particle.bang(mouse_x,mouse_y,new Color(236,124,38),12));
-                        Main.LiquidList.add(new Acid((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                        Main.LiquidList.add(new Acid(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));

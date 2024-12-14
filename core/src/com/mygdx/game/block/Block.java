@@ -16,6 +16,7 @@ import static java.sql.Types.NULL;
 public abstract class Block {
     public int x,y,x_rend,y_rend,x_center,y_center;
     public int radius;
+
     public UpdateBlock render_block;
     public ArrayList<Integer> h = new ArrayList<>();
     private int i;
@@ -70,6 +71,8 @@ public abstract class Block {
     public void update(){
         center_render();
         render_block.render(this.x_rend, this.y_rend);
+    }
+    public void render(){
     }
     public void all_action(){
 

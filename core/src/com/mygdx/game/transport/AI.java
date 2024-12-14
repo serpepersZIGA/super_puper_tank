@@ -1,4 +1,5 @@
 package com.mygdx.game.transport;
+import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
 
 public class AI {
@@ -190,15 +191,15 @@ public class AI {
                     }
                 }
             }
-            for(int i = 0;i<ai.path.size();i++){
-                Main.BlockList2D.get(ai.path.get(i)[1]).get(ai.path.get(i)[0]).render_block = Main.UpdateBlockReg.Update4;
-            }
+//            for(int i = 0;i<ai.path.size();i++){
+//                Main.BlockList2D.get(ai.path.get(i)[1]).get(ai.path.get(i)[0]).render_block = UpdateRegister.Update4;
+//            }
         }
     }
     public int[] block_detected_2(Transport tr){
         int i = (int)(tr.tower_y/Main.height_block)-1;
         int i2 = (int)(tr.tower_x/Main.width_block)-1;
-        Main.BlockList2D.get(i).get(i2).render_block = Main.UpdateBlockReg.Update3;
+        //Main.BlockList2D.get(i).get(i2).render_block = UpdateRegister.Update3;
         if(!Main.BlockList2D.get(i).get(i2).passability) {
             return new int[]{i2, i};
         }

@@ -1,11 +1,8 @@
 package com.mygdx.game.main;
 
 import Content.Particle.*;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.method.Keyboard;
 
 import static com.mygdx.game.main.Main.*;
 
@@ -17,30 +14,30 @@ public class ActionMenu extends ActionGame {
 
 
             Main.RC.metod();
-        if(Main.PressW){
+        if(Keyboard.PressW){
             Main.RC.y += 10;
         }
-        if(Main.PressS){
+        if(Keyboard.PressS){
             Main.RC.y -= 10;
         }
-        if(Main.PressA){
+        if(Keyboard.PressA){
             Main.RC.x -= 10;
         }
-        if(Main.PressD){
+        if(Keyboard.PressD){
             Main.RC.x += 10;
         }
         try {
             if(timer <= 0) {
 
-                if (LeftMouse) {
-                    Main.FlameSpawnList.add(new FlameSpawn((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                if (Keyboard.LeftMouse) {
+                    Main.FlameSpawnList.add(new FlameSpawn((float) (Keyboard.MouseX / Zoom + RC.x2), (float) (Keyboard.MouseY / Zoom + RC.y2)));
                     timer = 60;
 
 
                 }
-                if (RightMouse) {
+                if (Keyboard.RightMouse) {
                     //main.Main.bang_obj.add(new particle.bang(mouse_x,mouse_y,new Color(236,124,38),12));
-                    Main.LiquidList.add(new Acid((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                    Main.LiquidList.add(new Acid((float) (Keyboard.MouseX / Zoom + RC.x2), (float) (Keyboard.MouseY / Zoom + RC.y2)));
                     //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                     //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                     //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
@@ -89,7 +86,6 @@ public class ActionMenu extends ActionGame {
         for (i = 0; i< Main.BuildingList.size(); i++){
             Main.BuildingList.get(i).all_action(i);}
         Batch.draw(textureBuffer,100,100,100,100);
-
         Render.end();
         Render.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -123,8 +119,13 @@ public class ActionMenu extends ActionGame {
         Batch.end();
         Batch.begin();
         for (i = 0;i< ButtonList.size();i++){
-            if(Main.ConfigMenu == ButtonList.get(i).ConfigMenu) {
+            if(Main.ConfigMenu == ButtonList.get(i).ConfigMenu & !ButtonList.get(i).TypeFont) {
                 ButtonList.get(i).TXTRender();
+            }
+        }
+        for (i = 0;i< ButtonList.size();i++){
+            if(Main.ConfigMenu == ButtonList.get(i).ConfigMenu & ButtonList.get(i).TypeFont) {
+                ButtonList.get(i).TXTRender2();
             }
         }
         Batch.end();
@@ -136,7 +137,11 @@ public class ActionMenu extends ActionGame {
                     serverMain = new ServerMain();
                     serverMain.create();
                     ActionGame = new ActionGameHost();
-
+                    for(i = 0; i< BlockList2D.size(); i++){
+                        for(int i2 = 0; i2< BlockList2D.get(i).size(); i2++){
+                            BlockList2D.get(i).get(i2).passability_detected();
+                        }
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -150,7 +155,7 @@ public class ActionMenu extends ActionGame {
                 }
             }
         }
-        Main.LeftMouseClick = false;
+        Keyboard.LeftMouseClick = false;
     }
 
 

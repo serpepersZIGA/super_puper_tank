@@ -232,12 +232,12 @@ public abstract class Transport{
         }
     }
     protected final void host_control(){
-        this.left_mouse = Main.LeftMouse;
-        this.right_mouse = Main.RightMouse;
-        this.press_w = Main.PressW;
-        this.press_a = Main.PressA;
-        this.press_s = Main.PressS;
-        this.press_d = Main.PressD;
+        this.left_mouse = Keyboard.LeftMouse;
+        this.right_mouse = Keyboard.RightMouse;
+        this.press_w = Keyboard.PressW;
+        this.press_a = Keyboard.PressA;
+        this.press_s = Keyboard.PressS;
+        this.press_d = Keyboard.PressD;
     }
     protected final void client_control(){
         this.left_mouse = Main.LeftMouseClient;
@@ -251,7 +251,7 @@ public abstract class Transport{
         this.time_sound_motor -= 1;
         if (this.press_w) {
             if (this.time_sound_motor < 0) {
-                SoundPlay.sound(Main.ContentSound.get(0).motor_back, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
+                SoundPlay.sound(Main.ContentSound.get(0).motor_back, 1);
                 this.time_sound_motor = this.time_max_sound_motor;
 
             }
@@ -261,7 +261,7 @@ public abstract class Transport{
         }
         if (this.press_s) {
             if (this.time_sound_motor < 0) {
-                SoundPlay.sound(Main.ContentSound.get(0).motor, (float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / -60);
+                SoundPlay.sound(Main.ContentSound.get(0).motor, 1);
                 this.time_sound_motor = this.time_max_sound_motor;
             }
             if(this.max_speed > this.speed) {

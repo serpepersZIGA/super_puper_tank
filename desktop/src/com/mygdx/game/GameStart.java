@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.mygdx.game.main.Main;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class GameStart {
 	public static void main (String[] arg) {
@@ -17,7 +16,8 @@ public class GameStart {
 //		}
 		config.setForegroundFPS(60);
 		config.setTitle("Game");
-
+		config.setWindowIcon("image/player/tower_player_1.png");
 		new Lwjgl3Application(new Main(), config);
+
 	}
 }

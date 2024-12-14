@@ -1,11 +1,9 @@
 package com.mygdx.game.main;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
+import com.mygdx.game.method.Keyboard;
 
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.main.ClientMain.Client;
@@ -18,30 +16,30 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
     public void action() {
         Main.RC.metod();
         if(Main.PlayerList.size()==0){
-            if(Main.PressW){
+            if(Keyboard.PressW){
                 Main.RC.y += 10;
             }
-            if(Main.PressS){
+            if(Keyboard.PressS){
                 Main.RC.y -= 10;
             }
-            if(Main.PressA){
+            if(Keyboard.PressA){
                 Main.RC.x -= 10;
             }
-            if(Main.PressD){
+            if(Keyboard.PressD){
                 Main.RC.x += 10;
             }
             try {
                 if(timer <= 0) {
 
-                    if (LeftMouse) {
-                        Main.FlameSpawnList.add(new FlameSpawn((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                    if (Keyboard.LeftMouse) {
+                        Main.FlameSpawnList.add(new FlameSpawn(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2));
                         timer = 60;
 
 
                     }
-                    if (RightMouse) {
+                    if (Keyboard.RightMouse) {
                         //main.Main.bang_obj.add(new particle.bang(mouse_x,mouse_y,new Color(236,124,38),12));
-                        Main.LiquidList.add(new Acid((float) (MouseX / Zoom + RC.x2), (float) (MouseY / Zoom + RC.y2)));
+                        Main.LiquidList.add(new Acid(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
                         //main.Main.liquid_obj.add(new particle.acid(mouse_x/1.23,mouse_y/1.23));
@@ -102,6 +100,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
             Main.BuildingList.get(i).all_action(i);}
         Batch.draw(textureBuffer,100,100,100,100);
         Render.end();
+
         Render.begin(ShapeRenderer.ShapeType.Filled);
 
         for (i = 0; i< Main.BullList.size(); i++){
@@ -130,14 +129,14 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         client_packet();
     }
     public static void client_packet(){
-        PacketClient.press_w = Main.PressW;
-        PacketClient.press_a = Main.PressA;
-        PacketClient.press_s = Main.PressS;
-        PacketClient.press_d = Main.PressD;
-        PacketClient.left_mouse = Main.LeftMouse;
-        PacketClient.right_mouse = Main.RightMouse;
-        PacketClient.mouse_x = Main.MouseX;
-        PacketClient.mouse_y = Main.MouseY;
+        PacketClient.press_w = Keyboard.PressW;
+        PacketClient.press_a = Keyboard.PressA;
+        PacketClient.press_s = Keyboard.PressS;
+        PacketClient.press_d = Keyboard.PressD;
+        PacketClient.left_mouse = Keyboard.LeftMouse;
+        PacketClient.right_mouse = Keyboard.RightMouse;
+        PacketClient.mouse_x = Keyboard.MouseX;
+        PacketClient.mouse_y = Keyboard.MouseY;
         Client.sendTCP(PacketClient);
         PacketClient.rot_tower.clear();
 

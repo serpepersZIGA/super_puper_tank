@@ -6,6 +6,7 @@ import com.mygdx.game.block.Block;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.bull.Bull;
 import com.mygdx.game.main.Main;
+import com.mygdx.game.menu.button.Button;
 import com.mygdx.game.particle.Particle;
 import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
@@ -15,20 +16,31 @@ import static com.mygdx.game.main.Main.radius_air_max;
 import static com.mygdx.game.main.Main.radius_air_max_zoom;
 
 public class Keyboard extends InputAdapter{
+    public static boolean PressW,PressA,PressS,PressD,PressUP,PressDown;
+    public static boolean LeftMouse, RightMouse,LeftMouseClick, RightMouseClick;
+    public static int MouseX,MouseY;
 
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.W) {
-            Main.PressW = true;
+            PressW = true;
         }
         if (keycode ==Input.Keys.S ) {
-            Main.PressS = true;
+            PressS = true;
         }
         if (keycode ==Input.Keys.A) {
-            Main.PressA = true;
+            PressA = true;
         }
         if (keycode ==Input.Keys.D) {
-            Main.PressD = true;
+            PressD = true;
+        }
+        if (keycode == Input.Keys.UP) {
+            Button.YList += 4;
+            PressUP = true;
+        }
+        if (keycode == Input.Keys.DOWN) {
+            Button.YList -= 4;
+            PressDown = true;
         }
         return true;
     }
@@ -36,16 +48,22 @@ public class Keyboard extends InputAdapter{
     @Override
     public boolean keyUp(int keycode) {
         if (keycode ==Input.Keys.W) {
-            Main.PressW = false;
+            PressW = false;
         }
         if (keycode ==Input.Keys.S) {
-            Main.PressS = false;
+            PressS = false;
         }
         if (keycode ==Input.Keys.A) {
-            Main.PressA = false;
+            PressA = false;
         }
         if (keycode ==Input.Keys.D) {
-            Main.PressD = false;
+            PressD = false;
+        }
+        if (keycode == Input.Keys.UP) {
+            PressUP = false;
+        }
+        if (keycode == Input.Keys.DOWN) {
+            PressDown = false;
         }
         return true;
     }
@@ -58,10 +76,10 @@ public class Keyboard extends InputAdapter{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if(button == Input.Buttons.LEFT) {
-            Main.LeftMouse = true;
+            LeftMouse = true;
         }
         if(button == Input.Buttons.RIGHT) {
-            Main.RightMouse = true;
+           RightMouse = true;
         }
         return false;
     }
@@ -69,35 +87,35 @@ public class Keyboard extends InputAdapter{
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if(button == Input.Buttons.LEFT) {
-            Main.LeftMouse = false;
-            Main.LeftMouseClick = true;
+            LeftMouse = false;
+            LeftMouseClick = true;
         }
         if(button == Input.Buttons.RIGHT) {
-            Main.RightMouse = false;
-            Main.RightMouseClick = true;
+            RightMouse = false;
+            RightMouseClick = true;
         }
         return false;
     }
 
     @Override
     public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-        Main.MouseX = screenX;
-        Main.MouseY = (screenY-Main.screenHeight)*-1;
+        MouseX = screenX;
+        MouseY = (screenY-Main.screenHeight)*-1;
         return false;
     }
 
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Main.MouseX = screenX;
-        Main.MouseY = (screenY-Main.screenHeight)*-1;
+        MouseX = screenX;
+        MouseY = (screenY-Main.screenHeight)*-1;
         return false;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        Main.MouseX = screenX;
-        Main.MouseY = (screenY-Main.screenHeight)*-1;
+        MouseX = screenX;
+        MouseY = (screenY-Main.screenHeight)*-1;
         return false;
     }
 

@@ -8,7 +8,8 @@ public class DataImage {
     public Sprite corpus_player,corpus_track_remount_enemy,corpus_track_soldat_enemy,corpus_enemy;
     public Sprite build_1,build_2;
     public Sprite track_enemy_1lvl;
-    public Sprite dirt_1,dirt_2,dirt_3,dirt_4;
+    public Sprite grass,dirt_2,dirt_3,dirt_4;
+    public Sprite asphalt1;
     public Sprite soldat_1;
     public DataImage(){
         corpus_track_soldat_enemy = new Sprite(new Texture("image/enemy/machine_enemy_1lvl.png"));
@@ -19,10 +20,11 @@ public class DataImage {
         corpus_enemy = new Sprite(new Texture("image/enemy/corpus_enemy_many_tower_1.png"));
         build_1 = new Sprite(new Texture("image/build/home_3.png"));
         build_2 = new Sprite(new Texture("image/build/big_build_wood_1.png"));
-        dirt_1 = new Sprite(new Texture("image/other/grass_256_1.png"));
+        grass = new Sprite(new Texture("image/other/grass_256_1.png"));
         dirt_2 = new Sprite(new Texture("image/other/dirt_256_1.png"));
         dirt_3 = new Sprite(new Texture("image/other/dirt_256_2.png"));
         dirt_4 = new Sprite(new Texture("image/other/dirt_2.png"));
+        asphalt1 = new Sprite(new Texture("image/other/asphalt1.png"));
         tower_player_auxiliary_1 = new Sprite(new Texture("image/player/tower_auxiliart_player_1.png"));
         tower_enemy_auxiliary_1 = new Sprite(new Texture("image/enemy/tower_auxiliart_enemy_1.png"));
         soldat_1 = new Sprite(new Texture("image/infantry/soldat_enemy.png"));
@@ -36,7 +38,7 @@ public class DataImage {
         corpus_player =null;
         build_1 = null;
         build_2 = null;
-        dirt_1 = null;
+        grass = null;
         dirt_2 = null;
         dirt_3 = null;
         dirt_4 = null;

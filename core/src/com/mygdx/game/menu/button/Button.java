@@ -12,10 +12,12 @@ import static java.lang.StrictMath.*;
 public abstract class Button {
     public int x,y,width,height,radius,XTXT,YTXT;
     public static float[] RGBButton1,RGBButton2,RGBButton3,RGBTotal;
-    public String txt;
+    public String txt,path;
+    public static int YList = 0;
     public byte TypeClick;
     public byte ConfigMenu = 0;
     public boolean condition;
+    public boolean TypeFont;
     public boolean TipOff;
     public int widthXY,heightXY,radiusX,radiusY;
     public void render(int i){
@@ -36,7 +38,7 @@ public abstract class Button {
         RGBTotal = RGBButton3;
     }
     protected void XYDetectedButtonRect(){
-        if(x< Main.MouseX &widthXY>Main.MouseX & y<Main.MouseY & heightXY>Main.MouseY){
+        if(x< Keyboard.MouseX &widthXY>Keyboard.MouseX & y<Keyboard.MouseY & heightXY>Keyboard.MouseY){
             TipOff = true;
             RGBTotal = RGBButton2;
         }
@@ -46,7 +48,7 @@ public abstract class Button {
         }
     }
     protected void XYDetectedButtonCircle(){
-        if(sqrt(pow((x-Main.MouseX),2)+pow((y-Main.MouseY),2))<radius){
+        if(sqrt(pow((x-Keyboard.MouseX),2)+pow((y-Keyboard.MouseY),2))<radius){
             TipOff = true;
             RGBTotal = RGBButton2;
         }
@@ -56,20 +58,20 @@ public abstract class Button {
         }
     }
     protected void ActionButton1(){
-        if(TipOff & Main.LeftMouseClick){
+        if(TipOff & Keyboard.LeftMouseClick){
             condition = true;
-            Main.LeftMouseClick = false;
+            Keyboard.LeftMouseClick = false;
             RGBTotal = RGBButton1;
         }
     }
     protected void ActionButton2(){
-        if(TipOff & Main.LeftMouseClick & !condition){
+        if(TipOff & Keyboard.LeftMouseClick & !condition){
             condition = true;
-            Main.LeftMouseClick = false;
+            Keyboard.LeftMouseClick = false;
         }
-        else if(TipOff & Main.LeftMouseClick & condition){
+        else if(TipOff & Keyboard.LeftMouseClick & condition){
             condition = false;
-            Main.LeftMouseClick = false;
+            Keyboard.LeftMouseClick = false;
         }
     }
     protected void RenderButtonRect(){
@@ -83,6 +85,10 @@ public abstract class Button {
     public void TXTRender(){
         font.setColor(0.1f,0.9f,0.8f,1f);
         font.draw(Batch,txt,XTXT,YTXT);
+    }
+    public void TXTRender2(){
+        font2.setColor(0.1f,0.9f,0.8f,1f);
+        font2.draw(Batch,txt,XTXT,YTXT);
     }
 
 }

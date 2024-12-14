@@ -59,7 +59,11 @@ public abstract class Particle {
     protected final void grass_delete(){
         int ix = (int) (x/Main.width_block)-1;
         int iy = (int) (y/Main.height_block)-1;
-        if(ix >0 & iy >0){Main.BlockList2D.get(iy).get(ix).render_block = Main.UpdateBlockReg.Update2;}
+        if(ix >0 & iy >0){
+            if(Main.BlockList2D.get(iy).get(ix).render_block == Main.UpdateBlockReg.GrassUpdate) {
+                Main.BlockList2D.get(iy).get(ix).render_block = Main.UpdateBlockReg.Update2;
+            }
+        }
     }
     protected void size_update(){
         this.size_2 = this.size/2;

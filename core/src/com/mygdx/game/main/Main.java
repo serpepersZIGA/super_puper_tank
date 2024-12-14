@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Map.MapScan;
 import com.mygdx.game.block.Block;
 import Content.Block.Dirt;
 import Content.Block.Air;
@@ -17,6 +18,7 @@ import com.mygdx.game.build.Building;
 import com.mygdx.game.bull.Bull;
 import Data.DataImage;
 import com.mygdx.game.menu.InputWindow;
+import com.mygdx.game.menu.MapAllLoad;
 import com.mygdx.game.menu.button.*;
 import com.mygdx.game.method.Keyboard;
 import com.mygdx.game.method.Option;
@@ -27,6 +29,7 @@ import Content.Soldat.SoldatRegister;
 import Data.DataSound;
 import com.mygdx.game.transport.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -86,7 +89,7 @@ public class Main extends ApplicationAdapter {
 	public static PackerServer PacketServer;
 	public static Packet_client PacketClient;
 	public static int TickBlock,TickBlockMax = 600;
-	public static BitmapFont font;
+	public static BitmapFont font,font2;
 	public static byte ConfigMenu;
 	public static InputWindow InputWindow;
 	public static int xMaxAir ;
@@ -101,10 +104,12 @@ public class Main extends ApplicationAdapter {
 
 	public static void spawn_object(){
 		PlayerList.add(new PlayerCannonMortar(200,200, PlayerList,true));
-		BuildingList.add(new BigBuildingWood1(500,600,0));
-		BuildingList.add(new BigBuildingWood1(500,1200,0));
-		BuildingList.add(new BigBuildingWood1(1200,1200,0));
-		BuildingList.add(new BigBuildingWood1(1200,600,0));
+//		BuildingList.add(new BigBuildingWood1(500,600,0));
+//		BuildingList.add(new BigBuildingWood1(500,1200,0));
+//		BuildingList.add(new BigBuildingWood1(1200,1200,0));
+//		BuildingList.add(new BigBuildingWood1(1200,600,0));
+		MapScan.MapInput("assets/maps/MapBase.mapt");
+		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
 		LiquidList.add(new Acid(200,200));
@@ -167,7 +172,8 @@ public class Main extends ApplicationAdapter {
 		Render = new ShapeRenderer();
 		RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
-		font = TXTFont(64,"font/Base/BaseFont2.otf");
+		font = TXTFont(64,"font/Base/BaseFont4.ttf");
+		font2 = TXTFont(16,"font/Base/BaseFont.ttf");
 		InputWindow = new InputWindow();
 
 		Keyboard = new Keyboard();
@@ -192,6 +198,7 @@ public class Main extends ApplicationAdapter {
 		RC.const_xy_block();
 		xMaxAir = Main.AirList.get(0).size();
 		yMaxAir = Main.AirList.size();
+
 
 
 

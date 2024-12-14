@@ -54,7 +54,7 @@ public class Method {
         return xy;
     }
     public static double tower_player(float x, float y, float rotation_tower, float speed_tower) {
-        return tower(x, y, Main.MouseX, Main.MouseY, rotation_tower, speed_tower);
+        return tower(x, y, Keyboard.MouseX, Keyboard.MouseY, rotation_tower, speed_tower);
 
     }
     public static double tower_player_client(float x, float y, float rotation_tower, float speed_tower) {

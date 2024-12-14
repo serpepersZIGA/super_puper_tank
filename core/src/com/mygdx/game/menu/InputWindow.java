@@ -5,9 +5,10 @@ import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.main.ClientMain;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class InputWindow{
-    public static JButton button;
+    public static JButton Button;
     public static JFrame frame;
     public InputWindow(){
         // Создаем новое окно
@@ -17,7 +18,7 @@ public class InputWindow{
 
         // Создаем текстовое поле
         // Создаем кнопку для сохранения текста
-        button = new JButton("Save");
+        Button = new JButton("Save");
         //frame.add(button);
 
         // Добавляем текстовое поле и кнопку в окно
@@ -26,12 +27,12 @@ public class InputWindow{
         JTextField textField = new JTextField(ClientMain.IP,40);
 
         frame.getContentPane().add(textField, "North");
-        frame.getContentPane().add(button, "South");
+        frame.getContentPane().add(Button, "South");
 
         // Создаем переменную для хранения текста
 
         // Добавляем обработчик событий для кнопки
-        button.addActionListener(e -> {
+        Button.addActionListener(e -> {
             ClientMain.IP = textField.getText();
             FileHandle file = Gdx.files.local("bufferIP.txt");
             file.writeString(ClientMain.IP, false);
