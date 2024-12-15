@@ -85,7 +85,7 @@ public class ActionMenu extends ActionGame {
         }
         for (i = 0; i< Main.BuildingList.size(); i++){
             Main.BuildingList.get(i).all_action(i);}
-        Batch.draw(textureBuffer,100,100,100,100);
+        Batch.draw(textureBuffer,-20,1,1,1);
         Render.end();
         Render.begin(ShapeRenderer.ShapeType.Filled);
 

@@ -44,7 +44,7 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<Soldat> SoldatList = new ArrayList<>();
 	public static LinkedList<Particle> BangList = new LinkedList<>();
 	public static LinkedList<Particle> FlameParticleList = new LinkedList<>();
-	public static LinkedList<Particle> LiquidList = new LinkedList<>();
+	public static ArrayList<Particle> LiquidList = new ArrayList<>();
 	public static LinkedList<Particle> FlameSpawnList = new LinkedList<>();
 	public static ArrayList<Transport> HelicopterList = new ArrayList<>();
 	public static ArrayList<Transport> DebrisList = new ArrayList<>();
@@ -80,7 +80,7 @@ public class Main extends ApplicationAdapter {
 	public static float radius_air_max = 150,radius_air_max_zoom;
 	public static ServerMain serverMain;
 	public static ClientMain Main_client;
-	public static Option option;
+	public static Option Option;
 	public static PackerServer PacketServer;
 	public static Packet_client PacketClient;
 	public static int TickBlock,TickBlockMax = 600;
@@ -90,6 +90,8 @@ public class Main extends ApplicationAdapter {
 	public static int xMaxAir ;
 	public static int yMaxAir ;
 	public static Texture textureBuffer;
+	public static int IDClient;
+	public static  ArrayList<Packet_client> Clients = new ArrayList<>();
 
 
 	public Main(){
@@ -149,6 +151,7 @@ public class Main extends ApplicationAdapter {
 
 			}
 		}
+
 		LiquidList.add(new Acid(200,200));
 		LiquidList.add(new Blood(200,200));
 		FlameSpawnList.add(new FlameSpawn(200,200));
@@ -174,7 +177,7 @@ public class Main extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(KeyboardObj);
 		field(10000, 10000);
 		spawn_object();
-		option = new Option();
+		Option = new Option();
 		KeyboardObj.zoom_const();
 		Ai = new AI();
 		TransportRegister = new TransportRegister();

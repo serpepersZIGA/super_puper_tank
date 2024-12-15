@@ -18,6 +18,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static com.mygdx.game.main.Main.LiquidList;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 

@@ -201,13 +201,13 @@ public class Keyboard extends InputAdapter{
             sl.width_render = (int)(sl.width*Main.Zoom);
             sl.height_render = (int)(sl.height*Main.Zoom);
         }
-        Main.option.size_y_indicator_zoom = (int) (Main.option.size_y_indicator* Main.Zoom);
-        Main.option.size_x_indicator_zoom = (int) (Main.option.size_x_indicator* Main.Zoom);
+        Main.Option.size_y_indicator_zoom = (int) (Main.Option.size_y_indicator* Main.Zoom);
+        Main.Option.size_x_indicator_zoom = (int) (Main.Option.size_x_indicator* Main.Zoom);
 
-        Main.option.const_hp_x_zoom = (int)(Main.option.const_hp_x* Main.Zoom);
-        Main.option.const_hp_y_zoom= (int)(Main.option.const_hp_y* Main.Zoom);
-        Main.option.const_reload_x_zoom = (int)(Main.option.const_reload_x* Main.Zoom);
-        Main.option.const_reload_y_zoom = (int)(Main.option.const_reload_y* Main.Zoom);
+        Main.Option.const_hp_x_zoom = (int)(Main.Option.const_hp_x* Main.Zoom);
+        Main.Option.const_hp_y_zoom= (int)(Main.Option.const_hp_y* Main.Zoom);
+        Main.Option.const_reload_x_zoom = (int)(Main.Option.const_reload_x* Main.Zoom);
+        Main.Option.const_reload_y_zoom = (int)(Main.Option.const_reload_y* Main.Zoom);
     }
     public static void ZoomConstTransport(){
         for(Transport tr : Main.PlayerList){

@@ -9,5 +9,6 @@ public class TransportPacket {
     public int hp;
     public float speed;
     public boolean host;
+    public int IDClient;
     public ArrayList<Float>rotation_tower_2 = new ArrayList<>();
 }

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.main.Main.BullList;
+import static com.mygdx.game.main.Main.LiquidList;
 import static java.lang.StrictMath.*;
 
 public abstract class Soldat implements Serializable {
@@ -63,6 +64,7 @@ public abstract class Soldat implements Serializable {
     public void clear(ArrayList<Soldat>obj,int i){
         if(this.clear_sost == 1){
             for(int i1 =0;i1<12;i1++){
+                int i2 = LiquidList.size();
             Main.LiquidList.add(new Blood((float) (this.x+i1), (float) this.y));}
             obj.remove(i);
         }

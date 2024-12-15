@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
@@ -31,6 +32,7 @@ public class ClientMain extends Listener{
     public static Client Client;
     static int udpPort = 27950, tcpPort = 27950;
     public static String IP = "127.0.0.1";
+    public static int IDClient;
     private int i;
     public void create() {
         System.out.println("Подключаемся к серверу");
@@ -75,11 +77,13 @@ public class ClientMain extends Listener{
         }
 
         Client.addListener(Main.Main_client);
+        //IDClient = Client.getID();
     }
 
     @Override
     public void received(Connection c, Object p) {
         //c.sendUDP(packetMessage);
+        Main.IDClient = c.getID();
         if(p instanceof PackerServer) {
             PacketPlayer = ((PackerServer) p).player;
             if (PacketPlayer.size() == PlayerList.size()) {
@@ -216,7 +220,9 @@ public class ClientMain extends Listener{
         PlayerList.get(i).team = PacketPlayer.get(i).team;
         PlayerList.get(i).speed = PacketPlayer.get(i).speed;
         PlayerList.get(i).host = PacketPlayer.get(i).host;
-        if(PacketPlayer.get(i).host) {
+        PlayerList.get(i).nConnect = PacketPlayer.get(i).IDClient;
+        //System.out.println(PacketPlayer.get(i).rotation_tower_2.size());
+        if(PacketPlayer.get(i).IDClient!=IDClient) {
             for (int i2 = 0; i2< PacketPlayer.get(i).rotation_tower_2.size(); i2++) {
                 PlayerList.get(i).tower_obj.get(i2).rotation_tower = PacketPlayer.get(i).rotation_tower_2.get(i2);
             }

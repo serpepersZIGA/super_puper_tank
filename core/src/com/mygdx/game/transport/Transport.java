@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
+import com.mygdx.game.main.Packet_client;
 import com.mygdx.game.method.*;
 import Content.Particle.FlameSpawn;
 import Content.Particle.Bang;
@@ -34,7 +35,7 @@ public abstract class Transport{
     public UnitType type_unit;
     public float x, y;
     public int  difference,difference_2,hp,max_hp,time_spawn_soldat,time_spawn_soldat_max,x_rend,y_rend,x_tower_rend,y_tower_rend, id_unit, x_tower,y_tower,
-    time_max_sound_motor = 20,time_sound_motor = time_max_sound_motor;
+    time_max_sound_motor = 20,time_sound_motor = time_max_sound_motor,nConnect;
     protected Sound sound_fire;
     private float fire_x,fire_y;
     public float max_speed=4, min_speed=-4,damage,penetration,damage_fragment,penetration_fragment,t,t_damage,armor,reload_max,acceleration=0.2f,speed,speed_inert, rotation_inert, rotation_tower, speed_tower=0.2f, speed_rotation=0.2f
@@ -240,12 +241,38 @@ public abstract class Transport{
         this.press_d = Keyboard.PressD;
     }
     protected final void client_control(){
-        this.left_mouse = Main.LeftMouseClient;
-        this.right_mouse = Main.RightMouseClient;
-        this.press_w = Main.PressWClient;
-        this.press_a = Main.PressAClient;
-        this.press_s = Main.PressSClient;
-        this.press_d = Main.PressDClient;
+        for(i = 0;i<Clients.size();i++){
+            if(Clients.get(i).IDClient==nConnect){
+                this.left_mouse = Clients.get(i).left_mouse;
+                this.right_mouse = Clients.get(i).right_mouse;
+                this.press_w = Clients.get(i).press_w;
+                this.press_a = Clients.get(i).press_a;
+                this.press_s = Clients.get(i).press_s;
+                this.press_d = Clients.get(i).press_d;
+
+                rotation_tower = Clients.get(i).rotation_tower_client;
+                if (tower_obj.size() < Clients.get(i).rot_tower.size()) {
+                    for (int i2 = 0; i2 < tower_obj.size(); i2++) {
+                        Clients.get(i).rot_tower.size();
+                        tower_obj.get(i2).rotation_tower = Clients.get(i).rot_tower.get(i2);
+                    }
+                } else {
+                    for (int i2 = 0; i2 < Clients.get(i).rot_tower.size(); i2++) {
+                        Clients.get(i).rot_tower.size();
+                        tower_obj.get(i2).rotation_tower = Clients.get(i).rot_tower.get(i2);
+                    }
+
+                }
+
+
+            }
+        }
+//        this.left_mouse = Main.LeftMouseClient;
+//        this.right_mouse = Main.RightMouseClient;
+//        this.press_w = Main.PressWClient;
+//        this.press_a = Main.PressAClient;
+//        this.press_s = Main.PressSClient;
+//        this.press_d = Main.PressDClient;
     }
     protected final void motor_player(){
         this.time_sound_motor -= 1;
@@ -458,31 +485,31 @@ public abstract class Transport{
         return false;
     }
     protected void indicator_hp(){
-        green_len = ((float) this.hp /this.max_hp)* option.size_x_indicator;
-        Render.setColor(option.hp_2_r_indicator,option.hp_2_g_indicator,option.hp_2_b_indicator,1);
-        Render.rect(((this.x_rend-option.const_hp_x_zoom)),((this.y_rend-option.const_hp_y_zoom)),option.size_x_indicator_zoom,option.size_y_indicator_zoom);
-        Render.setColor(option.hp_r_indicator,option.hp_g_indicator,option.hp_b_indicator,1);
-        Render.rect(((this.x_rend-option.const_hp_x_zoom)),((this.y_rend-option.const_hp_y_zoom)),(int)(green_len* Main.Zoom),option.size_y_indicator_zoom);
+        green_len = ((float) this.hp /this.max_hp)* Option.size_x_indicator;
+        Render.setColor(Option.hp_2_r_indicator, Option.hp_2_g_indicator, Option.hp_2_b_indicator,1);
+        Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
+        Render.setColor(Option.hp_r_indicator, Option.hp_g_indicator, Option.hp_b_indicator,1);
+        Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
     }
     protected void indicator_hp_2(){
-        green_len = ((float)this.hp/this.max_hp)*option.size_x_indicator;
-        Render.setColor(option.hp_2_r_indicator,option.hp_2_g_indicator,option.hp_2_b_indicator,1);
-        Render.rect(((this.x_rend-option.const_hp_x_zoom)),((this.y_rend-option.const_hp_y_zoom)),option.size_x_indicator_zoom,option.size_y_indicator_zoom);
+        green_len = ((float)this.hp/this.max_hp)* Option.size_x_indicator;
+        Render.setColor(Option.hp_2_r_indicator, Option.hp_2_g_indicator, Option.hp_2_b_indicator,1);
+        Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
         if(this.crite_life == 0){
-            Render.setColor(option.hp_r_indicator,option.hp_g_indicator,option.hp_b_indicator,1);
-            Render.rect(((this.x_rend-option.const_hp_x_zoom)),((this.y_rend-option.const_hp_y_zoom)),(int)(green_len* Main.Zoom),option.size_y_indicator_zoom);
+            Render.setColor(Option.hp_r_indicator, Option.hp_g_indicator, Option.hp_b_indicator,1);
+            Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
             }
         else{
-            Render.setColor(option.hp_crite_r_indicator,option.hp_crite_g_indicator,option.hp_crite_b_indicator,1);
-            Render.rect(((this.x_rend-option.const_hp_x_zoom)),((this.y_rend-option.const_hp_y_zoom)),(int)(green_len* Main.Zoom),option.size_y_indicator_zoom);
+            Render.setColor(Option.hp_crite_r_indicator, Option.hp_crite_g_indicator, Option.hp_crite_b_indicator,1);
+            Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
         }
     }
     protected void indicator_reload(){
-        green_len = (this.reload/this.reload_max)*option.size_x_indicator;
-        Render.setColor(option.reload_r_indicator,option.reload_g_indicator,option.reload_b_indicator,1);
-        Render.rect((this.x_rend-option.const_reload_x_zoom),(this.y_rend-option.const_reload_y_zoom),option.size_x_indicator_zoom,option.size_y_indicator_zoom);
-        Render.setColor(option.reload_2_r_indicator,option.reload_2_g_indicator,option.reload_2_b_indicator,1);
-        Render.rect((this.x_rend-option.const_reload_x_zoom),(this.y_rend-option.const_reload_y_zoom),(int)(green_len* Main.Zoom),option.size_y_indicator_zoom);
+        green_len = (this.reload/this.reload_max)* Option.size_x_indicator;
+        Render.setColor(Option.reload_r_indicator, Option.reload_g_indicator, Option.reload_b_indicator,1);
+        Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
+        Render.setColor(Option.reload_2_r_indicator, Option.reload_2_g_indicator, Option.reload_2_b_indicator,1);
+        Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
     }
     protected void fire_player_bull_tank(){
         reload_bot();

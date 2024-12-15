@@ -82,7 +82,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
             Main.FlameSpawnList.get(i).all_action(i);
         }
         for(i = 0; i< PlayerList.size(); i++) {
-            if(PlayerList.get(i).host) {
+            if(PlayerList.get(i).host ||PlayerList.get(i).nConnect != IDClient) {
                 Main.PlayerList.get(i).all_action_client_2(i);
             }
             else {
@@ -98,7 +98,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         }
         for (i = 0; i< Main.BuildingList.size(); i++){
             Main.BuildingList.get(i).all_action(i);}
-        Batch.draw(textureBuffer,100,100,100,100);
+        Batch.draw(textureBuffer,-20,1,1,1);
         Render.end();
 
         Render.begin(ShapeRenderer.ShapeType.Filled);
@@ -137,6 +137,8 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         PacketClient.right_mouse = Keyboard.RightMouse;
         PacketClient.mouse_x = Keyboard.MouseX;
         PacketClient.mouse_y = Keyboard.MouseY;
+        PacketClient.IDClient = Main.IDClient;
+        //System.out.println(PacketClient.rot_tower.size());
         Client.sendTCP(PacketClient);
         PacketClient.rot_tower.clear();
 

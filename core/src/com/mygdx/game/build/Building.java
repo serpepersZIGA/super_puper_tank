@@ -109,7 +109,6 @@ public abstract class Building implements Serializable {
                         case 3:{
                             part.add(new FlameStatic(this.x, this.y + rand.rand(height)));break;}
                     }
-
             }
         }
         else{

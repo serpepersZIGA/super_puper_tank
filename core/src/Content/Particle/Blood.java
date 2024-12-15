@@ -15,12 +15,13 @@ public class Blood extends Particle {
         this.speed_y = 0;
         r = BloodR;g = BloodG;b = BloodB;
         this.interval_rise_size = 0.02f;
+        liquid_const();
     }
     public void all_action(int i){
-        super.liquid_physic(i,Main.LiquidList);
-        super.size_rise_delete(Main.LiquidList,i);
+        super.liquid_physic();
+        super.size_rise_delete(i);
         center_render();
-        Main.Render.setColor(r,g,b,1);
+        Main.Render.setColor(r,g,b,0.1f);
         Main.Render.circle((this.x_rend),(this.y_rend),(int)(size*Main.Zoom),(int)(size*Main.Zoom));
     }
 

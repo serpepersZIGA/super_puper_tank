@@ -8,6 +8,7 @@ import com.mygdx.game.method.SoundPlay;
 import com.mygdx.game.method.move;
 import com.mygdx.game.method.rand;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static com.mygdx.game.method.Option.SoundConst;
@@ -69,35 +70,42 @@ public abstract class Particle {
         this.size_2 = this.size/2;
         this.size_3 = this.size_2-2;
     }
-    protected void liquid_physic(int i,LinkedList<Particle>liquid_obj){
-         int[]rg= Method.detection_near_particle_xy_def(liquid_obj,i,liquid_obj);
-         if(rg[0]!=NULL) {
-             double RotationXY = (-rg[1] - 90)*3.1415926535 /180;
-             if (rg[0] < this.size_3) {
-                 liquid_obj.get(rg[2]).x += move.move_sin2(3, RotationXY);
-                 liquid_obj.get(rg[2]).y += move.move_cos2(3, RotationXY);
-                 this.x -= move.move_sin2(3, RotationXY);
-                 this.y -= move.move_cos2(3, RotationXY);
-                 return;
-             } else if (rg[0] < this.size && rg[0] > this.size_2) {
-                 this.x += move.move_sin2(2, RotationXY);
-                 this.y += move.move_cos2(2, RotationXY);
-                 return;
-             }
-         }
-    }
-    protected void flame_physic(int i,LinkedList<Particle>flame_obj){
-        int[]rg= Method.detection_near_particle_xy_def(flame_obj,i,flame_obj);
-        if(rg[0]!=NULL) {
-            double RotationXY = (-rg[1] - 90)*3.1415926535 /180;
-            if (rg[0] < this.size_3) {
-                this.x -= move.move_sin2(3, RotationXY);
-                this.y -= move.move_cos2(3, RotationXY);
-            } else if (rg[0] > this.size_2) {
-                this.x += move.move_sin2(2, RotationXY);
-                this.y += move.move_cos2(2, RotationXY);
+    private int radCollision;
+    protected float RotationXY;
+    public int xCollision,yCollision;
+    protected void liquid_const(){
+        if(Main.LiquidList.size()!= 0) {
+            int[] rg = Method.detection_near_particle_xy_def(Main.LiquidList, Main.LiquidList.size()-1,Main.LiquidList);
+            if (rg[0] != 0) {
+                RotationXY = (int) ((-rg[1] - 90) * 3.1415926535 / 180);
+                //liquid_obj.get(rg[2]).speed_x = move.move_sin2(3, RotationXY);
+                //liquid_obj.get(rg[2]).speed_y = move.move_cos2(3, RotationXY);
+                //this.speed_x = move.move_sin2(3, RotationXY);
+                //this.speed_y = move.move_cos2(3, RotationXY);
+                radCollision = rg[0];
+                xCollision = rg[2];
+                yCollision = rg[3];
+                //Main.LiquidList.get(rg[2]).xCollision = (int) x;
+                //Main.LiquidList.get(rg[2]).yCollision = (int) y;
+                //Main.LiquidList.get(rg[2]).speed_x = -this.speed_x;
+                //Main.LiquidList.get(rg[2]).speed_y = -this.speed_y;
+            }
+            else{
+                xCollision = (int) x;
+                yCollision = (int) y;
             }
         }
+
+    }
+    protected void liquid_physic(){
+        radCollision = (int) sqrt(pow2(x-xCollision)+pow2(y-yCollision));
+             if (radCollision < this.size_3) {
+                 this.x -= speed_x;
+                 this.y -= speed_y;
+             } else if (radCollision < this.size && radCollision > this.size_2) {
+                 this.x += speed_x;
+                 this.y += speed_y;
+             }
     }
     protected void center_render(){
         double[]xy = Main.RC.render_obj(this.x,this.y);
@@ -109,11 +117,11 @@ public abstract class Particle {
         this.size_2 = this.size/2;
         this.size_3 = this.size_2/2;
     }
-    protected void size_rise_delete(LinkedList<Particle>part, int i){
+    protected void size_rise_delete(int i){
 
         this.size -= this.interval_rise_size;
         if(this.size < 4){
-            part.remove(i);
+            Main.LiquidList.remove(i);
         }
         this.size_2 = this.size/2;
         this.size_3 = this.size_2/2;
