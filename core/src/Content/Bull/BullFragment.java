@@ -32,7 +32,7 @@ public class BullFragment extends Bull {
         super.corpus_bull(Main.EnemyList);
         super.corpus_bull(Main.PlayerList);
         super.bull_clear_time();
-        super.bull_build(Main.BuildingList);
+        super.BullBuild();
         super.soldat_bull(Main.SoldatList);
         this.update();
         super.clear(i);
@@ -44,7 +44,7 @@ public class BullFragment extends Bull {
         super.corpus_bull(Main.EnemyList);
         super.corpus_bull(Main.PlayerList);
         super.bull_clear_time();
-        super.bull_build(Main.BuildingList);
+        super.BullBuild();
         super.soldat_bull(Main.SoldatList);
         super.clear(i);
     }

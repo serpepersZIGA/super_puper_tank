@@ -2,7 +2,6 @@ package com.mygdx.game.bull;
 import Content.Bull.BullFragment;
 import com.mygdx.game.main.Main;
 
-import com.mygdx.game.build.Building;
 import com.mygdx.game.method.move;
 import com.mygdx.game.method.rand;
 import Content.Particle.Acid;
@@ -18,7 +17,8 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static com.mygdx.game.main.Main.LiquidList;
+import static com.mygdx.game.main.Main.*;
+import static com.mygdx.game.main.Main.BlockList2D;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 
@@ -109,45 +109,47 @@ public abstract class Bull implements Serializable {
             spawn_acid();
             this.clear_sost = 1;}
     }
-    protected final void bull_build(ArrayList<Building> building){
-        for(i=0; i< building.size(); i++) {
-            if(height == 1) {
-                for(int j = 0; j< building.get(i).area_list.size(); j++) {
-                    z = rect_bull(building.get(i).area_list.get(j),
-                            (int) this.x, (int) this.y, this.size);
-                    if (z) {
-                        this.clear_sost = 1;
-                    }
-                }
+    protected void BullBuild(){
+        int yM = (int) (y/height_block)-1;
+        int xM = (int) (x/width_block)-1;
+        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+            if (BlockList2D.get(yM).get(xM).passability & height == 1) {
+                this.clear_sost = 1;
             }
-            else{
-                z = rect_bull(building.get(i).x, building.get(i).y, building.get(i).width, building.get(i).height,
-                        (int) this.x,(int)this.y,this.size, building.get(i).rotation);
-                if(z) {
-                    this.clear_sost = 1;
+        }
+    }
+    protected void BullBuildFlame(){
+        int yM = (int) (y/height_block)-1;
+        int xM = (int) (x/width_block)-1;
+        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+            if (BlockList2D.get(yM).get(xM).passability & height == 1) {
+                this.clear_sost = 1;
+                BuildingList.get(BlockList2D.get(yM).get(xM).iBuilding).time_flame += 10;
+
+            }
+        }
+    }
+    protected void BullBuildMortar(){
+        int yM = (int) (y/height_block)-1;
+        int xM = (int) (x/width_block)-1;
+        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+            if (BlockList2D.get(yM).get(xM).passability & height == 1) {
+                this.clear_sost = 1;
+                Main.BangList.add(new Bang(this.x, this.y, 4));
+                for (int l = 0; l < 20; l++) {
+                    Main.BullList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
                 }
             }
         }
     }
-    protected final void bull_build_flame(ArrayList<Building> building){
-        for(i=0; i< building.size(); i++) {
-            if(height == 1) {
-                for(int j = 0; j< building.get(i).area_list.size(); j++) {
-                    z = rect_bull(building.get(i).area_list.get(j),
-                            (int) this.x, (int) this.y, this.size);
-                    if (z) {
-                        building.get(i).time_flame += 10;
-                        this.clear_sost = 1;
-                    }
-                }
-            }
-            else{
-                z = rect_bull(building.get(i).x, building.get(i).y, building.get(i).width, building.get(i).height,
-                        (int) this.x,(int)this.y,this.size, building.get(i).rotation);
-                if(z) {
-                    this.clear_sost = 1;
-                    building.get(i).time_flame += 10;
-                }
+    protected void BullBuildAcid(){
+        int yM = (int) (y/height_block)-1;
+        int xM = (int) (x/width_block)-1;
+        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+            if (BlockList2D.get(yM).get(xM).passability & height == 1) {
+                this.clear_sost = 1;
+                spawn_acid();
+
             }
         }
     }
@@ -155,52 +157,6 @@ public abstract class Bull implements Serializable {
 
         Ellipse2D circle = new Ellipse2D.Double(x,y,size,size);
         return area.intersects(circle.getBounds2D());
-    }
-    protected final void bull_build_fragment(ArrayList<Building> building){
-        for(i=0; i< building.size(); i++) {
-            if (height == 1) {
-                for (int j = 0; j < building.get(i).area_list.size(); j++) {
-                    z = rect_bull(building.get(i).area_list.get(j),
-                            (int) this.x, (int) this.y, this.size);
-                    if (z) {
-                        Main.BangList.add(new Bang(this.x, this.y, 4));
-                        for(int l = 0;l<20;l++) {
-                            Main.BullList.add(new BullFragment(this.x,this.y,damage_fragment,penetration_fragment,type_team));
-                        }
-                        this.clear_sost = 1;
-                    }
-                }
-            } else {
-                z = rect_bull(building.get(i).x, building.get(i).y, building.get(i).width, building.get(i).height,
-                        (int) this.x, (int) this.y, this.size, building.get(i).rotation);
-                if (z) {
-                    Main.BangList.add(new Bang(this.x, this.y, 4));
-                    this.clear_sost = 1;
-                }
-            }
-        }
-    }
-    protected final void bull_build_acid(ArrayList<Building> building){
-        for(i=0; i< building.size(); i++) {
-            if(height == 1) {
-                for(int j = 0; j< building.get(i).area_list.size(); j++) {
-                    z = rect_bull(building.get(i).area_list.get(j),
-                            (int) this.x, (int) this.y, this.size);
-                    if (z) {
-                        spawn_acid();
-                        this.clear_sost = 1;
-                    }
-                }
-            }
-            else{
-                z = rect_bull(building.get(i).x, building.get(i).y, building.get(i).width, building.get(i).height,
-                        (int) this.x,(int)this.y,this.size, building.get(i).rotation);
-                if(z) {
-                    spawn_acid();
-                    this.clear_sost = 1;
-                }
-            }
-        }
     }
 
     protected final void corpus_bull_mortar(ArrayList<Transport> obj_2){

@@ -14,6 +14,7 @@ import Content.Block.BlockMap;
 import Content.Block.Air;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.build.Building;
+import com.mygdx.game.build.PacketBuildingServer;
 import com.mygdx.game.bull.Bull;
 import Data.DataImage;
 import com.mygdx.game.menu.InputWindow;
@@ -54,14 +55,11 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<ArrayList<Block>> BlockList2D = new ArrayList<>();
 
 	public static RenderCenter RC;
-	//public static ArrayList<double[]> size_render = new ArrayList<>();
 	public static DataImage ContentImage;
 	public static SpriteBatch Batch;
 	public static Keyboard KeyboardObj;
-	public static boolean PressWClient, PressSClient, PressAClient, PressDClient;
 	public static int screenWidth;
 	public static int screenHeight;
-	public static boolean LeftMouseClient, RightMouseClient;
 	public static double MouseXClient, MouseYClient;
 	private static int i;
 	public static float Zoom = 1;
@@ -82,6 +80,7 @@ public class Main extends ApplicationAdapter {
 	public static ClientMain Main_client;
 	public static Option Option;
 	public static PackerServer PacketServer;
+	public static PacketBuildingServer PacketBuildingServer;
 	public static Packet_client PacketClient;
 	public static int TickBlock,TickBlockMax = 600;
 	public static BitmapFont font,font2;
@@ -163,6 +162,7 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
+		PacketBuildingServer = new PacketBuildingServer();
 		ContentSound.add(new DataSound());
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
@@ -175,7 +175,7 @@ public class Main extends ApplicationAdapter {
 
 		KeyboardObj = new Keyboard();
 		Gdx.input.setInputProcessor(KeyboardObj);
-		field(10000, 10000);
+		field(100000, 100000);
 		spawn_object();
 		Option = new Option();
 		KeyboardObj.zoom_const();
@@ -218,9 +218,25 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void dispose () {
+		textureBuffer.dispose();
+		BlockList2D.clear();
+		BuildingList.clear();
+		AirList.clear();
+		FlameList.clear();
+		FlameSpawnList.clear();
+		LiquidList.clear();
+		PlayerList.clear();
+		EnemyList.clear();
+		DebrisList.clear();
+		FlameParticleList.clear();
+		FlameStaticList.clear();
+		RC= null;
+		Clients= null;
+
 		Batch.dispose();
 		Render.dispose();
 		font.dispose();
+		font2.dispose();
 		ContentImage.dispose();
 		if(ServerMain.Server != null) {
 			try {
@@ -236,5 +252,7 @@ public class Main extends ApplicationAdapter {
 				throw new RuntimeException(e);
 			}
 		}
+		super.dispose();
 	}
+
 }

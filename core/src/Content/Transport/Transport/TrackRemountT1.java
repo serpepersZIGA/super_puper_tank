@@ -49,7 +49,7 @@ public class TrackRemountT1 extends Transport {
     public void all_action(int i){
         super.all_action(i);
         super.bypass_hiller(i);
-        super.build_corpus(Main.BuildingList);
+        super.build_corpus();
         super.hill_bot(Main.EnemyList);
         tower_xy();
         super.corpus_corpus_def_xy(Main.EnemyList,(byte)1);

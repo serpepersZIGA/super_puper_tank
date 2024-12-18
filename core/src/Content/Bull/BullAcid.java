@@ -27,7 +27,7 @@ public class BullAcid extends Bull {
         super.corpus_bull(Main.EnemyList);
         super.corpus_bull(Main.PlayerList);
         super.corpus_bull(Main.DebrisList);
-        super.bull_build_acid(Main.BuildingList);
+        super.BullBuildAcid();
         super.soldat_bull(Main.SoldatList);
         super.bull_clear_time_acid();
         this.update();
@@ -38,9 +38,8 @@ public class BullAcid extends Bull {
         super.bull_move_xy();
         super.corpus_bull(Main.EnemyList);
         super.corpus_bull(Main.PlayerList);
-        super.corpus_bull(Main.HelicopterList);
         super.corpus_bull(Main.DebrisList);
-        super.bull_build_acid(Main.BuildingList);
+        super.BullBuildAcid();
         super.soldat_bull(Main.SoldatList);
         super.bull_clear_time_acid();
         this.update();

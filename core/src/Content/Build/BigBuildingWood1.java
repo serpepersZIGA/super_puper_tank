@@ -6,20 +6,21 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 
 public class BigBuildingWood1 extends Building {
-    public BigBuildingWood1(int x, int y, float rotation){
+    public BigBuildingWood1(int x, int y){
         name = BuildType.BigBuildingWood1;
         this.x = x;
         this.y = y;
-        this.rotation = rotation;
         this.build_image = Main.ContentImage.build_2;
-        this.width = 500;
-        this.height = 300;
-        this.width_2 = this.width/2;
-        this.height_2 = this.height/2;
-        this.time_flame = 0;
-        create_rect(this.x,this.y,180,300);
-        create_rect(this.x+300,this.y,200,300);
-        super.data();
+        ConstructBuilding = new boolean[][]{
+                {true,true,true,true,false,false,true,true,true,true},
+                {true,true,true,true,false,false,true,true,true,true},
+                {true,true,true,true,false,false,true,true,true,true},
+                {true,true,true,true,false,false,true,true,true,true},
+                {true,true,true,true,false,false,true,true,true,true},
+                {true,true,true,true,false,false,true,true,true,true}
+        };
+        super.Data();
+
 
     }
     public void all_action(int i) {

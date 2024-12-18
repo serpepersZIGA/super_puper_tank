@@ -6,6 +6,7 @@ import Content.Soldat.SoldatFlame;
 import Content.Transport.Transport.DebrisTransport;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.main.Packet_client;
@@ -249,7 +250,6 @@ public abstract class Transport{
                 this.press_a = Clients.get(i).press_a;
                 this.press_s = Clients.get(i).press_s;
                 this.press_d = Clients.get(i).press_d;
-
                 rotation_tower = Clients.get(i).rotation_tower_client;
                 if (tower_obj.size() < Clients.get(i).rot_tower.size()) {
                     for (int i2 = 0; i2 < tower_obj.size(); i2++) {
@@ -325,9 +325,9 @@ public abstract class Transport{
             try{
                 //System.out.println(this.teg_unit);
                 int i2 = Method.detection_near_transport_i(this.spisok, i,this.enemy_spisok);
-                this.aim_x = this.enemy_spisok.get(i2).x;
-                this.aim_y = this.enemy_spisok.get(i2).y;
-                this.rotation_tower = Method.tower(this.tower_x, this.tower_y,this.enemy_spisok.get(i2).x, this.enemy_spisok.get(i2).y, this.rotation_tower, this.speed_tower);}
+                this.aim_x = this.enemy_spisok.get(i2).tower_x;
+                this.aim_y = this.enemy_spisok.get(i2).tower_y;
+                this.rotation_tower = Method.tower(this.tower_x, this.tower_y,this.enemy_spisok.get(i2).tower_x, this.enemy_spisok.get(i2).tower_y, this.rotation_tower, this.speed_tower);}
             catch(Exception ignored){
 
             }
@@ -358,7 +358,7 @@ public abstract class Transport{
         if(obj_2.size() != 0) {
             try {
                 int i2 = Method.detection_near_transport_i(obj_1, i,obj_2);
-                this.sost_fire_bot = fire_bot(obj_2.get(i2).x, obj_2.get(i2).y);
+                this.sost_fire_bot = fire_bot(obj_2.get(i2).tower_x, obj_2.get(i2).tower_y);
             }
             catch (Exception ignored){
 
@@ -839,7 +839,6 @@ public abstract class Transport{
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
                     Ai.path_AI(this.spisok.get(i3), obj_tr.get(i2), xy[0], xy[1]);
-                    ai_sost = 300;
                     trigger_fire = false;
                 } else {
                     path.clear();
@@ -857,19 +856,18 @@ public abstract class Transport{
                 }
             }
             else{
-                double rad = sqrt(pow2((spisok.get(i3).x - obj_tr.get(i2).x)) + pow2(spisok.get(i3).y - obj_tr.get(i2).y));
+                double rad = sqrt(pow2((x - obj_tr.get(i2).x)) + pow2(y - obj_tr.get(i2).y));
                 rotation_bot(g, g_right, g_left);
                 motor_bot_base(rad, this.behavior);
             }
         }
     }
-    private void bypass_build_not_tower(ArrayList<Building> obj_building, ArrayList<Transport> obj_tr, double g, double g_left, double g_right, int i3, int i2, double g2) {
+    private void bypass_build_not_tower(ArrayList<Building> obj_building, ArrayList<Transport> obj_tr, double g, double g_left, double g_right, int i3, int i2) {
         if(obj_building.size()!= 0) {
             if (ai_sost == 0) {
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
                     Ai.path_AI(this.spisok.get(i3), obj_tr.get(i2), xy[0], xy[1]);
-                    ai_sost = 200;
                     trigger_fire = false;
                 } else {
                     path.clear();
@@ -887,8 +885,9 @@ public abstract class Transport{
                 }
             }
             else{
+                double rad = sqrt(pow2((x - obj_tr.get(i2).x)) + pow2(y - obj_tr.get(i2).y));
                 rotation_bot(g, g_right,g_left);
-                motor_bot_base(g2,this.behavior);
+                motor_bot_base(rad,this.behavior);
             }
         }
     }
@@ -1299,16 +1298,42 @@ public abstract class Transport{
         }
         return false;
     }
-    protected void build_corpus(ArrayList<Building> building){
-        for (Building value : building) {
-            for (int j = 0; j < value.area_list.size(); j++) {
-                boolean z = rect_1_collision((int) this.x, (int) this.y, (int) this.corpus_width, (int) this.corpus_height, this.rotation_corpus,
-                        value.area_list.get(j));
-                if (z) {
-                    if (this.speed > 2 || this.speed < -2) {
-                        SoundPlay.sound(Main.ContentSound.get(0).break_wooden, 1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+//    protected void build_corpus(ArrayList<Building> building){
+//        for (Building value : building) {
+//            for (int j = 0; j < value.area_list.size(); j++) {
+//                boolean z = rect_1_collision((int) this.x, (int) this.y, (int) this.corpus_width, (int) this.corpus_height, this.rotation_corpus,
+//                        value.area_list.get(j));
+//                if (z) {
+//                    if (this.speed > 2 || this.speed < -2) {
+//                        SoundPlay.sound(Main.ContentSound.get(0).break_wooden, 1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
+//                    }
+//                    metod_1(value.xy_area_list.get(j));
+//                }
+//            }
+//        }
+//    }
+    public static int BorderDetected = 400;
+    protected void build_corpus(){
+        int render_x_max = (int)((x+BorderDetected/Main.Zoom)/Main.width_block);
+        int render_x_min = (int)(((x-BorderDetected/Main.Zoom)/Main.width_block));
+        if(render_x_min <0){render_x_min =0;}
+        if(render_x_max >RC.block_i_x_max){render_x_max = RC.block_i_x_max;}
+        int render_y_max = (int)((y+BorderDetected/Main.Zoom)/Main.height_block);
+        int render_y_min = (int)((y-BorderDetected/Main.Zoom)/Main.height_block);
+        if(render_y_min <0){render_y_min = 0;}
+        if(render_y_max >RC.block_i_y_max){render_y_max = RC.block_i_y_max;}
+
+        for (int iy = render_y_min; iy < render_y_max; iy++) {
+            for (int ix = render_x_min; ix < render_x_max; ix++) {
+                if (BlockList2D.get(iy).get(ix).passability) {
+                    boolean z = rect_collision((int) this.x, (int) this.y, (int) this.corpus_width, (int) this.corpus_height, this.rotation_corpus, BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y,
+                            width_block, height_block, 0);
+                    if (z) {
+                        if (this.speed > 2 || this.speed < -2) {
+                            SoundPlay.sound(Main.ContentSound.get(0).break_wooden, 1 - ((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / SoundConst));
+                        }
+                        metod_1(BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y);
                     }
-                    metod_1(value.xy_area_list.get(j));
                 }
             }
         }
@@ -1361,6 +1386,24 @@ public abstract class Transport{
             this.y += 2;
         }
     }
+    private void metod_1(int x,int y){
+        if(this.x<x) {
+            this.x -= 2;
+            this.speed *= -0.8;
+            this.speed_inert *= -0.8;
+        }
+        else if(this.x>x) {
+            this.x += 2;
+            this.speed *= -0.8;
+            this.speed_inert *= -0.8;
+        }
+        if(this.y<y) {
+            this.y -= 2;
+        }
+        else if(this.y>y) {
+            this.y += 2;
+        }
+    }
     protected void move_debris(){
         this.x += move.move_sin(this.speed,-this.rotation_corpus);
         this.y += move.move_cos(this.speed,-this.rotation_corpus);
@@ -1409,7 +1452,7 @@ public abstract class Transport{
             g_left = this.rotation_corpus - 10;
             g = (float) (atan2(this.y - this.spisok.get(sp[0]).y, this.x - this.spisok.get(sp[0]).x) / 3.1415926535 * 180);
             g -= 90;
-            bypass_build_not_tower(BuildingList,spisok,g,g_left,g_right,i,sp[0],sp[1]);
+            bypass_build_not_tower(BuildingList,spisok,g,g_left,g_right,i,sp[0]);
         }
         speed_balance();
     }

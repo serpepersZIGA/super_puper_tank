@@ -42,7 +42,7 @@ public class DebrisTransport extends Transport {
         super.corpus_corpus(Main.PlayerList);
         super.corpus_corpus(Main.EnemyList);
         super.corpus_corpus_def_xy(Main.DebrisList,(byte)1);
-        build_corpus(Main.BuildingList);
+        build_corpus();
         move_debris();
         center_render();
         RenderMethod.transorm_img(this.x_rend,this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);

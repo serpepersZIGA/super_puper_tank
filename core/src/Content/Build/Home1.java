@@ -17,8 +17,7 @@ public class Home1 extends Building {
         this.width_2 = this.width/2;
         this.height_2 = this.height/2;
         this.time_flame = 0;
-        super.data();
-        create_rect(this.x,this.y,width,height);
+        super.Data();
 
     }
     public void all_action(int i) {

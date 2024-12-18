@@ -68,7 +68,7 @@ public class PanzerMortarT1 extends Transport {
         super.behavior_bot(this.enemy_spisok, i);
         super.bot_fragmentation_bull_fire(i, spisok,enemy_spisok);
         super.tower_ii(i);
-        super.build_corpus(Main.BuildingList);
+        super.build_corpus();
         super.corpus_corpus_def_xy(this.spisok,(byte)1);
         super.tower_xy();
         center_render();

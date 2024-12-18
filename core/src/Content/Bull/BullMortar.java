@@ -29,7 +29,7 @@ public class BullMortar extends Bull {
         super.corpus_bull_mortar(Main.EnemyList);
         super.corpus_bull_mortar(Main.PlayerList);
         super.corpus_bull_mortar(Main.DebrisList);
-        super.bull_build_fragment(Main.BuildingList);
+        super.BullBuildMortar();
         super.soldat_bull(Main.SoldatList);
         super.fragments_create();
         this.update();
@@ -41,7 +41,7 @@ public class BullMortar extends Bull {
         super.corpus_bull_mortar(Main.EnemyList);
         super.corpus_bull_mortar(Main.PlayerList);
         super.corpus_bull_mortar(Main.DebrisList);
-        super.bull_build_fragment(Main.BuildingList);
+        super.BullBuildMortar();
         super.soldat_bull(Main.SoldatList);
         super.fragments_create_client();
         this.update();

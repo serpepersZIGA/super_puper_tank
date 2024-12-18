@@ -31,10 +31,9 @@ public class BullFlame extends Bull {
         super.color_fire();
         super.corpus_bull_temperature(Main.EnemyList);
         super.corpus_bull_temperature(Main.PlayerList);
-        super.corpus_bull(Main.HelicopterList);
         super.corpus_bull(Main.DebrisList);
         super.soldat_bull(Main.SoldatList);
-        super.bull_build_flame(Main.BuildingList);
+        super.BullBuildFlame();
         super.bull_clear_time_flame();
         this.update();
         super.clear(i);
@@ -48,7 +47,7 @@ public class BullFlame extends Bull {
         super.corpus_bull_temperature(Main.PlayerList);
         super.corpus_bull(Main.DebrisList);
         super.soldat_bull(Main.SoldatList);
-        super.bull_build_flame(Main.BuildingList);
+        super.BullBuildFlame();
         super.bull_clear_time_flame();
         super.clear(i);
     }

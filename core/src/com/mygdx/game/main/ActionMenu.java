@@ -2,6 +2,7 @@ package com.mygdx.game.main;
 
 import Content.Particle.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.block.Block;
 import com.mygdx.game.method.Keyboard;
 
 import static com.mygdx.game.main.Main.*;
@@ -137,11 +138,9 @@ public class ActionMenu extends ActionGame {
                     serverMain = new ServerMain();
                     serverMain.create();
                     ActionGame = new ActionGameHost();
-                    for(i = 0; i< BlockList2D.size(); i++){
-                        for(int i2 = 0; i2< BlockList2D.get(i).size(); i2++){
-                            BlockList2D.get(i).get(i2).passability_detected();
-                        }
-                    }
+                    Block.passability_detected();
+
+
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

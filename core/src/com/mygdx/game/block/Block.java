@@ -1,5 +1,6 @@
 package com.mygdx.game.block;
 
+import Content.Particle.FlameSpawn;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
 
@@ -8,34 +9,40 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.*;
 
+import static com.mygdx.game.block.UpdateRegister.VoidUpdate;
 import static com.mygdx.game.main.Main.FlameSpawnList;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 import static java.sql.Types.NULL;
 
 public abstract class Block {
-    public int x,y,x_rend,y_rend,x_center,y_center;
+    public int x,y;
+    public int x_rend,y_rend,x_center,y_center;
     public int radius;
 
     public UpdateBlock render_block;
     public ArrayList<Integer> h = new ArrayList<>();
     private int i;
-    public boolean Ai_buffer;
     private ArrayList<float[]> rgbl = new ArrayList<>();
     public boolean passability;
     private float r;
     private float g;
     private float b;
     private float rad;
-    public static float lighting = 400;
+    public int iBuilding;
+    public static final float lighting = 400;
     public static float lighting_zoom = 400,lighting_zoom_2 = 200;
-    public void passability_detected(){
-        passability = false;
-        for (i = 0; i<Main.BuildingList.size(); i++){
-            for (int j = 0; j<Main.BuildingList.get(i).xy_area_list.size(); j++) {
-                if (rect_collision(x, y, Main.width_block, Main.height_block, Main.BuildingList.get(i).xy_area_list.get(j)[0],Main.BuildingList.get(i).xy_area_list.get(j)[1], Main.BuildingList.get(i).xy_area_list.get(j)[2], Main.BuildingList.get(i).xy_area_list.get(j)[3], Main.BuildingList.get(i).rotation)) {
-                    passability = true;
-                    return;
+    public static void passability_detected() {
+        for (int i = 0; i < Main.BuildingList.size(); i++) {
+            for (int j = 0; j < Main.BuildingList.get(i).ConstructBuilding.length; j++) {
+                for (int j2 = 0; j2 < Main.BuildingList.get(i).ConstructBuilding[j].length; j2++) {
+                    Main.BlockList2D.get(j+Main.BuildingList.get(i).yMatrix).get(j2+Main.BuildingList.get(i).xMatrix).passability =
+                            Main.BuildingList.get(i).ConstructBuilding[j][j2];
+                    if(Main.BuildingList.get(i).ConstructBuilding[j][j2]) {
+                        Main.BlockList2D.get(j+Main.BuildingList.get(i).yMatrix).get(j2+Main.BuildingList.get(i).xMatrix).render_block = VoidUpdate;
+                        Main.BlockList2D.get(j+Main.BuildingList.get(i).yMatrix).get(j2+Main.BuildingList.get(i).xMatrix).iBuilding = i;
+
+                    }
                 }
             }
         }

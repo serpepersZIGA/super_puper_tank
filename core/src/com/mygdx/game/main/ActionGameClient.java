@@ -139,7 +139,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         PacketClient.mouse_y = Keyboard.MouseY;
         PacketClient.IDClient = Main.IDClient;
         //System.out.println(PacketClient.rot_tower.size());
-        Client.sendTCP(PacketClient);
+        Client.sendUDP(PacketClient);
         PacketClient.rot_tower.clear();
 
     }

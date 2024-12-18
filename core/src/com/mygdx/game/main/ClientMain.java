@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
+import com.mygdx.game.block.Block;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
+import com.mygdx.game.build.PacketBuildingServer;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
@@ -65,6 +67,7 @@ public class ClientMain extends Listener{
         Client.getKryo().register(BullAcid.class);
         Client.getKryo().register(BullTank.class);
         Client.getKryo().register(BullMortar.class);
+        Client.getKryo().register(PacketBuildingServer.class);
         //Запускаем клиент
         Client.start();
         //Клиент начинает подключатся к серверу
@@ -125,17 +128,6 @@ public class ClientMain extends Listener{
                 }
                 ZoomConstTransport();
             }
-
-
-            PacketBuilding = ((PackerServer) p).building;
-            if (PacketBuilding.size() != BuildingList.size()) {
-                BuildingList.clear();
-                for (int i = 0; i < PacketBuilding.size(); i++) {
-                    Building_create(i,PacketBuilding.get(i).x,PacketBuilding.get(i).y);
-                }
-            }
-
-
             PacketDebris = ((PackerServer) p).debris;
             if (PacketDebris.size() == DebrisList.size()) {
                 for (int i = 0; i < DebrisList.size(); i++) {
@@ -196,6 +188,15 @@ public class ClientMain extends Listener{
                     e.printStackTrace();
                 }
             }
+        }
+        else if(p instanceof PacketBuildingServer){
+            PacketBuilding = ((PacketBuildingServer) p).BuildPack;
+            BuildingList.clear();
+            for (int i = 0; i < PacketBuilding.size(); i++) {
+                Building_create(i,PacketBuilding.get(i).x-width_block,PacketBuilding.get(i).y-height_block);
+            }
+            Block.passability_detected();
+
         }
     }
     private void bull_data(int i){
@@ -288,7 +289,7 @@ public class ClientMain extends Listener{
         if(PacketBuilding.get(i).name != null) {
             switch (PacketBuilding.get(i).name) {
                 case BigBuildingWood1:
-                    BuildingList.add(new BigBuildingWood1(x, y, 0));
+                    BuildingList.add(new BigBuildingWood1(x, y));
                     break;
                 case Home1:
                     BuildingList.add(new Home1(x, y, 0));

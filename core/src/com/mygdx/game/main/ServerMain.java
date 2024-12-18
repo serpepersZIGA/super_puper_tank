@@ -2,11 +2,13 @@ package com.mygdx.game.main;
 import Content.Bull.*;
 import Content.Particle.*;
 import Content.Transport.Transport.PlayerCannonFlame;
+import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
+import com.mygdx.game.build.PacketBuildingServer;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
@@ -25,7 +27,7 @@ import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
 
 public class ServerMain extends Listener {
     static Server Server;
-    static int udpPort = 27950, tcpPort = 27950;
+    static final int udpPort = 27950, tcpPort = 27950;
     public static int nConnect = 0;
 
     public void create(){
@@ -61,6 +63,7 @@ public class ServerMain extends Listener {
         Server.getKryo().register(BullAcid.class);
         Server.getKryo().register(BullTank.class);
         Server.getKryo().register(BullMortar.class);
+        Server.getKryo().register(PacketBuildingServer.class);
 
         //Регистрируем порт
         try {
@@ -77,8 +80,6 @@ public class ServerMain extends Listener {
     }
     public void connected(Connection c){
         System.out.println("На сервер подключился "+c.getRemoteAddressTCP().getHostString());
-        ZoomConstTransport();
-
         int i2 = Main.PlayerList.size();
         nConnect+= 1;
         Main.PlayerList.add(new PlayerCannonFlame(200,200,Main.PlayerList,false));
@@ -87,13 +88,18 @@ public class ServerMain extends Listener {
         for (int i = 0;i<Main.BuildingList.size();i++){
             PacketBuildServer(i);
         }
+        Server.sendToAllTCP(PacketBuildingServer);
+        ZoomConstTransport();
+        KeyboardObj.zoom_const();
+
     }
     public void PacketBuildServer(int i){
-        PacketBuilding.add(new BuildPacket());
-        PacketBuilding.get(i).name = BuildingList.get(i).name;
-        PacketBuilding.get(i).x = BuildingList.get(i).x;
-        PacketBuilding.get(i).y = BuildingList.get(i).y;
-        PacketBuilding.get(i).rotation = BuildingList.get(i).rotation;
+        //PacketBuildingServer packB = new PacketBuildingServer();
+        PacketBuildingServer.BuildPack.add(new BuildPacket());
+        PacketBuildingServer.BuildPack.get(i).name = BuildingList.get(i).name;
+        PacketBuildingServer.BuildPack.get(i).x = BuildingList.get(i).x;
+        PacketBuildingServer.BuildPack.get(i).y = BuildingList.get(i).y;
+        PacketBuildingServer.BuildPack.get(i).rotation = BuildingList.get(i).rotation;
     }
 
     //Используется когда клиент отправляет пакет серверу

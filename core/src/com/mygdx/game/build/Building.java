@@ -22,42 +22,32 @@ public abstract class Building implements Serializable {
     public static float[]rgb = {(float)1/255 * 236, (float) 1/255 * 124, (float) 1/255 * 38};
     //public float[]rgb = {(float)1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250)};
     public Sprite build_image;
-    public ArrayList<Area>area_list = new ArrayList<>();
-    public ArrayList<int[]>xy_area_list = new ArrayList<>();
     private int distance_light,density_light_x,density_light_y;
     public ArrayList<int[]>xy_light = new ArrayList<>();
     public ArrayList<int[]>xy_light_render = new ArrayList<>();
     public BuildType name;
+    public boolean[][]ConstructBuilding;
+    public int ConstructX,ConstructY,xMatrix,yMatrix;
 
 
-
-    //public byte flame_sost;
-    public void create_rect(int x,int y,int width,int height){
-        Rectangle rect = new Rectangle(x,y,width,height);
-        AffineTransform transform2 = new AffineTransform();
-        transform2.rotate(Math.toRadians(rotation), rect.getCenterX(), rect.getCenterY());
-        Area area = new Area(rect);
-        area.transform(transform2);
-        area_list.add(area);
-        xy_area_list.add(new int[]{x,y,width,height});
-    }
-    public void build_installation(){
-        int i1 = ((x-width_2)/Main.width_block);
-        int i2 = ((y-height_2)/Main.width_block);
-        int width1 = (width/Main.width_block)+2;
-        int height1 = (height/Main.height_block)+2;
-        x = Main.BlockList2D.get(i1).get(i2).y;
-        y = Main.BlockList2D.get(i1).get(i2).x;
-        width = width1*Main.width_block;
-        height = height1*Main.height_block;
-
-    }
-    public void data(){
+    protected void Data(){
+        DataCollision();
         distance_light = 100;
         density_light_y=(int)((double)height/distance_light);
         density_light_x=(int)((double)width/distance_light);
-        //build_installation();
         size_light();
+    }
+    private void DataCollision(){
+        ConstructX = ConstructBuilding[0].length;
+        ConstructY =ConstructBuilding.length;
+        this.width = Main.width_block*ConstructX;
+        this.height = Main.height_block*ConstructY;
+        xMatrix = this.x/Main.width_block;
+        yMatrix = this.y/Main.height_block;
+        this.x = Main.BlockList2D.get(yMatrix).get(xMatrix).x;
+        this.y = Main.BlockList2D.get(yMatrix).get(xMatrix).y;
+        this.width_2 = this.width/2;
+        this.height_2 = this.height/2;
     }
     private void size_light(){
         int x_light = x;

@@ -66,7 +66,7 @@ public class PanzerT1 extends Transport {
         super.tower_ii(i);
         super.bot_bull_tank_fire(i, this.spisok, this.enemy_spisok);
         super.behavior_bot(this.enemy_spisok, i);
-        super.build_corpus(Main.BuildingList);
+        super.build_corpus();
         super.corpus_corpus_def_xy(this.spisok,(byte)1);
         super.tower_xy();
         center_render();

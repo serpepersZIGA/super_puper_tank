@@ -54,9 +54,8 @@ public class PlayerCannonBullTank extends Transport {
         super.host_control();
         super.motor_player();
         super.fire_player_bull_tank();
-        super.build_corpus(Main.BuildingList);
+        super.build_corpus();
         super.corpus_corpus(this.enemy_spisok);
-        super.corpus_corpus_def_xy(this.spisok,(byte)1);
         super.tower_xy();
         super.tower_player();
         Main.RC.x = this.tower_x;
@@ -74,8 +73,9 @@ public class PlayerCannonBullTank extends Transport {
         super.client_control();
         super.motor_player();
         super.fire_player_bull_tank();
-        super.build_corpus(Main.BuildingList);
+        super.build_corpus();
         super.corpus_corpus(this.enemy_spisok);
+        super.corpus_corpus_def_xy(this.spisok,(byte)1);
         super.tower_xy();
 
         //corpus_bull(main.Main.bull_obj,this.team);

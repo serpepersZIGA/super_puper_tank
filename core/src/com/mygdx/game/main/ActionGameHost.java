@@ -122,7 +122,6 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
             }
         }
         for (i = 0; i< Main.BuildingList.size(); i++){
-            PacketBuildServer(i);
             Main.BuildingList.get(i).all_action(i);}
         Batch.draw(textureBuffer,-20,1,1,1);
         Render.end();
@@ -174,7 +173,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         PacketServer.bull = PacketBull;
         PacketServer.building = PacketBuilding;
 
-        Server.sendToAllTCP(PacketServer);
+        Server.sendToAllUDP(PacketServer);
         PacketPlayer.clear();
         PacketEnemy.clear();
         PacketBull.clear();

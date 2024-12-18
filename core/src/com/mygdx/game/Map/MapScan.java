@@ -144,7 +144,9 @@ public class MapScan {
 
     private static void MapSpawn(String Build, int x, int y) {
         if (Objects.equals(Build, "BigBuildingWood1")) {
-            Main.BuildingList.add(new BigBuildingWood1(x, y, 0));
+            Main.BuildingList.add(new BigBuildingWood1(x, y));
+        } else if (Objects.equals(Build, "Asphalt")) {
+            AsphaltSpawn(x, y);
         }
     }
 
