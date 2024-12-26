@@ -2,19 +2,17 @@ package com.mygdx.game.particle;
 
 import Content.Particle.Flame;
 import Content.Particle.FlameParticle;
+import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.Method;
 import com.mygdx.game.method.SoundPlay;
-import com.mygdx.game.method.move;
 import com.mygdx.game.method.rand;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static com.mygdx.game.method.Option.SoundConst;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
-import static java.sql.Types.NULL;
 
 public abstract class Particle {
     public float x,y,size,size_2,speed_x,speed_y,interval_rise_size,size_3;
@@ -61,8 +59,8 @@ public abstract class Particle {
         int ix = (int) (x/Main.width_block)-1;
         int iy = (int) (y/Main.height_block)-1;
         if(ix >0 & iy >0){
-            if(Main.BlockList2D.get(iy).get(ix).render_block == Main.UpdateBlockReg.GrassUpdate) {
-                Main.BlockList2D.get(iy).get(ix).render_block = Main.UpdateBlockReg.Update2;
+            if(Main.BlockList2D.get(iy).get(ix).render_block == UpdateRegister.GrassUpdate) {
+                Main.BlockList2D.get(iy).get(ix).render_block = UpdateRegister.DirtUpdate;
             }
         }
     }
@@ -74,10 +72,10 @@ public abstract class Particle {
     protected float RotationXY;
     public int xCollision,yCollision;
     protected void liquid_const(){
-        if(Main.LiquidList.size()!= 0) {
+        if(Main.LiquidList.size()> 1) {
             int[] rg = Method.detection_near_particle_xy_def(Main.LiquidList, Main.LiquidList.size()-1,Main.LiquidList);
             if (rg[0] != 0) {
-                RotationXY = (int) ((-rg[1] - 90) * 3.1415926535 / 180);
+                RotationXY = (int) ((-rg[1]) / 3.1415926535 * 180);
                 //liquid_obj.get(rg[2]).speed_x = move.move_sin2(3, RotationXY);
                 //liquid_obj.get(rg[2]).speed_y = move.move_cos2(3, RotationXY);
                 //this.speed_x = move.move_sin2(3, RotationXY);
@@ -127,12 +125,9 @@ public abstract class Particle {
         this.size_3 = this.size_2/2;
     }
     protected void color_fire(){
-        this.r-= r_m;
-        this.g -=g_m;
-        this.b -= b_m;
-        if(this.r< 0){this.r = 0;}
-        if(this.g< 0){this.g = 0;}
-        if(this.b< 0){this.b = 0;}
+        if(this.r> 0.1){this.r-= r_m;}
+        if(this.g> 0.1){this.g -=g_m;}
+        if(this.b> 0.1){this.b -= b_m;}
     }
     protected void move_particle(){
         this.x += this.speed_x;

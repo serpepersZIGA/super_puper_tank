@@ -152,7 +152,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         Render.end();
         Batch.end();
         server_packet();
-        if(Transport.ai_sost == 0){Transport.ai_sost=200;}
+        if(Transport.ai_sost == 0){Transport.ai_sost=400;}
     }
     private void server_packet() {
         if(EnumerationList){
@@ -236,6 +236,5 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         PacketBuilding.get(i).name = BuildingList.get(i).name;
         PacketBuilding.get(i).x = BuildingList.get(i).x;
         PacketBuilding.get(i).y = BuildingList.get(i).y;
-        PacketBuilding.get(i).rotation = BuildingList.get(i).rotation;
     }
 }

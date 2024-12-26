@@ -16,8 +16,6 @@ import java.util.Objects;
 public class MapAllLoad{
     public static void MapCount(){
         FileHandle[] files = Gdx.files.internal("maps").list();
-
-
         System.out.println(Arrays.toString(files));
         int x = 1200;
         int y = 200;
@@ -27,10 +25,5 @@ public class MapAllLoad{
             Main.ButtonList.add(new MapLoad(x,y,260,140,file.path()));
             y+= 140;
         }
-
-
-    }
-    public static void AsphaltSpawn(int x,int y){
-        Main.BlockList2D.get(y).get(x).render_block = new UpdateAsphalt1();
     }
 }

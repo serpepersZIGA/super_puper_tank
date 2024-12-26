@@ -3,14 +3,11 @@ package com.mygdx.game.Map;
 import Content.Build.BigBuildingWood1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.mygdx.game.block.Update1;
-import com.mygdx.game.block.UpdateAsphalt1;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -144,7 +141,7 @@ public class MapScan {
 
     private static void MapSpawn(String Build, int x, int y) {
         if (Objects.equals(Build, "BigBuildingWood1")) {
-            Main.BuildingList.add(new BigBuildingWood1(x, y));
+            Main.BuildingList.add(new BigBuildingWood1(x*Main.width_block, y*Main.height_block));
         } else if (Objects.equals(Build, "Asphalt")) {
             AsphaltSpawn(x, y);
         }

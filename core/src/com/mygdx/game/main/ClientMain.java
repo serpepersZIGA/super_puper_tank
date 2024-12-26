@@ -261,7 +261,6 @@ public class ClientMain extends Listener{
         BuildingList.get(i).name = PacketBuilding.get(i).name;
         BuildingList.get(i).x = PacketBuilding.get(i).x;
         BuildingList.get(i).y = PacketBuilding.get(i).y;
-        BuildingList.get(i).rotation = PacketBuilding.get(i).rotation;
     }
     private void enemy_create(int i){
         switch (PacketEnemy.get(i).name) {
@@ -292,7 +291,7 @@ public class ClientMain extends Listener{
                     BuildingList.add(new BigBuildingWood1(x, y));
                     break;
                 case Home1:
-                    BuildingList.add(new Home1(x, y, 0));
+                    BuildingList.add(new Home1(x, y));
                     break;
             }
         }

@@ -10,7 +10,8 @@ public class BigBuildingWood1 extends Building {
         name = BuildType.BigBuildingWood1;
         this.x = x;
         this.y = y;
-        this.build_image = Main.ContentImage.build_2;
+        RenderBuilding = Main.BuildingRegister.Update_big_build_wood1;
+        this.build_image = Main.ContentImage.big_build_wood_1;
         ConstructBuilding = new boolean[][]{
                 {true,true,true,true,false,false,true,true,true,true},
                 {true,true,true,true,false,false,true,true,true,true},
@@ -30,6 +31,6 @@ public class BigBuildingWood1 extends Building {
     }
     public void update(){
         center_render();
-        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,this.rotation,this.build_image);
+        RenderBuilding.render(this.x_rend,this.y_rend,this.width_render,this.height_render);
     }
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class DataImage {
     public Sprite tower_player, tower_player_auxiliary_1,tower_enemy, tower_enemy_auxiliary_1;
     public Sprite corpus_player,corpus_track_remount_enemy,corpus_track_soldat_enemy,corpus_enemy;
-    public Sprite build_1,build_2;
+    public Sprite build_1, big_build_wood_1;
     public Sprite track_enemy_1lvl;
     public Sprite grass,dirt_2,dirt_3,dirt_4;
     public Sprite asphalt1;
@@ -19,7 +19,7 @@ public class DataImage {
         corpus_player = new Sprite(new Texture("image/player/corpus_player_many_tower_1.png"));
         corpus_enemy = new Sprite(new Texture("image/enemy/corpus_enemy_many_tower_1.png"));
         build_1 = new Sprite(new Texture("image/build/home_3.png"));
-        build_2 = new Sprite(new Texture("image/build/big_build_wood_1.png"));
+        big_build_wood_1 = new Sprite(new Texture("image/build/big_build_wood_1.png"));
         grass = new Sprite(new Texture("image/other/grass_256_1.png"));
         dirt_2 = new Sprite(new Texture("image/other/dirt_256_1.png"));
         dirt_3 = new Sprite(new Texture("image/other/dirt_256_2.png"));
@@ -37,11 +37,12 @@ public class DataImage {
         tower_enemy = null;
         corpus_player =null;
         build_1 = null;
-        build_2 = null;
+        big_build_wood_1 = null;
         grass = null;
         dirt_2 = null;
         dirt_3 = null;
         dirt_4 = null;
+        asphalt1 = null;
         tower_player_auxiliary_1 = null;
         tower_enemy_auxiliary_1 = null;
         soldat_1 = null;

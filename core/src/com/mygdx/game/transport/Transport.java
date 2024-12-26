@@ -313,12 +313,17 @@ public abstract class Transport{
             this.speed += this.slowing;
             if (this.speed>speed_minimum){this.speed = 0;}
         }
-        this.x += move.move_sin(this.speed, -this.rotation_corpus);
-        this.y += move.move_cos(this.speed, -this.rotation_corpus);
+        move_xy_transport();
     }
     protected final void move_xy_transport(){
-        this.x += move.move_sin(this.speed, -this.rotation_corpus);
-        this.y += move.move_cos(this.speed, -this.rotation_corpus);
+        float rotation_corpus2 = (float) (-this.rotation_corpus*3.1415/180);
+        this.x += move.move_sin2(this.speed, rotation_corpus2);
+        this.y += move.move_cos2(this.speed, rotation_corpus2);
+    }
+    protected final void move_xy_transport_bot(){
+        float rotation_corpus2 = (float) (-this.rotation_corpus*3.1415/180);
+        this.x -= move.move_sin2(this.speed, rotation_corpus2);
+        this.y -= move.move_cos2(this.speed, rotation_corpus2);
     }
     protected final void tower_bot_enemy(int i) {
         if(this.enemy_spisok.size() != 0) {
@@ -706,8 +711,7 @@ public abstract class Transport{
                 this.speed -=this.acceleration;
             }
         }
-        this.x -= move.move_sin(this.speed, -this.rotation_corpus);
-        this.y -= move.move_cos(this.speed, -this.rotation_corpus);
+        move_xy_transport_bot();
     }
     private void motor_bot_base(int g,byte behavior){
         this.time_sound_motor -=1;
@@ -836,7 +840,9 @@ public abstract class Transport{
     private void bypass_build(ArrayList<Building> obj_building, ArrayList<Transport> obj_tr, double g, double g_left, double g_right, int i3, int i2) {
         if(obj_building.size()!= 0&& this.enemy_spisok.size()!=0) {
             if (ai_sost == 0) {
+
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
+                    path.clear();
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
                     Ai.path_AI(this.spisok.get(i3), obj_tr.get(i2), xy[0], xy[1]);
                     trigger_fire = false;
@@ -844,8 +850,7 @@ public abstract class Transport{
                     path.clear();
                     trigger_fire = true;
                 }
-            }
-            if(path.size() > 0) {
+            }if(path.size() > 0) {
                 float []xy = Method.tower_xy_2(this.x,this.y,this.ai_x_const,this.ai_y_const,0,0,-this.rotation_corpus);
                 this.g = (float) sqrt(pow2((xy[0] - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)) + pow2(xy[1] - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center));
                 double gr = (atan2(xy[1] - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center,xy[0] - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)/3.1415926535*180)-90;
@@ -866,6 +871,7 @@ public abstract class Transport{
         if(obj_building.size()!= 0) {
             if (ai_sost == 0) {
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
+                    path.clear();
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
                     Ai.path_AI(this.spisok.get(i3), obj_tr.get(i2), xy[0], xy[1]);
                     trigger_fire = false;
@@ -891,110 +897,105 @@ public abstract class Transport{
             }
         }
     }
-    protected float[] findIntersection(float x0, float y0, float dx, float dy, float x1, float y1, float x2, float y2) {
-        float xy_r = (float) atan2(dy-y0, dx-x0);
-        //double xy_r = atan2(y0-dy, x0-dx)*-1;
-        float x = x0;
-        float y = y0;
-        float speed_x = (float) (10 * cos(xy_r));
-        float speed_y = (float) (10 * sin(xy_r));
+    protected float[] findIntersection(float x0, float y0, float dx, float dy) {
+        //float xy_r = (float) atan2(y0-dy, x0-dx);
+        float x = x0/width_block;
+        float y = y0/height_block;
+        dx = dx/width_block;
+        dy = dy/height_block;
+        float xy_r = (float)(atan2(y-dy, x-dx));
+        float speed_x = (float) cos(xy_r)/2;
+        float speed_y = (float) sin(xy_r)/2;
+//        System.out.println(x+" g "+y);
+//        System.out.println(dx+" h "+dy);
+//        System.out.println(xy_r);
         if (y > dy) {
             if (x > dx) {
                 while (x > dx && y > dy) {
-                    x += speed_x;
-                    y += speed_y;
+                    x -= speed_x;
+                    y -= speed_y;
                     //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" w");
                     //double[]xy = Main.rc.get(0).render_obj(x0,y0);
-                    if (x > x1 && x < x2 && y > y1 && y < y2) {
+//                    System.out.println(x+" z "+y);
+//                    System.out.println(dx+" vo "+dy);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
                         return new float[]{x, y};
                     }
 
                 }
-            } else {
+            } else if(x < dx){
                 while (x < dx && y > dy) {
-                    x += speed_x;
-                    y += speed_y;
+                    x -= speed_x;
+                    y -= speed_y;
                     //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
                     //double[]xy = Main.rc.get(0).render_obj(x0,y0);
-                    if (x > x1 & x < x2 & y > y1 & y < y2) {
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
                         return new float[]{x, y};
                     }
                 }
             }
-        } else{
-            if (x > dx) {
-                while (x > dx && y < dy) {
-                    x += speed_x;
-                    y += speed_y;
-                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" x");
+            else{
+                while (y > dy) {
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
                     //double[]xy = Main.rc.get(0).render_obj(x0,y0);
-                    if (x > x1 & x < x2 & y > y1 & y < y2) {
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
                         return new float[]{x, y};
                     }
                 }
-            } else {
-                while (x < dx && y < dy) {
-                    x += speed_x;
-                    y += speed_y;
-                   // System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" z");
+            }
+        } else if(y < dy){
+            if (x > dx) {
+                while (x > dx && y < dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" x");
                     //double[]xy = Main.rc.get(0).render_obj(x0,y0);
-                    if (x > x1 & x < x2 & y > y1 & y < y2) {
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            } else if (x < dx){
+                while (x < dx && y < dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+
+                    // System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" z");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            }
+            else {
+                while (y < dy) {
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
                         return new float[]{x, y};
                     }
                 }
             }
         }
-        return null;
+        else {
+            if (x > dx) {
+                while (x > dx) {
+                    x -= speed_x;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" x");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            } else if (x < dx){
+                while (x < dx) {
+                    x -= speed_x;
 
-    }
-    private float[] findIntersection(float x0, float y0, float dx, float dy) {
-        float xy_r = (float) atan2(dy-y0, dx-x0);
-        float speed_x = (float) (10 * cos(xy_r));
-        float speed_y = (float) (10 * sin(xy_r));
-        int BlockX;
-        int BlockY;
-        float x = x0;
-        float y = y0;
-        if (y > dy) {
-            if (x > dx) {
-                while (x > dx && y > dy) {
-                    x += speed_x;
-                    y += speed_y;
-                    BlockX = (int) (x/ width_block);
-                    BlockY = (int) (y/ height_block);
-                    if (BlockList2D.get(BlockY).get(BlockX).passability) {
-                        return new float[]{x, y};
-                    }
-                }
-            } else {
-                while (x < dx && y > dy) {
-                    x += speed_x;
-                    y += speed_y;
-                    BlockX = (int) (x/ width_block);
-                    BlockY = (int) (y/ height_block);
-                    if (BlockList2D.get(BlockY).get(BlockX).passability) {
-                        return new float[]{x, y};
-                    }
-                }
-            }
-        } else {
-            if (x > dx) {
-                while (x > dx && y < dy) {
-                    x += speed_x;
-                    y += speed_y;
-                    BlockX = (int) (x/ width_block);
-                    BlockY = (int) (y/ height_block);
-                    if (BlockList2D.get(BlockY).get(BlockX).passability) {
-                        return new float[]{x, y};
-                    }
-                }
-            } else {
-                while (x < dx && y < dy) {
-                    x += speed_x;
-                    y += speed_y;
-                    BlockX = (int) (x/ width_block);
-                    BlockY = (int) (y/ height_block);
-                    if (BlockList2D.get(BlockY).get(BlockX).passability) {
+
+                    // System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" z");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
                         return new float[]{x, y};
                     }
                 }

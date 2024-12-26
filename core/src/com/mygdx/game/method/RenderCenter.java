@@ -3,6 +3,9 @@ package com.mygdx.game.method;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
 
+import static com.mygdx.game.main.Main.ZoomWindowX;
+import static com.mygdx.game.main.Main.ZoomWindowY;
+
 public class RenderCenter {
     public float x,y,x2,y2;
     public float width_2 = Main.screenWidth/2f,height_2 = Main.screenHeight/2f;
@@ -53,7 +56,7 @@ public class RenderCenter {
                 for (int ix = render_x_min; ix < render_x_max; ix++) {
                     Main.BlockList2D.get(iy).get(ix).update();
                     if(rand.rand(20) == 1) {
-                        if(Main.BlockList2D.get(iy).get(ix).render_block != UpdateRegister.UpdateAsphalt1) {
+                        if(Main.BlockList2D.get(iy).get(ix).render_block == UpdateRegister.DirtUpdate) {
                             Main.BlockList2D.get(iy).get(ix).render_block = UpdateRegister.GrassUpdate;
                         }
                     }

@@ -17,7 +17,6 @@ import java.util.LinkedList;
 
 
 public abstract class Building implements Serializable {
-    public float rotation;
     public int width,height,x,y,time_flame,width_2,height_2,x_rend,y_rend,width_render,height_render,brightness_max = 240,brightness;
     public static float[]rgb = {(float)1/255 * 236, (float) 1/255 * 124, (float) 1/255 * 38};
     //public float[]rgb = {(float)1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250), (float) 1/255 * rand.rand(20,250)};
@@ -28,6 +27,8 @@ public abstract class Building implements Serializable {
     public BuildType name;
     public boolean[][]ConstructBuilding;
     public int ConstructX,ConstructY,xMatrix,yMatrix;
+    public UpdateBuilding RenderBuilding;
+
 
 
     protected void Data(){

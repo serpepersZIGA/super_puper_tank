@@ -1,7 +1,7 @@
 package Content.Block;
 
 import com.mygdx.game.block.Block;
-import com.mygdx.game.block.Update1;
+import com.mygdx.game.block.UpdateGrass;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 
@@ -12,7 +12,7 @@ public class Asphalt extends Block {
         this.x = x;
         this.y = y;
         block_xy();
-        this.render_block = new Update1();
+        this.render_block = new UpdateGrass();
     }
     public void all_action(){
         super.render();

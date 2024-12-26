@@ -3,18 +3,21 @@ import Content.Particle.*;
 import Content.Transport.Transport.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Map.MapScan;
 import com.mygdx.game.block.Block;
 import Content.Block.BlockMap;
 import Content.Block.Air;
 import com.mygdx.game.block.UpdateRegister;
-import com.mygdx.game.build.Building;
-import com.mygdx.game.build.PacketBuildingServer;
+import com.mygdx.game.build.*;
 import com.mygdx.game.bull.Bull;
 import Data.DataImage;
 import com.mygdx.game.menu.InputWindow;
@@ -45,9 +48,8 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<Soldat> SoldatList = new ArrayList<>();
 	public static LinkedList<Particle> BangList = new LinkedList<>();
 	public static LinkedList<Particle> FlameParticleList = new LinkedList<>();
-	public static ArrayList<Particle> LiquidList = new ArrayList<>();
+	public static LinkedList<Particle> LiquidList = new LinkedList<>();
 	public static LinkedList<Particle> FlameSpawnList = new LinkedList<>();
-	public static ArrayList<Transport> HelicopterList = new ArrayList<>();
 	public static ArrayList<Transport> DebrisList = new ArrayList<>();
 
 	public static ArrayList<DataSound> ContentSound = new ArrayList<>();
@@ -62,7 +64,7 @@ public class Main extends ApplicationAdapter {
 	public static int screenHeight;
 	public static double MouseXClient, MouseYClient;
 	private static int i;
-	public static float Zoom = 1;
+	public static float Zoom = 1,ZoomWindowX,ZoomWindowY;
 	public static ShapeRenderer Render;
 	public static UpdateRegister UpdateBlockReg;
 	public static AI Ai;
@@ -72,9 +74,9 @@ public class Main extends ApplicationAdapter {
 	public static boolean GameHost;
 	public static TransportRegister TransportRegister;
 	public static Content.Soldat.SoldatRegister SoldatRegister;
-	public static int width_2,height_2,x_block,y_block,width_block= 50,height_block =50,width_block_air= 15,height_block_air =15,quantity_width,quantity_height;
+	public static int width_block_2, height_block_2,x_block,y_block,width_block= 50,height_block =50,width_block_air= 15,height_block_air =15,quantity_width,quantity_height;
 	public int[][]xy;
-	public static int width_block_zoom= 50,height_block_zoom =50,width_block_render= 63,height_block_render =63;
+	public static int width_block_zoom= 50,height_block_zoom =50,width_block_render= 64,height_block_render =64;
 	public static float radius_air_max = 150,radius_air_max_zoom;
 	public static ServerMain serverMain;
 	public static ClientMain Main_client;
@@ -90,11 +92,20 @@ public class Main extends ApplicationAdapter {
 	public static int yMaxAir ;
 	public static Texture textureBuffer;
 	public static int IDClient;
+	public static UpdateBuildingRegister BuildingRegister;
 	public static  ArrayList<Packet_client> Clients = new ArrayList<>();
+	private Viewport viewport;
+	private Camera camera;
 
 
-	public Main(){
+	public Main(int x,int y){
+		screenWidth = x;
+		screenHeight = y;
+		ZoomWindowX = (float) screenWidth /1920;
+		ZoomWindowY = (float) screenHeight /1000;
+
 	}
+
 
 
 
@@ -107,7 +118,7 @@ public class Main extends ApplicationAdapter {
 		MapScan.MapInput("maps/MapBase.mapt");
 		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
-		EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
+		//EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
 		LiquidList.add(new Acid(200,200));
 		LiquidList.add(new Blood(200,200));
 		FlameSpawnList.add(new FlameSpawn(200,200));
@@ -118,12 +129,12 @@ public class Main extends ApplicationAdapter {
 		quantity_width = width_field/width_block;
 		quantity_height = height_field/height_block;
 		xy = new int[quantity_width][quantity_height];
-		width_2 = width_block/2;
-		height_2 = height_block/2;
+		width_block_2 = width_block/2;
+		height_block_2 = height_block/2;
 		width_block*=1.24;
 		height_block*=1.24;
 
-		x_block = width_2;
+		x_block = width_block_2;
 		y_block = 0;
 		for(int i = 0;i<quantity_height;i++){
 			BlockList2D.add(new ArrayList<Block>());
@@ -162,20 +173,22 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
+		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
 		ContentSound.add(new DataSound());
-		screenWidth = Gdx.graphics.getWidth();
-		screenHeight = Gdx.graphics.getHeight();
+		//screenWidth =//Gdx.graphics.getWidth();
+		//screenHeight = Gdx.graphics.getHeight();
 		Render = new ShapeRenderer();
 		RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
-		font = TXTFont(64,"font/Base/BaseFont4.ttf");
-		font2 = TXTFont(16,"font/Base/BaseFont.ttf");
+		font = TXTFont((int) (64*ZoomWindowX),"font/Base/BaseFont4.ttf");
+		font2 = TXTFont((int) (16*ZoomWindowX),"font/Base/BaseFont.ttf");
 		InputWindow = new InputWindow();
 
 		KeyboardObj = new Keyboard();
+		Keyboard.ZoomMaxMin();
 		Gdx.input.setInputProcessor(KeyboardObj);
-		field(100000, 100000);
+		field(10000, 10000);
 		spawn_object();
 		Option = new Option();
 		KeyboardObj.zoom_const();
@@ -187,16 +200,27 @@ public class Main extends ApplicationAdapter {
 		ButtonList.add(new PlayClient(100,600,400,120,"CONNECT",(byte)1));
 		ButtonList.add(new Cancel(100,400,400,120,"CANCEL",(byte)1));
 		ButtonList.add(new Maps(100,400,400,120,"MAPS",(byte)0));
+		ButtonList.add(new Exit(100,200,400,120,"Exit",(byte)0));
 		ButtonList.add(new Cancel(100,400,400,120,"CANCEL",(byte)3));
 		ActionGame = new ActionMenu();
 		RC.const_xy_block();
 		xMaxAir = Main.AirList.get(0).size();
 		yMaxAir = Main.AirList.size();
+		camera = new OrthographicCamera();
+
+		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
+		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
 
 
 
 
 
+
+	}
+
+
+	public void resize(int width, int height) {
+		viewport.update((int) screenWidth, (int) screenHeight);
 	}
 	public static BitmapFont TXTFont(int size,String fontPath){
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
@@ -230,6 +254,8 @@ public class Main extends ApplicationAdapter {
 		DebrisList.clear();
 		FlameParticleList.clear();
 		FlameStaticList.clear();
+		ButtonList.clear();
+		KeyboardObj = null;
 		RC= null;
 		Clients= null;
 

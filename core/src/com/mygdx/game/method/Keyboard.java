@@ -12,13 +12,17 @@ import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
 
 import static com.mygdx.game.block.Block.lighting;
-import static com.mygdx.game.main.Main.radius_air_max;
-import static com.mygdx.game.main.Main.radius_air_max_zoom;
+import static com.mygdx.game.main.Main.*;
 
 public class Keyboard extends InputAdapter{
     public static boolean PressW,PressA,PressS,PressD,PressUP,PressDown;
     public static boolean LeftMouse, RightMouse,LeftMouseClick, RightMouseClick;
     public static int MouseX,MouseY;
+    private static float ZoomMax,ZoomMin;
+    public static void ZoomMaxMin(){
+        ZoomMax = 2;
+        ZoomMin = (float) (0.4);
+    }
 
     @Override
     public boolean keyDown(int keycode) {
@@ -122,12 +126,12 @@ public class Keyboard extends InputAdapter{
     @Override
     public boolean scrolled(float amountX, float amountY) {
         if(amountY > 0) {
-            if (Main.Zoom >0.4) {
+            if (Main.Zoom >ZoomMin) {
                 Main.Zoom -= 0.1;
                 zoom_const();
             }
         } else {
-            if (Main.Zoom < 2) {
+            if (Main.Zoom < ZoomMax) {
                 Main.Zoom += 0.1;
                 zoom_const();
             }
@@ -136,6 +140,8 @@ public class Keyboard extends InputAdapter{
         return false;
     }
     public void zoom_const(){
+        //ZoomWindowX = (float) screenWidth /1920;
+        //ZoomWindowY = (float) screenHeight /1080;
         for(Particle particle : Main.FlameParticleList){
             particle.size_render = (int)(particle.size* Main.Zoom);
         }

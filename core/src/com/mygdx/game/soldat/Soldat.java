@@ -22,8 +22,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static Content.Bull.BullRegister.PacketBull;
-import static com.mygdx.game.main.Main.BullList;
-import static com.mygdx.game.main.Main.LiquidList;
+import static com.mygdx.game.main.Main.*;
 import static java.lang.StrictMath.*;
 
 public abstract class Soldat implements Serializable {
@@ -33,8 +32,8 @@ public abstract class Soldat implements Serializable {
     public byte clear_sost,team,trigger_attack;
     public Sprite soldat_image;
     public void data(){
-        this.width_render = (int)(width*Main.Zoom);
-        this.height_render = (int)(height*Main.Zoom);
+        this.width_render = (int)(width*ZoomWindowX);
+        this.height_render = (int)(height*ZoomWindowY);
         this.width_2 = width/2;
         this.height_2 = height/2;
     }
@@ -221,8 +220,8 @@ public abstract class Soldat implements Serializable {
     }
     public void center_render(){
         double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]* Main.Zoom);
-        this.y_rend = (int)(xy[1]* Main.Zoom);
+        this.x_rend = (int)(xy[0]* ZoomWindowX);
+        this.y_rend = (int)(xy[1]* ZoomWindowY);
     }
     public void collision_transport(ArrayList<Transport>transport){
         for(int i = 0;i<transport.size();i++){

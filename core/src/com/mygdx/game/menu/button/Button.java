@@ -38,7 +38,8 @@ public abstract class Button {
         RGBTotal = RGBButton3;
     }
     protected void XYDetectedButtonRect(){
-        if(x< Keyboard.MouseX &widthXY>Keyboard.MouseX & y<Keyboard.MouseY & heightXY>Keyboard.MouseY){
+        if(x*ZoomWindowX< Keyboard.MouseX &widthXY*ZoomWindowX>Keyboard.MouseX & y*ZoomWindowY<Keyboard.MouseY
+                & heightXY*ZoomWindowY>Keyboard.MouseY){
             TipOff = true;
             RGBTotal = RGBButton2;
         }
@@ -76,19 +77,19 @@ public abstract class Button {
     }
     protected void RenderButtonRect(){
         Render.setColor(RGBTotal[0],RGBTotal[1],RGBTotal[2],1f);
-        Render.rect(this.x,this.y,this.width,this.height);
+        Render.rect(this.x*ZoomWindowX,this.y*ZoomWindowY,this.width*ZoomWindowX,this.height*ZoomWindowY);
     }
     protected void RenderButtonCircle(){
         Render.setColor(RGBTotal[0],RGBTotal[1],RGBTotal[2],1f);
-        Render.circle(this.x,this.y,radius);
+        Render.circle(this.x*ZoomWindowX,this.y*ZoomWindowY,radius);
     }
     public void TXTRender(){
         font.setColor(0.1f,0.9f,0.8f,1f);
-        font.draw(Batch,txt,XTXT,YTXT);
+        font.draw(Batch,txt,XTXT*ZoomWindowX,YTXT*ZoomWindowY);
     }
     public void TXTRender2(){
         font2.setColor(0.1f,0.9f,0.8f,1f);
-        font2.draw(Batch,txt,XTXT,YTXT);
+        font2.draw(Batch,txt,XTXT*ZoomWindowX,YTXT*ZoomWindowY);
     }
 
 }

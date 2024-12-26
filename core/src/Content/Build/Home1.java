@@ -6,11 +6,10 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 
 public class Home1 extends Building {
-    public Home1(int x, int y, float rotation){
+    public Home1(int x, int y){
         name = BuildType.Home1;
         this.x = x;
         this.y = y;
-        this.rotation = rotation;
         this.build_image = Main.ContentImage.build_1;
         this.width = 100;
         this.height = 50;
@@ -27,6 +26,6 @@ public class Home1 extends Building {
     }
     public void update(){
         center_render();
-        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,this.rotation,this.build_image);
+        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,this.build_image);
     }
 }
