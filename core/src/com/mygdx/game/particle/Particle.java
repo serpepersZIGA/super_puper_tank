@@ -47,7 +47,7 @@ public abstract class Particle {
     protected void sound_play(){
         sound_time +=1;
         if(sound_time_max == sound_time) {
-            double[]xy = Main.RC.render_obj(this.x,this.y);
+            float[]xy = Main.RC.WindowSynchronization(this.x,this.y);
             rad = 1-((float) sqrt(pow2(xy[0]) + pow2(xy[1]))/SoundConst);
             sound_time = 0;
             if(rad>0) {
@@ -106,9 +106,9 @@ public abstract class Particle {
              }
     }
     protected void center_render(){
-        double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]* Main.Zoom);
-        this.y_rend = (int)(xy[1]* Main.Zoom);
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
+        this.x_rend = (int)xy[0];
+        this.y_rend = (int)xy[1];
     }
     protected void size_rise(){
         this.size += this.interval_rise_size;

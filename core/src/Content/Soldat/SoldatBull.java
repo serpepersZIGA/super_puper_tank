@@ -3,7 +3,7 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.soldat.Soldat;
 
 public class SoldatBull extends Soldat {
-    public SoldatBull(double x, double y){
+    public SoldatBull(float x, float y){
         this.name = "bull";
         this.x = x;
         this.y = y;

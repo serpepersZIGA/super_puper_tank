@@ -27,7 +27,7 @@ import static java.lang.StrictMath.*;
 
 public abstract class Soldat implements Serializable {
     public String name;
-    public double x,y,speed,rotation,speed_rotation,damage,penetration,t_damage,damage_fragmentation,penetration_fragmentation,range_see = 650;
+    public float x,y,speed,rotation,speed_rotation,damage,penetration,t_damage,damage_fragmentation,penetration_fragmentation,range_see = 650;
     public int width,height,width_2,height_2,size,time,time_max,x_rend,y_rend,width_render,height_render;
     public byte clear_sost,team,trigger_attack;
     public Sprite soldat_image;
@@ -63,8 +63,7 @@ public abstract class Soldat implements Serializable {
     public void clear(ArrayList<Soldat>obj,int i){
         if(this.clear_sost == 1){
             for(int i1 =0;i1<12;i1++){
-                int i2 = LiquidList.size();
-            Main.LiquidList.add(new Blood((float) (this.x+i1), (float) this.y));}
+            Main.LiquidList.add(new Blood(this.x+i1, this.y));}
             obj.remove(i);
         }
     }
@@ -72,9 +71,7 @@ public abstract class Soldat implements Serializable {
         this.time -=1;
         if(this.time < 0 && g>g_left && g<g_right){
             this.time = this.time_max;
-            //int i1 = packet_bull.size();
-            //int i2 = bull_obj.size();
-            Main.BullList.add(new BullTank((float) this.x,(float)this.y,(float)-this.rotation+180,(float)this.damage,(float)this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullTank(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
             int i2 = BullList.size()-1;
@@ -85,10 +82,8 @@ public abstract class Soldat implements Serializable {
         this.time -=1;
         if(this.time < 0 && g>g_left && g<g_right){
             this.time = this.time_max;
-            //int i1 = packet_bull.size();
-            //int i2 = bull_obj.size();
-            Main.BullList.add(new BullFlame((float) this.x, (float) this.y, (float) (-this.rotation+ -15+rand.rand(30)+180), (float) this.damage,(float)this.t_damage,(float)this.penetration,this.team,(byte)1));
-            Main.BullList.add(new BullFlame((float) this.x, (float) this.y, (float) (-this.rotation+ -15+rand.rand(30)+180), (float) this.damage,(float)this.t_damage,(float)this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullFlame(this.x,  this.y,-this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
+            Main.BullList.add(new BullFlame(this.x, this.y, -this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
@@ -103,8 +98,8 @@ public abstract class Soldat implements Serializable {
             this.time = this.time_max;
             ///int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
-            Main.BullList.add(new BullMortar((float) this.x, (float) this.y,(float)-this.rotation+180,(float)this.damage,(float)this.penetration,(float)this.damage_fragmentation,
-                    (float)this.penetration_fragmentation,this.team,(byte)1));
+            Main.BullList.add(new BullMortar(this.x,  this.y,-this.rotation+180,this.damage,this.penetration,this.damage_fragmentation,
+                    this.penetration_fragmentation,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
             int i2 = BullList.size()-1;
@@ -210,34 +205,34 @@ public abstract class Soldat implements Serializable {
         }
     }
     public void hustle(ArrayList<Transport>transport){
-        for(int i = 0;i<transport.size();i++){
-            boolean z = rect_bull((int)transport.get(i).x,(int)transport.get(i).y,(int)transport.get(i).corpus_width,(int)transport.get(i).corpus_height,
-                    (int)this.x,(int)this.y,this.size,transport.get(i).rotation_corpus);
-            if(z){
+        for (Transport value : transport) {
+            boolean z = rect_bull((int) value.x, (int) value.y, (int) value.corpus_width, (int) value.corpus_height,
+                    (int) this.x, (int) this.y, this.size, value.rotation_corpus);
+            if (z) {
                 this.clear_sost = 1;
             }
         }
     }
     public void center_render(){
-        double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]* ZoomWindowX);
-        this.y_rend = (int)(xy[1]* ZoomWindowY);
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
+        this.x_rend = (int)xy[0];
+        this.y_rend = (int)xy[1];
     }
     public void collision_transport(ArrayList<Transport>transport){
-        for(int i = 0;i<transport.size();i++){
-            boolean z = rect_bull((int)transport.get(i).x,(int)transport.get(i).y,(int)transport.get(i).corpus_width,(int)transport.get(i).corpus_height,
-                    (int)this.x,(int)this.y,this.size,transport.get(i).rotation_corpus);
-            if(z){
-                metod_1(transport.get(i).x,transport.get(i).y);
+        for (Transport value : transport) {
+            boolean z = rect_bull((int) value.x, (int) value.y, (int) value.corpus_width, (int) value.corpus_height,
+                    (int) this.x, (int) this.y, this.size, value.rotation_corpus);
+            if (z) {
+                metod_1(value.x, value.y);
             }
         }
     }
     public void collision_build(ArrayList<Building> building){
-        for(int i = 0; i< building.size(); i++){
-            boolean z = rect_bull(building.get(i).x, building.get(i).y, building.get(i).width, building.get(i).height,
-                    (int)this.x,(int)this.y,this.size,0);
-            if(z){
-                metod_1(building.get(i).x, building.get(i).y);
+        for (Building value : building) {
+            boolean z = rect_bull(value.x, value.y, value.width, value.height,
+                    (int) this.x, (int) this.y, this.size, 0);
+            if (z) {
+                metod_1(value.x, value.y);
             }
         }
     }
@@ -249,7 +244,7 @@ public abstract class Soldat implements Serializable {
             }
         }
     }
-    public void metod_1(double x,double y){
+    public void metod_1(float x,float y){
         if(x>this.x){
             this.x -= 2;
         }
@@ -263,7 +258,7 @@ public abstract class Soldat implements Serializable {
             this.y += 2;
         }
     }
-    public boolean rect_bull(int x1,int y1,int width,int height,int x,int y,int size,double rotation){
+    public boolean rect_bull(int x1,int y1,int width,int height,int x,int y,int size,float rotation){
         Rectangle2D rect1 = new Rectangle2D.Double(x1,y1,width,height);
         AffineTransform transform1 = new AffineTransform();
         transform1.rotate(Math.toRadians(-rotation), rect1.getCenterX(), rect1.getCenterY());
@@ -272,10 +267,7 @@ public abstract class Soldat implements Serializable {
 
         Ellipse2D circle = new Ellipse2D.Double(x,y,size,size);
 
-        if (area1.intersects(circle.getBounds2D())) {
-            return true;
-        }
-        return false;
+        return area1.intersects(circle.getBounds2D());
     }
     public void move_soldat_ii_flame(int i){
         if(Main.PlayerList.size() != 0) {

@@ -76,8 +76,8 @@ public abstract class Block {
     }
 
     public void update(){
-        center_render();
-        render_block.render(this.x_rend, this.y_rend);
+        int[]xy = Main.RC.render_objZoom(this.x,this.y);
+        render_block.render(xy[0],xy[1]);
     }
     public void render(){
     }
@@ -148,11 +148,6 @@ public abstract class Block {
 
                 }
             }
-    }
-    public void center_render(){
-        int[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]* Main.Zoom);
-        this.y_rend = (int)(xy[1]* Main.Zoom);
     }
 
 

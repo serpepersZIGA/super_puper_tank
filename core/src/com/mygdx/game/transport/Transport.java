@@ -1513,24 +1513,24 @@ public abstract class Transport{
 
     }
     protected void center_render(){
-        double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]*Main.Zoom);
-        this.y_rend = (int)(xy[1]*Main.Zoom);
-        xy = Main.RC.render_obj(this.tower_x,this.tower_y);
-        this.x_tower_rend = (int)(xy[0]*Main.Zoom);
-        this.y_tower_rend = (int)(xy[1]*Main.Zoom);
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
+        this.x_rend = (int)xy[0];
+        this.y_rend = (int)xy[1];
+        xy = Main.RC.render_objZoom(this.tower_x,this.tower_y);
+        this.x_tower_rend = (int)xy[0];
+        this.y_tower_rend = (int)xy[1];
 
     }
     protected void center_corpus_render(){
-        double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]*Main.Zoom);
-        this.y_rend = (int)(xy[1]*Main.Zoom);
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
+        this.x_rend = (int)xy[0];
+        this.y_rend = (int)xy[1];
 
     }
     public void center_render_tower(){
-        double[]xy = Main.RC.render_obj(this.tower_x,this.tower_y);
-        this.x_tower_rend = (int)(xy[0]*Main.Zoom);
-        this.y_tower_rend = (int)(xy[1]*Main.Zoom);
+        float[]xy = Main.RC.render_objZoom(this.tower_x,this.tower_y);
+        this.x_tower_rend = (int)xy[0];
+        this.y_tower_rend = (int)xy[1];
 
     }
 }

@@ -148,8 +148,10 @@ public class Keyboard extends InputAdapter{
         Main.width_block_zoom = (int) (Main.width_block_render * Main.Zoom);
         Main.height_block_zoom = (int) (Main.height_block_render * Main.Zoom);
         radius_air_max_zoom = radius_air_max*Main.Zoom;
-        Block.lighting_zoom = (float) (lighting*Main.Zoom);
+        Block.lighting_zoom = lighting*Main.Zoom;
         Block.lighting_zoom_2 = Block.lighting_zoom / 2;
+        RC.width_2_zoom = RC.width_2*Main.Zoom;
+        RC.height_2_zoom = RC.height_2*Main.Zoom;
         for(Building building : Main.BuildingList){
             building.width_render = (int)(building.width* Main.Zoom);
             building.height_render = (int)(building.height* Main.Zoom);
@@ -172,6 +174,7 @@ public class Keyboard extends InputAdapter{
         for(Particle particle : Main.BangList){
             particle.size_render = (int)(particle.size* Main.Zoom);
         }
+
         for(Bull bull : Main.BullList){
             bull.size_render = (int)(bull.size* Main.Zoom);
         }
@@ -184,6 +187,12 @@ public class Keyboard extends InputAdapter{
             tr.const_y_corpus = (int)(tr.corpus_height_2*Main.Zoom);
             tr.const_x_tower = (int)(tr.const_tower_x*Main.Zoom);
             tr.const_y_tower = (int)(tr.const_tower_y*Main.Zoom);
+            for (Transport tower : tr.tower_obj){
+                tower.width_tower_zoom = (int)(tower.width_tower *Main.Zoom);
+                tower.height_tower_zoom = (int)(tower.height_tower *Main.Zoom);
+                tower.const_x_tower = (int)(tower.const_tower_x*Main.Zoom);
+                tower.const_y_tower = (int)(tower.const_tower_y*Main.Zoom);
+            }
 
         }
         for(Transport tr : Main.EnemyList){
@@ -195,6 +204,13 @@ public class Keyboard extends InputAdapter{
             tr.const_y_corpus = (int)(tr.corpus_height_2*Main.Zoom);
             tr.const_x_tower = (int)(tr.const_tower_x*Main.Zoom);
             tr.const_y_tower = (int)(tr.const_tower_y*Main.Zoom);
+            for (Transport tower : tr.tower_obj){
+                tower.width_tower_zoom = (int)(tower.width_tower *Main.Zoom);
+                tower.height_tower_zoom = (int)(tower.height_tower *Main.Zoom);
+                tower.const_x_tower = (int)(tower.const_tower_x*Main.Zoom);
+                tower.const_y_tower = (int)(tower.const_tower_y*Main.Zoom);
+            }
+
         }
         for(Transport tr : Main.DebrisList){
             tr.corpus_width_zoom = (int)(tr.corpus_width*Main.Zoom);
@@ -225,6 +241,13 @@ public class Keyboard extends InputAdapter{
             tr.const_y_corpus = (int)(tr.corpus_height_2*Main.Zoom);
             tr.const_x_tower = (int)(tr.const_tower_x*Main.Zoom);
             tr.const_y_tower = (int)(tr.const_tower_y*Main.Zoom);
+            for (Transport tower : tr.tower_obj){
+                tower.width_tower_zoom = (int)(tower.width_tower *Main.Zoom);
+                tower.height_tower_zoom = (int)(tower.height_tower *Main.Zoom);
+                tower.const_x_tower = (int)(tower.const_tower_x*Main.Zoom);
+                tower.const_y_tower = (int)(tower.const_tower_y*Main.Zoom);
+            }
+
 
         }
         for(Transport tr : Main.EnemyList){
@@ -236,6 +259,13 @@ public class Keyboard extends InputAdapter{
             tr.const_y_corpus = (int)(tr.corpus_height_2*Main.Zoom);
             tr.const_x_tower = (int)(tr.const_tower_x*Main.Zoom);
             tr.const_y_tower = (int)(tr.const_tower_y*Main.Zoom);
+            for (Transport tower : tr.tower_obj){
+                tower.width_tower_zoom = (int)(tower.width_tower *Main.Zoom);
+                tower.height_tower_zoom = (int)(tower.height_tower *Main.Zoom);
+                tower.const_x_tower = (int)(tower.const_tower_x*Main.Zoom);
+                tower.const_y_tower = (int)(tower.const_tower_y*Main.Zoom);
+            }
+
         }
         for(Transport tr : Main.DebrisList){
             tr.corpus_width_zoom = (int)(tr.corpus_width*Main.Zoom);

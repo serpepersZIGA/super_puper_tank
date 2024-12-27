@@ -48,8 +48,7 @@ public class TowerMortarPlayer extends Transport {
         tower_player();
         fire_player_fragmentation_bull();
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
-
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
     public void tower_action_client(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
@@ -59,8 +58,7 @@ public class TowerMortarPlayer extends Transport {
         tower_xy_2();
         fire_player_fragmentation_bull();
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
-
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
     public void tower_action_client_1(int i,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
@@ -69,8 +67,7 @@ public class TowerMortarPlayer extends Transport {
         this.left_mouse = sost_fire_bot;
         super.tower_xy_2();
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
-    }
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);    }
     public void tower_action_client_2(int i,float x,float y,float rotation,boolean sost_fire_bot) {
 
         this.x = x;
@@ -81,7 +78,7 @@ public class TowerMortarPlayer extends Transport {
         super.tower_player_2();
         Main.PacketClient.rot_tower.add(this.rotation_tower);
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
 
 }

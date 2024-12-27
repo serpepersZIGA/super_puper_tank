@@ -69,9 +69,9 @@ public abstract class Bull implements Serializable {
         }
     }
     protected final void center_render(){
-        double[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]* Main.Zoom);
-        this.y_rend = (int)(xy[1]* Main.Zoom);
+        float[] xy = RC.render_objZoom(this.x,this.y);
+        this.x_rend = (int) xy[0];
+        this.y_rend = (int) xy[1];
     }
     protected final void spawn_acid(){
         if(1 == rand.rand(3)){

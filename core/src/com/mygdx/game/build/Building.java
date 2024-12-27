@@ -8,9 +8,6 @@ import com.mygdx.game.method.rand;
 import Content.Particle.FlameStatic;
 import com.mygdx.game.particle.Particle;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -59,7 +56,7 @@ public abstract class Building implements Serializable {
             for(int j = 0;j<density_light_y;j++){
                 y_light += distance_light;
                 xy_light.add(new int[]{x_light,y_light});
-                xy_light_render.add(Main.RC.render_obj(x_light,y_light));
+                xy_light_render.add(Main.RC.WindowSynchronization(x_light,y_light));
             }
         }
     }
@@ -68,15 +65,18 @@ public abstract class Building implements Serializable {
     }
     public void iteration_light_build(){
         for (int[] ints : xy_light) {
-            xy_light_render.add(Main.RC.render_obj(ints[0], ints[1]));
+            xy_light_render.add(Main.RC.WindowSynchronization(ints[0], ints[1]));
         }
     }
     public void update(){
     }
     public void center_render(){
-        int[]xy = Main.RC.render_obj(this.x,this.y);
-        this.x_rend = (int)(xy[0]*Main.Zoom);
-        this.y_rend = (int)(xy[1]*Main.Zoom);
+        int[]xy = Main.RC.render_objZoom(this.x,this.y);
+        this.x_rend = xy[0];
+        this.y_rend = xy[1];
+    }
+    public static int[] center_render(int x,int y){
+        return Main.RC.WindowSynchronization(x,y);
     }
 
 

@@ -49,7 +49,7 @@ public class TowerBullTankEnemy extends Transport {
         tower_ii_2();
         bot_bull_tank_fire(i,spisok.get(i).tower_obj, this.enemy_spisok);
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,7* Main.Zoom,10* Main.Zoom);
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
     public void tower_action_client(int i,float x,float y,float rotation,boolean sost,boolean sost_2) {
         this.x = x;
@@ -60,7 +60,7 @@ public class TowerBullTankEnemy extends Transport {
         tower_xy_2();
         tower_ii_2();
         center_render_tower();
-        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower *Main.Zoom,this.height_tower *Main.Zoom,this.rotation_tower,this.tower_img,x_tower* Main.Zoom,y_tower* Main.Zoom);
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
 
     }
 }

@@ -30,7 +30,6 @@ public class BigBuildingWood1 extends Building {
 
     }
     public void update(){
-        center_render();
-        RenderBuilding.render(this.x_rend,this.y_rend,this.width_render,this.height_render);
+        RenderBuilding.render(this.x,this.y,this.width_render,this.height_render);
     }
 }
