@@ -1073,13 +1073,13 @@ public abstract class Transport{
 
             if (z & obj_2.get(i).priority_paint == this.priority_paint) {
                 SoundPlay.sound(Main.ContentSound.get(0).hit,1-((float) sqrt(pow2(this.x_rend) + pow2((float)this.y_rend))/SoundConst));
-                metod_1(obj_2, i);
+                method_1(obj_2, i);
                 physic_collision(obj_2, i);
 
             }
         }
     }
-    protected void corpus_corpus_def_xy(ArrayList<Transport>obj_2, byte type){
+    protected void corpus_corpus_def_xy(ArrayList<Transport>obj_2){
         boolean z;
         for(int i = 0;i<obj_2.size();i++) {
             if (obj_2.get(i).x != this.x && obj_2.get(i).y != this.y) {
@@ -1088,10 +1088,9 @@ public abstract class Transport{
 
                 if (z && obj_2.get(i).priority_paint == this.priority_paint) {
                     SoundPlay.sound(Main.ContentSound.get(0).hit, 1f-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/SoundConst));
-                    if (type == 1) {
-                        metod_1(obj_2, i);
-                        physic_collision(obj_2, i);
-                    }
+                    method_1(obj_2, i);
+                    physic_collision(obj_2, i);
+
                 }
             }
         }
@@ -1333,13 +1332,13 @@ public abstract class Transport{
                         if (this.speed > 2 || this.speed < -2) {
                             SoundPlay.sound(Main.ContentSound.get(0).break_wooden, 1 - ((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend)) / SoundConst));
                         }
-                        metod_1(BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y);
+                        method_1(BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y);
                     }
                 }
             }
         }
     }
-    private void metod_1(ArrayList<Transport>tr_2, int i2){
+    private void method_1(ArrayList<Transport>tr_2, int i2){
         if(this.x<tr_2.get(i2).x) {
             this.x -= 2;
             tr_2.get(i2).x += 2;
@@ -1369,25 +1368,7 @@ public abstract class Transport{
             tr_2.get(i2).y -= 2;
         }
     }
-    private void metod_1(int[]z){
-        if(this.x<z[0]) {
-            this.x -= 2;
-            this.speed *= -0.8;
-            this.speed_inert *= -0.8;
-        }
-        else if(this.x>z[0]) {
-            this.x += 2;
-            this.speed *= -0.8;
-            this.speed_inert *= -0.8;
-        }
-        if(this.y<z[1]) {
-            this.y -= 2;
-        }
-        else if(this.y>z[1]) {
-            this.y += 2;
-        }
-    }
-    private void metod_1(int x,int y){
+    private void method_1(int x,int y){
         if(this.x<x) {
             this.x -= 2;
             this.speed *= -0.8;

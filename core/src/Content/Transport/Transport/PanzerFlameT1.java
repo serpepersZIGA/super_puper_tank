@@ -66,7 +66,7 @@ public class PanzerFlameT1 extends Transport {
         super.bot_flame_fire(i, spisok,enemy_spisok);
         super.tower_ii(i);
         super.build_corpus();
-        super.corpus_corpus_def_xy(this.spisok,(byte)1);
+        super.corpus_corpus_def_xy(this.spisok);
         super.tower_xy();
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);

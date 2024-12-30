@@ -27,7 +27,7 @@ public class PanzerT1 extends Transport {
         this.tower_y = 0;
         this.medic_help = 0;
         this.height = 1;
-        this.behavior = 3;//(byte)metod.rand.metod.rand(1,3);
+        this.behavior = 3;
         this.reload_max = 180;
         this.team = 2;
         this.t = 0;
@@ -49,8 +49,6 @@ public class PanzerT1 extends Transport {
         this.speed_tower = 1;this.speed_rotation = 1;
         this.sound_fire = Main.ContentSound.get(0).acid_attack;
         data();
-//        this.tower_obj.add(new tower_flame_enemy(18,55,52,-12,4,2,65,12,2, this.id_unit,
-//                (byte)1,(byte)2,Main.content_base.tower_player_auxiliart_1,this.spisok, Main.sa.get(0).flame_attack));
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
                 (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.spisok, Main.ContentSound.get(0).flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
@@ -67,21 +65,21 @@ public class PanzerT1 extends Transport {
         super.bot_bull_tank_fire(i, this.spisok, this.enemy_spisok);
         super.behavior_bot(this.enemy_spisok, i);
         super.build_corpus();
-        super.corpus_corpus_def_xy(this.spisok,(byte)1);
+        super.corpus_corpus_def_xy(this.spisok);
         super.tower_xy();
         center_render();
-        RenderMethod.transorm_img((int) (this.x_rend), (int)(this.y_rend),this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
+        RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_bot(i);
-        RenderMethod.transorm_img((int) (this.x_tower_rend), (int)(this.y_tower_rend),this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
         super.transport_delete_2(i,this.spisok);
     }
     public void all_action_client(int i) {
         super.tower_xy();
         center_render();
-        RenderMethod.transorm_img((int) (this.x_rend), (int)(this.y_rend),this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
+        RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_bot_client(i);
-        RenderMethod.transorm_img((int) (this.x_tower_rend), (int)(this.y_tower_rend),this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
     }
     public void update(){

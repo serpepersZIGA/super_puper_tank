@@ -79,10 +79,8 @@ public class PlayerCannonFlame extends Transport {
         super.fire_player_flame();
         super.build_corpus();
         super.corpus_corpus(this.enemy_spisok);
-        super.corpus_corpus_def_xy(this.spisok,(byte)1);
+        super.corpus_corpus_def_xy(this.spisok);
         super.tower_xy();
-
-        //corpus_bull(main.Main.bull_obj,this.team);
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_client();
