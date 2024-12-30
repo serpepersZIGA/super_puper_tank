@@ -1,6 +1,6 @@
 package com.mygdx.game.menu.button;
 
-import com.mygdx.game.Map.MapScan;
+import com.mygdx.game.MapFunction.MapScan;
 
 import static com.mygdx.game.main.Main.KeyboardObj;
 

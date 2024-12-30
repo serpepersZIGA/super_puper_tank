@@ -215,15 +215,14 @@ public class ClientMain extends Listener{
         PlayerList.get(i).x = PacketPlayer.get(i).x;
         PlayerList.get(i).y = PacketPlayer.get(i).y;
         PlayerList.get(i).rotation_corpus = PacketPlayer.get(i).rotation_corpus;
-        PlayerList.get(i).rotation_tower = PacketPlayer.get(i).rotation_tower;
         PlayerList.get(i).reload = PacketPlayer.get(i).reload;
         PlayerList.get(i).hp = PacketPlayer.get(i).hp;
         PlayerList.get(i).team = PacketPlayer.get(i).team;
         PlayerList.get(i).speed = PacketPlayer.get(i).speed;
         PlayerList.get(i).host = PacketPlayer.get(i).host;
         PlayerList.get(i).nConnect = PacketPlayer.get(i).IDClient;
-        //System.out.println(PacketPlayer.get(i).rotation_tower_2.size());
-        if(PacketPlayer.get(i).IDClient!=IDClient) {
+        if(PacketPlayer.get(i).IDClient!=IDClient || PacketPlayer.get(i).host) {
+            PlayerList.get(i).rotation_tower = PacketPlayer.get(i).rotation_tower;
             for (int i2 = 0; i2< PacketPlayer.get(i).rotation_tower_2.size(); i2++) {
                 PlayerList.get(i).tower_obj.get(i2).rotation_tower = PacketPlayer.get(i).rotation_tower_2.get(i2);
             }

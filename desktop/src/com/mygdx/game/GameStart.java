@@ -19,12 +19,9 @@ public class GameStart {
 		WindowSize("WindowSize/SizeWindow.txt");
 		config.setWindowedMode(WidthWindow,HeightWindow-80);
 		config.useVsync(true);
-
 //		config.title = "Title";
 //		config.useGL20 = true;
 //		config.height = 640;
-
-
 		config.setForegroundFPS(60);
 		config.setTitle("Game");
 		config.setWindowIcon("image/player/tower_player_1.png");

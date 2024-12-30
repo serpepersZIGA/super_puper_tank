@@ -194,11 +194,11 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         PacketPlayer.get(i).speed = PlayerList.get(i).speed;
         PacketPlayer.get(i).host = PlayerList.get(i).host;
         PacketPlayer.get(i).IDClient = PlayerList.get(i).nConnect;
-        if(PlayerList.get(i).host) {
-            for (int i2 = 0; i2< PlayerList.get(i).tower_obj.size(); i2++) {
-                PacketPlayer.get(i).rotation_tower_2.add(PlayerList.get(i).tower_obj.get(i2).rotation_tower);
-            }
+
+        for (int i2 = 0; i2< PlayerList.get(i).tower_obj.size(); i2++) {
+            PacketPlayer.get(i).rotation_tower_2.add(PlayerList.get(i).tower_obj.get(i2).rotation_tower);
         }
+
     }
     private void packet_enemy_server(){
         PacketEnemy.add(new TransportPacket());

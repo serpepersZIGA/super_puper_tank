@@ -12,11 +12,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Map.MapScan;
+import com.mygdx.game.MapFunction.MapScan;
 import com.mygdx.game.block.Block;
 import Content.Block.BlockMap;
 import Content.Block.Air;
-import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.build.*;
 import com.mygdx.game.bull.Bull;
 import Data.DataImage;
@@ -63,10 +62,8 @@ public class Main extends ApplicationAdapter {
 	public static int screenWidth;
 	public static int screenHeight;
 	public static double MouseXClient, MouseYClient;
-	private static int i;
 	public static float Zoom = 1,ZoomWindowX,ZoomWindowY;
 	public static ShapeRenderer Render;
-	public static UpdateRegister UpdateBlockReg;
 	public static AI Ai;
 	public static boolean EnumerationList;
 	public static ActionGame ActionGame;
@@ -95,7 +92,6 @@ public class Main extends ApplicationAdapter {
 	public static UpdateBuildingRegister BuildingRegister;
 	public static  ArrayList<Packet_client> Clients = new ArrayList<>();
 	private Viewport viewport;
-	private Camera camera;
 
 
 	public Main(int x,int y){
@@ -111,11 +107,7 @@ public class Main extends ApplicationAdapter {
 
 	public static void spawn_object(){
 		PlayerList.add(new PlayerCannonFlame(200,200, PlayerList,true));
-//		BuildingList.add(new BigBuildingWood1(500,600,0));
-//		BuildingList.add(new BigBuildingWood1(500,1200,0));
-//		BuildingList.add(new BigBuildingWood1(1200,1200,0));
-//		BuildingList.add(new BigBuildingWood1(1200,600,0));
-		MapScan.MapInput("maps/MapBase.mapt");
+		MapScan.MapInput("Map/maps/MapBase.mapt");
 		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		//EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
@@ -126,8 +118,8 @@ public class Main extends ApplicationAdapter {
 		BangList.add(new Bang(200,200,10));
 	}
 	public void field(int width_field,int height_field){
-		quantity_width = width_field/width_block;
-		quantity_height = height_field/height_block;
+		quantity_width = width_field;
+		quantity_height = height_field;
 		xy = new int[quantity_width][quantity_height];
 		width_block_2 = width_block/2;
 		height_block_2 = height_block/2;
@@ -137,7 +129,7 @@ public class Main extends ApplicationAdapter {
 		x_block = width_block_2;
 		y_block = 0;
 		for(int i = 0;i<quantity_height;i++){
-			BlockList2D.add(new ArrayList<Block>());
+			BlockList2D.add(new ArrayList<>());
 			y_block += height_block;
 			x_block = 0;
 
@@ -152,7 +144,7 @@ public class Main extends ApplicationAdapter {
 		quantity_height = (int)(screenHeight/height_block_air);
 		y_block = -height_block_air;
 		for(int i = 0; i<quantity_height+1;i++){
-			AirList.add(new ArrayList<Block>());
+			AirList.add(new ArrayList<>());
 			y_block += height_block_air;
 			x_block = -width_block_air;
 			for(int i2 = 0; i2<quantity_width+1;i2++){
@@ -176,8 +168,6 @@ public class Main extends ApplicationAdapter {
 		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
 		ContentSound.add(new DataSound());
-		//screenWidth =//Gdx.graphics.getWidth();
-		//screenHeight = Gdx.graphics.getHeight();
 		Render = new ShapeRenderer();
 		RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
@@ -188,7 +178,7 @@ public class Main extends ApplicationAdapter {
 		KeyboardObj = new Keyboard();
 		Keyboard.ZoomMaxMin();
 		Gdx.input.setInputProcessor(KeyboardObj);
-		field(10000, 10000);
+		field(256, 256);
 		spawn_object();
 		Option = new Option();
 		KeyboardObj.zoom_const();
@@ -206,7 +196,7 @@ public class Main extends ApplicationAdapter {
 		RC.const_xy_block();
 		xMaxAir = Main.AirList.get(0).size();
 		yMaxAir = Main.AirList.size();
-		camera = new OrthographicCamera();
+		Camera camera = new OrthographicCamera();
 
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
@@ -220,7 +210,7 @@ public class Main extends ApplicationAdapter {
 
 
 	public void resize(int width, int height) {
-		viewport.update((int) screenWidth, (int) screenHeight);
+		viewport.update(screenWidth,screenHeight);
 	}
 	public static BitmapFont TXTFont(int size,String fontPath){
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
@@ -258,7 +248,6 @@ public class Main extends ApplicationAdapter {
 		KeyboardObj = null;
 		RC= null;
 		Clients= null;
-
 		Batch.dispose();
 		Render.dispose();
 		font.dispose();
@@ -280,5 +269,4 @@ public class Main extends ApplicationAdapter {
 		}
 		super.dispose();
 	}
-
 }

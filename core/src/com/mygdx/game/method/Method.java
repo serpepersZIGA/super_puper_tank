@@ -56,24 +56,6 @@ public class Method {
         return tower(x, y, Keyboard.MouseX, Keyboard.MouseY, rotation_tower, speed_tower);
 
     }
-    public static double tower_player_client(float x, float y, float rotation_tower, float speed_tower) {
-        return tower(x, y, Main.MouseXClient, Main.MouseYClient, rotation_tower, speed_tower);
-
-    }
-    public static int detection_near_build_i(ArrayList<Transport> obj_bot, int i, ArrayList<Building> obj) {
-        int ind = 0;
-        int radius = NULL;
-        for (int i2 = 0; i2 < obj.size(); i2++) {
-            double g = sqrt(pow2.pow2(obj_bot.get(i).x - obj.get(i2).x) + pow2.pow2(obj_bot.get(i).y - obj.get(i2).y));
-            if (radius == NULL || radius > g) {
-                radius = (int)g;
-                ind = i2;
-
-            }
-        }
-
-        return ind;
-    }
     public static int detection_near_transport_i(ArrayList<Transport> obj_bot, int i, ArrayList<Transport> obj) {
         int ind = 0;
         int radius = 0;

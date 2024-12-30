@@ -15,11 +15,9 @@ import java.util.Objects;
 
 public class MapAllLoad{
     public static void MapCount(){
-        FileHandle[] files = Gdx.files.internal("maps").list();
-        System.out.println(Arrays.toString(files));
+        FileHandle[] files = Gdx.files.internal("Map/maps").list();
         int x = 1200;
         int y = 200;
-        System.out.println(files.length);
         for (FileHandle file: files) {
             System.out.println(file.path());
             Main.ButtonList.add(new MapLoad(x,y,260,140,file.path()));
