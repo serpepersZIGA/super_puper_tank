@@ -74,6 +74,7 @@ public class ClientMain extends Listener{
         Client.getKryo().register(SpawnPlayerCannonAcid.class);
         Client.getKryo().register(SpawnPlayerCannonMortar.class);
         Client.getKryo().register(SpawnPlayerCannonBull.class);
+        Client.getKryo().register(SpawnPlayerVoid.class);
         //Запускаем клиент
         Client.start();
         //Клиент начинает подключатся к серверу

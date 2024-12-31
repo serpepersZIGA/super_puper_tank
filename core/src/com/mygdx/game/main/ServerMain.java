@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
+import static com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData.PlayerSpawnCannonVoid;
 
 public class ServerMain extends Listener {
     static Server Server;
@@ -70,6 +71,7 @@ public class ServerMain extends Listener {
         Server.getKryo().register(SpawnPlayerCannonAcid.class);
         Server.getKryo().register(SpawnPlayerCannonMortar.class);
         Server.getKryo().register(SpawnPlayerCannonBull.class);
+        Server.getKryo().register(SpawnPlayerVoid.class);
 
         //Регистрируем порт
         try {
@@ -133,10 +135,12 @@ public class ServerMain extends Listener {
 //            }
         }
         else if(p instanceof PlayerSpawnData){
-            int i2 = Main.PlayerList.size();
-            nConnect+= 1;
-            ((PlayerSpawnData) p).SpawnPlayer(false);
-            PlayerList.get(i2).nConnect = nConnect;
+            nConnect += 1;
+            if(!p.equals(new SpawnPlayerVoid())) {
+                int i2 = Main.PlayerList.size();
+                ((PlayerSpawnData) p).SpawnPlayer(false);
+                PlayerList.get(i2).nConnect = nConnect;
+            }
         }
     }
 

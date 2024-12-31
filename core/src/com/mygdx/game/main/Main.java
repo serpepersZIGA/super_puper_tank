@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData.PlayerSpawnCannonVoid;
+
 
 public class Main extends ApplicationAdapter {
 	public static ArrayList<Transport> PlayerList = new ArrayList<>();
@@ -201,6 +203,7 @@ public class Main extends ApplicationAdapter {
 		xMaxAir = Main.AirList.get(0).size();
 		yMaxAir = Main.AirList.size();
 		Camera camera = new OrthographicCamera();
+		SpawnPlayer = PlayerSpawnCannonVoid;
 
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
