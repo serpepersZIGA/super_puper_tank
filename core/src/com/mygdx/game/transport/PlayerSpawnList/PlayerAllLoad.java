@@ -19,7 +19,7 @@ public class PlayerAllLoad {
         int y = 200;
         for (FileHandle file: files) {
             System.out.println(file.readString());
-            Main.ButtonList.add(new TankChoice(x,y,260,140,file.readString()));
+            Main.ButtonList.add(new TankChoice(x,y,260,140,file.name()));
             y+= 140;
         }
     }
