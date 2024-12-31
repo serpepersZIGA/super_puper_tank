@@ -139,16 +139,18 @@ public class ActionMenu extends ActionGame {
                     serverMain.create();
                     ActionGame = new ActionGameHost();
                     Block.passability_detected();
+                    Main.SpawnPlayer.SpawnPlayer(true);
 
 
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    //throw new RuntimeException(e);
                 }
             } else {
                 try {
                     Main_client = new ClientMain();
                     Main_client.create();
                     ActionGame = new ActionGameClient();
+                    Main.SpawnPlayer.SpawnPlayer(false);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

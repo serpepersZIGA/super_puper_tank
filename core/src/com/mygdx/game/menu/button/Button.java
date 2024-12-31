@@ -12,7 +12,7 @@ import static java.lang.StrictMath.*;
 public abstract class Button {
     public int x,y,width,height,radius,XTXT,YTXT;
     public static float[] RGBButton1,RGBButton2,RGBButton3,RGBTotal;
-    public String txt,path;
+    public String txt,path,TankName;
     public static int YList = 0;
     public byte TypeClick;
     public byte ConfigMenu = 0;

@@ -2,6 +2,8 @@ package com.mygdx.game.transport;
 
 import Content.Transport.Transport.*;
 import com.mygdx.game.main.Main;
+import com.mygdx.game.transport.SpawnPlayer.SpawnPlayerCannonFlame;
+import com.mygdx.game.transport.SpawnPlayer.SpawnPlayerCannonMortar;
 
 import java.util.ArrayList;
 

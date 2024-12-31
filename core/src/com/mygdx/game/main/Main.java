@@ -30,6 +30,9 @@ import com.mygdx.game.soldat.Soldat;
 import Content.Soldat.SoldatRegister;
 import Data.DataSound;
 import com.mygdx.game.transport.*;
+import com.mygdx.game.transport.PlayerSpawnList.PlayerAllLoad;
+import com.mygdx.game.transport.SpawnPlayer.PlayerSpawnData;
+import com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,6 +95,8 @@ public class Main extends ApplicationAdapter {
 	public static UpdateBuildingRegister BuildingRegister;
 	public static  ArrayList<Packet_client> Clients = new ArrayList<>();
 	private Viewport viewport;
+	public static PlayerSpawnData SpawnPlayer;
+
 
 
 	public Main(int x,int y){
@@ -106,7 +111,7 @@ public class Main extends ApplicationAdapter {
 
 
 	public static void spawn_object(){
-		PlayerList.add(new PlayerCannonFlame(200,200, PlayerList,true));
+		//PlayerList.add(new PlayerCannonFlame(200,200, PlayerList,true));
 		MapScan.MapInput("Map/maps/MapBase.mapt");
 		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
@@ -165,6 +170,7 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
+		new PlayerSpawnListData();
 		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
 		ContentSound.add(new DataSound());
@@ -192,6 +198,7 @@ public class Main extends ApplicationAdapter {
 		ButtonList.add(new Maps(100,400,400,120,"MAPS",(byte)0));
 		ButtonList.add(new Exit(100,200,400,120,"Exit",(byte)0));
 		ButtonList.add(new Cancel(100,400,400,120,"CANCEL",(byte)3));
+		PlayerAllLoad.PlayerCount();
 		ActionGame = new ActionMenu();
 		RC.const_xy_block();
 		xMaxAir = Main.AirList.get(0).size();

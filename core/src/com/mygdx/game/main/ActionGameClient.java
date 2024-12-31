@@ -10,6 +10,11 @@ import static com.mygdx.game.main.ClientMain.Client;
 
 
 public class ActionGameClient extends com.mygdx.game.main.ActionGame {
+    public ActionGameClient(){
+       PacketSpawnPlayer.PlayerSpawnPack = Main.SpawnPlayer;
+       Client.sendTCP(Main.SpawnPlayer);
+
+    }
 
     int i;
     private static int timer = 0;

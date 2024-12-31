@@ -21,6 +21,7 @@ import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
 import com.mygdx.game.transport.*;
+import com.mygdx.game.transport.SpawnPlayer.*;
 
 import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
@@ -68,6 +69,11 @@ public class ClientMain extends Listener{
         Client.getKryo().register(BullTank.class);
         Client.getKryo().register(BullMortar.class);
         Client.getKryo().register(PacketBuildingServer.class);
+        Client.getKryo().register(PlayerSpawnData.class);
+        Client.getKryo().register(SpawnPlayerCannonFlame.class);
+        Client.getKryo().register(SpawnPlayerCannonAcid.class);
+        Client.getKryo().register(SpawnPlayerCannonMortar.class);
+        Client.getKryo().register(SpawnPlayerCannonBull.class);
         //Запускаем клиент
         Client.start();
         //Клиент начинает подключатся к серверу

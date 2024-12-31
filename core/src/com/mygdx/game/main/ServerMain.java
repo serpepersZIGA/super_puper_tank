@@ -15,6 +15,7 @@ import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
 import com.mygdx.game.transport.DebrisPacket;
 import Content.Transport.Transport.DebrisTransport;
+import com.mygdx.game.transport.SpawnPlayer.*;
 import com.mygdx.game.transport.TransportPacket;
 import com.mygdx.game.transport.UnitType;
 
@@ -64,6 +65,11 @@ public class ServerMain extends Listener {
         Server.getKryo().register(BullTank.class);
         Server.getKryo().register(BullMortar.class);
         Server.getKryo().register(PacketBuildingServer.class);
+        Server.getKryo().register(PlayerSpawnData.class);
+        Server.getKryo().register(SpawnPlayerCannonFlame.class);
+        Server.getKryo().register(SpawnPlayerCannonAcid.class);
+        Server.getKryo().register(SpawnPlayerCannonMortar.class);
+        Server.getKryo().register(SpawnPlayerCannonBull.class);
 
         //Регистрируем порт
         try {
@@ -80,10 +86,6 @@ public class ServerMain extends Listener {
     }
     public void connected(Connection c){
         System.out.println("На сервер подключился "+c.getRemoteAddressTCP().getHostString());
-        int i2 = Main.PlayerList.size();
-        nConnect+= 1;
-        Main.PlayerList.add(new PlayerCannonFlame(200,200,Main.PlayerList,false));
-        PlayerList.get(i2).nConnect = nConnect;
 
         for (int i = 0;i<Main.BuildingList.size();i++){
             PacketBuildServer(i);
@@ -129,6 +131,12 @@ public class ServerMain extends Listener {
 //                    }
 //                }
 //            }
+        }
+        else if(p instanceof PlayerSpawnData){
+            int i2 = Main.PlayerList.size();
+            nConnect+= 1;
+            ((PlayerSpawnData) p).SpawnPlayer(false);
+            PlayerList.get(i2).nConnect = nConnect;
         }
     }
 
