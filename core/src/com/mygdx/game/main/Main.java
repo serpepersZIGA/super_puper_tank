@@ -64,7 +64,6 @@ public class Main extends ApplicationAdapter {
 	public static Keyboard KeyboardObj;
 	public static int screenWidth;
 	public static int screenHeight;
-	public static double MouseXClient, MouseYClient;
 	public static float Zoom = 1,ZoomWindowX,ZoomWindowY;
 	public static ShapeRenderer Render;
 	public static AI Ai;
@@ -75,7 +74,6 @@ public class Main extends ApplicationAdapter {
 	public static TransportRegister TransportRegister;
 	public static Content.Soldat.SoldatRegister SoldatRegister;
 	public static int width_block_2, height_block_2,x_block,y_block,width_block= 50,height_block =50,width_block_air= 15,height_block_air =15,quantity_width,quantity_height;
-	public int[][]xy;
 	public static int width_block_zoom= 50,height_block_zoom =50,width_block_render= 64,height_block_render =64;
 	public static float radius_air_max = 150,radius_air_max_zoom;
 	public static ServerMain serverMain;
@@ -125,7 +123,6 @@ public class Main extends ApplicationAdapter {
 	public void field(int width_field,int height_field){
 		quantity_width = width_field;
 		quantity_height = height_field;
-		xy = new int[quantity_width][quantity_height];
 		width_block_2 = width_block/2;
 		height_block_2 = height_block/2;
 		width_block*=1.24;

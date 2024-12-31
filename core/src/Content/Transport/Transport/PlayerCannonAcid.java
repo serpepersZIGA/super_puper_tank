@@ -64,15 +64,14 @@ public class PlayerCannonAcid extends Transport {
         Main.RC.x = this.tower_x;
         Main.RC.y = this.tower_y;
         center_render();
-        RenderMethod.transorm_img((int) (this.x_rend), (int)(this.y_rend),this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
+        RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration();
-        RenderMethod.transorm_img((int) (this.x_tower_rend), (int)(this.y_tower_rend),this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
+        RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
         super.transport_delete(i,this.spisok);
     }
     @Override
     public void all_action_client(int i) {
-        //super.all_action(i);
         super.client_control();
         super.motor_player();
         super.fire_player_acid();
@@ -80,8 +79,6 @@ public class PlayerCannonAcid extends Transport {
         super.corpus_corpus(this.enemy_spisok);
         super.corpus_corpus_def_xy(this.spisok);
         super.tower_xy();
-
-        //corpus_bull(main.Main.bull_obj,this.team);
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_client();
@@ -98,12 +95,10 @@ public class PlayerCannonAcid extends Transport {
         Main.RC.y = this.tower_y;
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
-        //tower_iteration_client_2();
         tower_iteration_client_2();
         RenderMethod.transorm_img(this.x_tower_rend, this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
         Main.PacketClient.rotation_tower_client = rotation_tower;
-
     }
     public void all_action_client_2(int i) {
         super.tower_xy();
@@ -113,7 +108,6 @@ public class PlayerCannonAcid extends Transport {
         tower_iteration_client_1();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-
     }
     public void update(){
         indicator_reload();
