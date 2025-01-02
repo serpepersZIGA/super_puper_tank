@@ -4,6 +4,8 @@ import com.mygdx.game.method.rand;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.particle.Particle;
 
+import static Data.DataColor.RGBFlame;
+
 public class FlameSpawn extends Particle {
     public FlameSpawn(float x, float y){
         this.x = x;
@@ -12,7 +14,7 @@ public class FlameSpawn extends Particle {
         this.time_delete = 400;
         this.time_spawn = time_spawn_max;
         grass_delete();
-        rgb = new float[]{(float) (100+rand.rand(100)) /255, (float) (100+rand.rand(100)) /255,100+ (float) (100+rand.rand(100)) /255};//RGBFlame;
+        rgb = RGBFlame;
 
 
     }
