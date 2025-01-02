@@ -25,7 +25,7 @@ public class GameStart {
 		config.setForegroundFPS(60);
 		config.setTitle("Game");
 		config.setWindowIcon("image/player/tower_player_1.png");
-		new Lwjgl3Application(new Main(WidthWindow,HeightWindow-80), config);
+		new Lwjgl3Application(new Main(WidthWindow,HeightWindow-80,60), config);
 
 	}
 	private static void WindowSize(String path){

@@ -16,6 +16,7 @@ import com.mygdx.game.block.Block;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
 import com.mygdx.game.build.PacketBuildingServer;
+import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
@@ -75,6 +76,7 @@ public class ClientMain extends Listener{
         Client.getKryo().register(SpawnPlayerCannonMortar.class);
         Client.getKryo().register(SpawnPlayerCannonBull.class);
         Client.getKryo().register(SpawnPlayerVoid.class);
+
         //Запускаем клиент
         Client.start();
         //Клиент начинает подключатся к серверу
@@ -95,6 +97,8 @@ public class ClientMain extends Listener{
         //c.sendUDP(packetMessage);
         Main.IDClient = c.getID();
         if(p instanceof PackerServer) {
+            CycleTimeDay.lightTotal = ((PackerServer) p).TotalLight;
+            System.out.println(CycleTimeDay.lightTotal);
             PacketPlayer = ((PackerServer) p).player;
             if (PacketPlayer.size() == PlayerList.size()) {
                 for (i = 0; i < PacketPlayer.size(); i++) {

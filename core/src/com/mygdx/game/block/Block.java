@@ -11,6 +11,7 @@ import java.util.*;
 
 import static com.mygdx.game.block.UpdateRegister.VoidUpdate;
 import static com.mygdx.game.main.Main.FlameSpawnList;
+import static com.mygdx.game.method.CycleTimeDay.*;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 import static java.sql.Types.NULL;
@@ -92,13 +93,13 @@ public abstract class Block {
                 b += rgbl.get(i)[2] * Main.radius_air_max_zoom / h.get(i);
             }
             rad = ((float) radius/lighting_zoom);
-            Main.Render.setColor(r/rad,g/rad,b/rad,0.5f);
+            Main.Render.setColor(r/rad,g/rad,b/rad,lightFlame);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
             rgbl.clear();
             h.clear();
             r = 0;g =0;b=0;
         } else{
-            Main.Render.setColor(0, 0, 0,0.8f);
+            Main.Render.setColor(0, 0, 0,lightTotal);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
         }
     }

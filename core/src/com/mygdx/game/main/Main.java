@@ -22,6 +22,7 @@ import Data.DataImage;
 import com.mygdx.game.menu.InputWindow;
 import com.mygdx.game.menu.MapAllLoad;
 import com.mygdx.game.menu.button.*;
+import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
 import com.mygdx.game.method.Option;
 import com.mygdx.game.method.RenderCenter;
@@ -72,6 +73,7 @@ public class Main extends ApplicationAdapter {
 	public static boolean EnumerationList;
 	public static ActionGame ActionGame;
 	public static boolean GameStart;
+	public static int FPS;
 	public static boolean GameHost;
 	public static TransportRegister TransportRegister;
 	public static Content.Soldat.SoldatRegister SoldatRegister;
@@ -96,12 +98,14 @@ public class Main extends ApplicationAdapter {
 	public static  ArrayList<Packet_client> Clients = new ArrayList<>();
 	private Viewport viewport;
 	public static PlayerSpawnData SpawnPlayer;
+	public static CycleTimeDay CycleDayNight;
 
 
 
-	public Main(int x,int y){
+	public Main(int x,int y,int FPS){
 		screenWidth = x;
 		screenHeight = y;
+		Main.FPS = FPS;
 		ZoomWindowX = (float) screenWidth /1920;
 		ZoomWindowY = (float) screenHeight /1000;
 
@@ -170,6 +174,7 @@ public class Main extends ApplicationAdapter {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
 		new PlayerSpawnListData();
+		CycleDayNight = new CycleTimeDay(10,10,5,5,0.5f,0.9f);
 		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
 		ContentSound.add(new DataSound());

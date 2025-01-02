@@ -9,6 +9,7 @@ import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
 import Content.Soldat.SoldatPacket;
 import com.mygdx.game.build.BuildPacket;
+import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
 import com.mygdx.game.transport.DebrisPacket;
 import com.mygdx.game.transport.Transport;
@@ -153,6 +154,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         Batch.end();
         server_packet();
         if(Transport.ai_sost == 0){Transport.ai_sost=400;}
+        CycleDayNight.WorkTime();
     }
     private void server_packet() {
         if(EnumerationList){
@@ -172,6 +174,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         PacketServer.enemy = PacketEnemy;
         PacketServer.bull = PacketBull;
         PacketServer.building = PacketBuilding;
+        PacketServer.TotalLight = CycleTimeDay.lightTotal;
 
         Server.sendToAllUDP(PacketServer);
         PacketPlayer.clear();

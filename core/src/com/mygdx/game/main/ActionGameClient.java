@@ -3,6 +3,7 @@ package com.mygdx.game.main;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
+import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
 
 import static com.mygdx.game.main.Main.*;
@@ -11,10 +12,9 @@ import static com.mygdx.game.main.ClientMain.Client;
 
 public class ActionGameClient extends com.mygdx.game.main.ActionGame {
     public ActionGameClient(){
-       Client.sendTCP(Main.SpawnPlayer);
+        Client.sendTCP(Main.SpawnPlayer);
 
     }
-
     int i;
     private static int timer = 0;
     public void action() {

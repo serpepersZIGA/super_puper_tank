@@ -156,6 +156,7 @@ public class ActionMenu extends ActionGame {
             }
         }
         Keyboard.LeftMouseClick = false;
+        CycleDayNight.WorkTime();
     }
 
 

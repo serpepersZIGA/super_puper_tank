@@ -9,6 +9,7 @@ import com.esotericsoftware.kryonet.Server;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
 import com.mygdx.game.build.PacketBuildingServer;
+import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
@@ -92,6 +93,7 @@ public class ServerMain extends Listener {
         for (int i = 0;i<Main.BuildingList.size();i++){
             PacketBuildServer(i);
         }
+        PacketBuildingServer.FlameLight = CycleTimeDay.lightFlame;
         Server.sendToAllTCP(PacketBuildingServer);
         ZoomConstTransport();
         KeyboardObj.zoom_const();
