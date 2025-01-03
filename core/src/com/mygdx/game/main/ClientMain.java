@@ -123,7 +123,7 @@ public class ClientMain extends Listener{
                     }
                     player_data(i);
                 }
-                ZoomConstTransport();
+                KeyboardObj.zoom_const();
             }
             PacketEnemy = ((PackerServer) p).enemy;
             if (PacketEnemy.size() == EnemyList.size()) {
@@ -137,7 +137,7 @@ public class ClientMain extends Listener{
                     enemy_create(i);
                     enemy_data(i);
                 }
-                ZoomConstTransport();
+                KeyboardObj.zoom_const();
             }
             PacketDebris = ((PackerServer) p).debris;
             if (PacketDebris.size() == DebrisList.size()) {
@@ -149,7 +149,7 @@ public class ClientMain extends Listener{
                 for (int i = 0; i < PacketDebris.size(); i++) {
                     debris_create(i, PacketDebris.get(i).x, PacketDebris.get(i).y, PacketDebris.get(i).rotation);
                 }
-                ZoomConstTransport();
+                KeyboardObj.zoom_const();
             }
 
             PacketSoldat = ((PackerServer) p).soldat;
@@ -166,7 +166,7 @@ public class ClientMain extends Listener{
                         SoldatList.add(new SoldatBull(0, 0));
                     }
                 }
-                ZoomConstTransport();
+                KeyboardObj.zoom_const();
             }
             PacketBull = ((PackerServer) p).bull;
             i = BullList.size();

@@ -140,6 +140,7 @@ public class ActionMenu extends ActionGame {
                     ActionGame = new ActionGameHost();
                     Block.passability_detected();
                     Main.SpawnPlayer.SpawnPlayer(true);
+                    KeyboardObj.zoom_const();
 
 
                 } catch (Exception e) {
@@ -150,6 +151,7 @@ public class ActionMenu extends ActionGame {
                     Main_client = new ClientMain();
                     Main_client.create();
                     ActionGame = new ActionGameClient();
+                    KeyboardObj.zoom_const();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
