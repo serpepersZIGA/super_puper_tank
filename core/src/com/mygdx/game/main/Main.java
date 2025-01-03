@@ -133,20 +133,38 @@ public class Main extends ApplicationAdapter {
 		height_block_2 = height_block/2;
 		width_block*=1.24;
 		height_block*=1.24;
-
+		boolean confWallY = false;
+		boolean confWallX;
 		x_block = width_block_2;
 		y_block = 0;
 		for(int i = 0;i<quantity_height;i++){
 			BlockList2D.add(new ArrayList<>());
+			if(y_block == 0){
+				confWallY = true;
+			}
+			else if(i == quantity_height-3){
+				confWallY = true;
+			}
 			y_block += height_block;
 			x_block = 0;
+			confWallX = true;
+
 
 			for(int i2 = 0;i2<quantity_width;i2++){
 				x_block += width_block;
 				BlockList2D.get(i).add(new BlockMap(x_block,y_block));
+				if(quantity_width-3 == i2){
+					confWallX = true;
+				}
+				if(confWallX || confWallY){
+					BlockList2D.get(i).get(i2).passability= true;
+					confWallX = false;
+
+				}
 
 
 			}
+			confWallY = false;
 		}
 		quantity_width = (int)(screenWidth/width_block_air);
 		quantity_height = (int)(screenHeight/height_block_air);
@@ -188,7 +206,7 @@ public class Main extends ApplicationAdapter {
 		KeyboardObj = new Keyboard();
 		Keyboard.ZoomMaxMin();
 		Gdx.input.setInputProcessor(KeyboardObj);
-		field(256, 256);
+		field(120, 120);
 		spawn_object();
 		Option = new Option();
 		KeyboardObj.zoom_const();

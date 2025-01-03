@@ -58,10 +58,12 @@ public abstract class Particle {
     protected final void grass_delete(){
         int ix = (int) (x/Main.width_block)-1;
         int iy = (int) (y/Main.height_block)-1;
-        if(ix >0 & iy >0){
+        try {
             if(Main.BlockList2D.get(iy).get(ix).render_block == UpdateRegister.GrassUpdate) {
                 Main.BlockList2D.get(iy).get(ix).render_block = UpdateRegister.DirtUpdate;
             }
+        }
+        catch (IndexOutOfBoundsException ignored){
         }
     }
     protected void size_update(){
