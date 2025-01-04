@@ -23,8 +23,9 @@ public abstract class Building implements Serializable {
     public ArrayList<int[]>xy_light_render = new ArrayList<>();
     public BuildType name;
     public boolean[][]ConstructBuilding;
-    public int ConstructX,ConstructY,xMatrix,yMatrix;
+    public int xMatrix,yMatrix;
     public UpdateBuilding RenderBuilding;
+    public int RightTopPointX,RightTopPointY;
 
 
 
@@ -36,14 +37,16 @@ public abstract class Building implements Serializable {
         size_light();
     }
     private void DataCollision(){
-        ConstructX = ConstructBuilding[0].length;
-        ConstructY =ConstructBuilding.length;
+        int ConstructX = ConstructBuilding[0].length;
+        int ConstructY =ConstructBuilding.length;
         this.width = Main.width_block*ConstructX;
         this.height = Main.height_block*ConstructY;
         xMatrix = this.x/Main.width_block;
         yMatrix = this.y/Main.height_block;
         this.x = Main.BlockList2D.get(yMatrix).get(xMatrix).x;
         this.y = Main.BlockList2D.get(yMatrix).get(xMatrix).y;
+        RightTopPointX = xMatrix +ConstructX;
+        RightTopPointY = yMatrix +ConstructY;
         this.width_2 = this.width/2;
         this.height_2 = this.height/2;
     }

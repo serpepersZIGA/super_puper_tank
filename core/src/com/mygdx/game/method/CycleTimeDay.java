@@ -62,7 +62,5 @@ public class CycleTimeDay {
         else if(ConfigTime == 3){
             lightTotal += lightVariabilityDayNight;
         }
-
-
     }
 }

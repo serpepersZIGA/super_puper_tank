@@ -18,7 +18,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import static com.mygdx.game.main.Main.*;
-import static com.mygdx.game.main.Main.BlockList2D;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 
@@ -112,27 +111,33 @@ public abstract class Bull implements Serializable {
     protected void BullBuild(){
         int yM = (int) (y/height_block)-1;
         int xM = (int) (x/width_block)-1;
-        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+        if(xM>-1&yM>-1&xM< xMap&yM<yMap) {
             if (BlockList2D.get(yM).get(xM).passability & height == 1) {
                 this.clear_sost = 1;
             }
+        }
+        else{
+            this.clear_sost = 1;
         }
     }
     protected void BullBuildFlame(){
         int yM = (int) (y/height_block)-1;
         int xM = (int) (x/width_block)-1;
-        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+        if(xM>0&yM>0&xM< xMap&yM<yMap) {
             if (BlockList2D.get(yM).get(xM).passability & height == 1) {
                 this.clear_sost = 1;
                 BuildingList.get(BlockList2D.get(yM).get(xM).iBuilding).time_flame += 10;
 
             }
         }
+        else{
+            this.clear_sost = 1;
+        }
     }
     protected void BullBuildMortar(){
         int yM = (int) (y/height_block)-1;
         int xM = (int) (x/width_block)-1;
-        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+        if(xM>0&yM>0&xM< xMap&yM<yMap) {
             if (BlockList2D.get(yM).get(xM).passability & height == 1) {
                 this.clear_sost = 1;
                 Main.BangList.add(new Bang(this.x, this.y, 4));
@@ -141,16 +146,27 @@ public abstract class Bull implements Serializable {
                 }
             }
         }
+        else{
+            this.clear_sost = 1;
+            Main.BangList.add(new Bang(this.x, this.y, 4));
+            for (int l = 0; l < 20; l++) {
+                Main.BullList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
+            }
+        }
     }
     protected void BullBuildAcid(){
         int yM = (int) (y/height_block)-1;
         int xM = (int) (x/width_block)-1;
-        if(xM>0&yM>0&xM< xMaxAir&yM<yMaxAir) {
+        if(xM>0&yM>0&xM< xMap&yM<yMap) {
             if (BlockList2D.get(yM).get(xM).passability & height == 1) {
                 this.clear_sost = 1;
                 spawn_acid();
 
             }
+        }
+        else{
+            this.clear_sost = 1;
+            spawn_acid();
         }
     }
     protected final boolean rect_bull(Area area,int x,int y,int size){

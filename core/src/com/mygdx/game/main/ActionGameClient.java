@@ -100,8 +100,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         for (i = 0; i < Main.EnemyList.size(); i++) {
             Main.EnemyList.get(i).all_action_client(i);
         }
-        for (i = 0; i< Main.BuildingList.size(); i++){
-            Main.BuildingList.get(i).all_action(i);}
+        RC.BuildingIteration();
         Batch.draw(textureBuffer,-20,1,1,1);
         Render.end();
 
@@ -125,9 +124,6 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         }
         for (i= 0; i< Main.BangList.size(); i++){
             Main.BangList.get(i).all_action(i);}
-        for (i = 0; i< Main.BuildingList.size(); i++){
-            Main.BuildingList.get(i).xy_light_render.clear();
-        }
         Render.end();
         Batch.end();
         client_packet();

@@ -76,5 +76,18 @@ public class RenderCenter {
         }
 
     }
+    public void BuildingIteration(){
+        for (int i = 0; i< Main.BuildingList.size(); i++){
+            if((render_x_max>Main.BuildingList.get(i).RightTopPointX &render_x_min<Main.BuildingList.get(i).RightTopPointX &
+            render_y_max>Main.BuildingList.get(i).RightTopPointY &render_y_min<Main.BuildingList.get(i).RightTopPointY)||
+            (render_x_max>Main.BuildingList.get(i).xMatrix &render_x_min<Main.BuildingList.get(i).xMatrix &
+            render_y_max>Main.BuildingList.get(i).yMatrix &render_y_min<Main.BuildingList.get(i).yMatrix)
+            ) {
+                Main.BuildingList.get(i).all_action(i);
+                Main.BuildingList.get(i).xy_light_render.clear();
+            }
+
+        }
+    }
 
 }

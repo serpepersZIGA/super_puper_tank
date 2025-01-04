@@ -92,6 +92,8 @@ public class Main extends ApplicationAdapter {
 	public static InputWindow InputWindow;
 	public static int xMaxAir ;
 	public static int yMaxAir ;
+	public static int xMap ;
+	public static int yMap ;
 	public static Texture textureBuffer;
 	public static int IDClient;
 	public static UpdateBuildingRegister BuildingRegister;
@@ -223,6 +225,8 @@ public class Main extends ApplicationAdapter {
 		PlayerAllLoad.PlayerCount();
 		ActionGame = new ActionMenu();
 		RC.const_xy_block();
+		xMap = Main.BlockList2D.get(0).size();
+		yMap = Main.BlockList2D.size();
 		xMaxAir = Main.AirList.get(0).size();
 		yMaxAir = Main.AirList.size();
 		Camera camera = new OrthographicCamera();

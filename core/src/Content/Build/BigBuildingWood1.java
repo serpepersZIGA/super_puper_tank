@@ -20,6 +20,7 @@ public class BigBuildingWood1 extends Building {
                 {true,true,true,true,false,false,true,true,true,true},
                 {true,true,true,true,false,false,true,true,true,true}
         };
+
         super.Data();
 
 
