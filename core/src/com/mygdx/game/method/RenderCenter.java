@@ -52,7 +52,6 @@ public class RenderCenter {
             ixCam = ixCamBuff+1;
             iyCam = iyCamBuff+1;
         }
-
         if (Main.TickBlock < Main.TickBlockMax) {
             for (int iy = render_y_min; iy < render_y_max; iy++) {
                 for (int ix = render_x_min; ix < render_x_max; ix++) {

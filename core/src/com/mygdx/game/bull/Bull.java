@@ -169,12 +169,6 @@ public abstract class Bull implements Serializable {
             spawn_acid();
         }
     }
-    protected final boolean rect_bull(Area area,int x,int y,int size){
-
-        Ellipse2D circle = new Ellipse2D.Double(x,y,size,size);
-        return area.intersects(circle.getBounds2D());
-    }
-
     protected final void corpus_bull_mortar(ArrayList<Transport> obj_2){
         for(i = 0;i<obj_2.size();i++) {
 
@@ -184,6 +178,7 @@ public abstract class Bull implements Serializable {
                 obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
                 armor_damage(obj_2,i);
                 metod_mortar();
+                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
                 return;
             }
         }
@@ -196,6 +191,7 @@ public abstract class Bull implements Serializable {
                 obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
                 armor_damage(obj_2,i);
                 this.clear_sost = 1;
+                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
                 return;
             }
         }
@@ -208,6 +204,7 @@ public abstract class Bull implements Serializable {
                 obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
                 armor_damage(obj_2,i);
                 metod_temperature(obj_2,i);
+                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
                 return;
             }
         }

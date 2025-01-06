@@ -53,7 +53,7 @@ public abstract class Transport{
     private int i;
     protected int distance_target = 200;
     protected int distance_target_2 = 230;
-    public float difference_x,difference_y,green_len;
+    public float difference_x,difference_y,green_len,green_len_reload;
     public float rotation_fire;
     public int corpus_width_zoom, corpus_height_zoom,width_tower_zoom,height_tower_zoom;
     public static int ai_sost;
@@ -97,13 +97,13 @@ public abstract class Transport{
             this.tower_height_2 = this.height_tower/2;
             this.const_x_tower = (int)(const_tower_x*Main.Zoom);
             this.const_y_tower = (int)(const_tower_y*Main.Zoom);}
-
         this.corpus_width_zoom = (int)(corpus_width*Main.Zoom);
         this.corpus_height_zoom = (int)(corpus_height*Main.Zoom);
         this.width_tower_zoom = (int)(width_tower *Main.Zoom);
         this.height_tower_zoom = (int)(height_tower *Main.Zoom);
         this.const_x_corpus = (int)(corpus_width_2*Main.Zoom);
         this.const_y_corpus = (int)(corpus_height_2*Main.Zoom);
+        green_len = ((float)this.hp/this.max_hp)* Option.size_x_indicator;
     }
     protected final void data_tower(){
         this.teg_unit = "tower";
@@ -356,15 +356,15 @@ public abstract class Transport{
 
     private void bot_fire(int i, ArrayList<Transport>obj_1, ArrayList<Transport>obj_2){
         guidance = reload_bot();
-        if(obj_2.size() != 0) {
-            try {
-                int i2 = Method.detection_near_transport_i(obj_1, i,obj_2);
-                this.sost_fire_bot = fire_bot(obj_2.get(i2).tower_x, obj_2.get(i2).tower_y);
-            }
-            catch (Exception ignored){
 
+            if (obj_2.size() != 0) {
+                try {
+                    int i2 = Method.detection_near_transport_i(obj_1, i, obj_2);
+                    this.sost_fire_bot = fire_bot(obj_2.get(i2).tower_x, obj_2.get(i2).tower_y);
+                } catch (Exception ignored) {
+
+                }
             }
-        }
     }
     private void enemy_fire_not_tower(ArrayList<Transport>tr, int i){
         if(this.enemyList.size() != 0) {
@@ -376,7 +376,7 @@ public abstract class Transport{
         enemy_fire_not_tower(tr,i);
         if(this.sost_fire_bot && this.trigger_attack){
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
-            Main.BullList.add(new BullTank((float)this.tower_x,(float)this.tower_y,(float)this.rotation_corpus,(float)this.damage,(float)this.penetration,this.team,this.height));
+            Main.BullList.add(new BullTank(this.tower_x,this.tower_y,this.rotation_corpus,this.damage,this.penetration,this.team,this.height));
 
         }
     }
@@ -477,21 +477,20 @@ public abstract class Transport{
         //System.out.println(xy[0]+"ss"+xy[1]);
     }
     protected boolean reload_bot(){
-        if(this.reload <= 0){
-            return true;
+        if(this.reload > 0){
+            this.reload -= 1;
+            return false;
         }
-        this.reload-=1;
-        return false;
+        return true;
+
     }
     protected void indicator_hp(){
-        green_len = ((float) this.hp /this.max_hp)* Option.size_x_indicator;
         Render.setColor(Option.hp_2_r_indicator, Option.hp_2_g_indicator, Option.hp_2_b_indicator,1);
         Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
         Render.setColor(Option.hp_r_indicator, Option.hp_g_indicator, Option.hp_b_indicator,1);
         Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
     }
     protected void indicator_hp_2(){
-        green_len = ((float)this.hp/this.max_hp)* Option.size_x_indicator;
         Render.setColor(Option.hp_2_r_indicator, Option.hp_2_g_indicator, Option.hp_2_b_indicator,1);
         Render.rect(((this.x_rend- Option.const_hp_x_zoom)),((this.y_rend- Option.const_hp_y_zoom)), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
         if(this.crite_life == 0){
@@ -504,11 +503,11 @@ public abstract class Transport{
         }
     }
     protected void indicator_reload(){
-        green_len = (this.reload/this.reload_max)* Option.size_x_indicator;
+        green_len_reload = (this.reload/this.reload_max)* Option.size_x_indicator;
         Render.setColor(Option.reload_r_indicator, Option.reload_g_indicator, Option.reload_b_indicator,1);
         Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom), Option.size_x_indicator_zoom, Option.size_y_indicator_zoom);
         Render.setColor(Option.reload_2_r_indicator, Option.reload_2_g_indicator, Option.reload_2_b_indicator,1);
-        Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom),(int)(green_len* Main.Zoom), Option.size_y_indicator_zoom);
+        Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom),(int)(green_len_reload* Main.Zoom), Option.size_y_indicator_zoom);
     }
     protected void fire_player_bull_tank(){
         reload_bot();
@@ -523,7 +522,7 @@ public abstract class Transport{
             this.fire_y = (float) (this.tower_y+this.tower_height_2+((this.tower_height_2+this.y_tower) *cos(-this.rotation_tower*3.1415926535/180)));
             this.reload = this.reload_max;
             Main.BullList.add(new BullTank(this.fire_x,this.fire_y,
-                    (float) -this.rotation_tower,this.damage,this.penetration,this.team,(byte)1));
+                    -this.rotation_tower,this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
             int i2 = BullList.size()-1;
@@ -615,7 +614,7 @@ public abstract class Transport{
         this.tower_x = xy[0];this.tower_y = xy[1];}
     protected boolean fire_bot(double obj_x,double obj_y){
         g = (float) (atan2(this.tower_y - obj_y,this.tower_x-obj_x ) / 3.1415926535f * 180f);
-        g +=90;
+        g -=90;
         if (abs(g-rotation_corpus)<20 && guidance && trigger_fire) {
             this.reload = this.reload_max;
             return true;

@@ -211,8 +211,8 @@ public class Main extends ApplicationAdapter {
 		Keyboard.ZoomMaxMin();
 		Gdx.input.setInputProcessor(KeyboardObj);
 		field(120, 120);
-		spawn_object();
 		Option = new Option();
+		spawn_object();
 		KeyboardObj.zoom_const();
 		Ai = new AI();
 		TransportRegister = new TransportRegister();
