@@ -143,12 +143,10 @@ public abstract class Soldat implements Serializable {
                 path.clear();
             }
         }
-        //System.out.println(path.size());
         if(path.size() > 0) {
             float radius = (float) sqrt(pow2((x - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)) + pow2(y - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center));
             float gr = (float) ((atan2(y - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center,x - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)/3.1415926535*180)-90);
             SoldatRotatePath(gr);
-           //System.out.println(this.g);
             if(radius< 70){
                 path.remove(0);
             }
@@ -163,7 +161,6 @@ public abstract class Soldat implements Serializable {
     public void SoldatRotatePath(float TargetRotate){
         if (abs(TargetRotate-rotation)<5){
             move_invert();
-            //move_soldatPath(TargetRotate,g_left,g_right);
         }
         else if (TargetRotate > this.rotation) {
             this.rotation += this.speed_rotation;

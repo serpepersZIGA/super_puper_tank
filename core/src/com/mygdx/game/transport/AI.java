@@ -416,9 +416,7 @@ public class AI {
     public int[] block_detected_2Soldat(Transport tr){
         int i = (int)(tr.tower_y/Main.height_block)-1;
         int i2 = (int)(tr.tower_x/Main.width_block)-1;
-        System.out.println(i+"  "+i2);
         try {
-            //Main.BlockList2D.get(i).get(i2).render_block = UpdateRegister.Update3;
             if (!Main.BlockList2D.get(i).get(i2).passability) {
                 return new int[]{i2, i};
             } else {
