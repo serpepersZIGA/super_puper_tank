@@ -145,13 +145,17 @@ public class Keyboard extends InputAdapter{
         for(Particle particle : Main.FlameParticleList){
             particle.size_render = (int)(particle.size* Main.Zoom);
         }
+
+        RC.WidthRenderZoom = RC.WidthRender /Main.Zoom;
+        RC.HeightRenderZoom = RC.HeightRender /Main.Zoom;
+        RC.width_2_zoom = RC.width_2/Main.Zoom;
+        RC.height_2_zoom = RC.height_2/Main.Zoom;
+
         Main.width_block_zoom = (int) (Main.width_block_render * Main.Zoom);
         Main.height_block_zoom = (int) (Main.height_block_render * Main.Zoom);
         radius_air_max_zoom = radius_air_max*Main.Zoom;
         Block.lighting_zoom = lighting*Main.Zoom;
         Block.lighting_zoom_2 = Block.lighting_zoom / 2;
-        RC.width_2_zoom = RC.width_2*Main.Zoom;
-        RC.height_2_zoom = RC.height_2*Main.Zoom;
         for(Building building : Main.BuildingList){
             building.width_render = (int)(building.width* Main.Zoom);
             building.height_render = (int)(building.height* Main.Zoom);
