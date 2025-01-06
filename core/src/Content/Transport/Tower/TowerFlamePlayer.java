@@ -6,7 +6,6 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 import com.mygdx.game.transport.Transport;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class TowerFlamePlayer extends Transport {
@@ -14,7 +13,7 @@ public class TowerFlamePlayer extends Transport {
                             float t_damage, int ind_unit, byte height, byte team, Sprite str, ArrayList<Transport> spisok, Sound sound){
         this.tower_x_const = x_const;
         this.tower_y_const = y_const;
-        this.spisok = spisok;
+        this.allyList = spisok;
         this.sound_fire = sound;
         this.speed_tower = speed_rotation;
         this.t_damage = t_damage;

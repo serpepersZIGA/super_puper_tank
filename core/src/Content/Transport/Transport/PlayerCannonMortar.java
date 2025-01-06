@@ -16,7 +16,7 @@ public class PlayerCannonMortar extends Transport {
         this.speed_inert = 0;this.speed = 0;
         this.max_speed = 4;this.min_speed = -4;
         this.max_hp = 1200;
-        this.spisok = tr;
+        this.allyList = tr;
         this.damage = 250;
         this.armor = 50;
         this.penetration = 7;
@@ -49,9 +49,9 @@ public class PlayerCannonMortar extends Transport {
         this.speed_tower = 1;this.speed_rotation = 0.5f;
         data();
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,-12,5,2,20,12, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).machinegun));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.get(0).machinegun));
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,12,5,2,20,12, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok,Main.ContentSound.get(0).machinegun));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.get(0).machinegun));
         const_tower_x = 17;
         const_tower_y = 20;
 
@@ -63,7 +63,7 @@ public class PlayerCannonMortar extends Transport {
         super.motor_player();
         super.fire_player_fragmentation_bull();
         super.build_corpus();
-        super.corpus_corpus(this.enemy_spisok);
+        super.corpus_corpus(this.enemyList);
         super.tower_xy();
         super.tower_player();
         Main.RC.x = this.tower_x;
@@ -73,7 +73,7 @@ public class PlayerCannonMortar extends Transport {
         tower_iteration();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete(i,this.spisok);
+        super.transport_delete(i,this.allyList);
     }
     @Override
     public void all_action_client(int i) {
@@ -82,15 +82,15 @@ public class PlayerCannonMortar extends Transport {
         super.motor_player();
         super.fire_player_fragmentation_bull();
         super.build_corpus();
-        super.corpus_corpus(this.enemy_spisok);
-        super.corpus_corpus_def_xy(this.spisok);
+        super.corpus_corpus(this.enemyList);
+        super.corpus_corpus_def_xy(this.allyList);
         super.tower_xy();
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_client();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete(i,this.spisok);
+        super.transport_delete(i,this.allyList);
     }
     @Override
     public void all_action_client_1(int i) {

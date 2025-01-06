@@ -161,9 +161,9 @@ public class ClientMain extends Listener{
                 SoldatList.clear();
                 for (SoldatPacket soldatPacket : PacketSoldat) {
                     if (soldatPacket.name.equals("flame")) {
-                        SoldatList.add(new SoldatFlame(0, 0));
+                        SoldatList.add(new SoldatFlame(0, 0,EnemyList));
                     } else if (soldatPacket.name.equals("bull")) {
-                        SoldatList.add(new SoldatBull(0, 0));
+                        SoldatList.add(new SoldatBull(0, 0,EnemyList));
                     }
                 }
                 KeyboardObj.zoom_const();

@@ -1,13 +1,17 @@
 package Content.Soldat;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.soldat.Soldat;
+import com.mygdx.game.transport.Transport;
+
+import java.util.ArrayList;
 
 public class SoldatBull extends Soldat {
-    public SoldatBull(float x, float y){
+    public SoldatBull(float x, float y, ArrayList<Transport> List){
         this.name = "bull";
         this.x = x;
         this.y = y;
         this.speed = 3;
+        this.allyList = List;
         this.speed_rotation = 5;
         this.width = 22;
         this.height = 22;
@@ -25,7 +29,7 @@ public class SoldatBull extends Soldat {
         super.all_action(i);
         super.move_soldat_ii_bull(i);
         super.collision_soldat(Main.SoldatList,i);
-        super.collision_build(Main.BuildingList);
+        super.collision_build();
         super.collision_transport(Main.EnemyList);
         super.hustle(Main.PlayerList);
         super.clear(Main.SoldatList,i);

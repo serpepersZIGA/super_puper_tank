@@ -6,7 +6,6 @@ import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 import com.mygdx.game.transport.Transport;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class TowerMortarPlayer extends Transport {
@@ -15,7 +14,7 @@ public class TowerMortarPlayer extends Transport {
                              Sound sound){
         this.tower_x_const = x_const;
         this.tower_y_const = y_const;
-        this.spisok = spisok;
+        this.allyList = spisok;
         this.sound_fire = sound;
         this.speed_tower = speed_rotation;
         this.damage_fragment = damage_fragment;

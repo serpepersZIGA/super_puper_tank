@@ -18,7 +18,7 @@ public class PanzerFlameT1 extends Transport {
         this.max_speed = 4;this.min_speed = -4;
         this.max_hp = 1200;
         this.damage = 10;
-        this.spisok = tr;
+        this.allyList = tr;
         this.armor = 50;
         this.penetration = 2;
         this.acceleration = 0.2f;
@@ -49,9 +49,9 @@ public class PanzerFlameT1 extends Transport {
 //        this.tower_obj.add(new tower_flame_enemy(18,55,52,-12,4,2,65,12,2, this.id_unit,
 //                (byte)1,(byte)2,Main.content_base.tower_player_auxiliart_1,this.spisok, Main.sa.get(0).flame_attack));
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.spisok, Main.ContentSound.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.get(0).flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.spisok, Main.ContentSound.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.get(0).flame_attack));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();
@@ -62,11 +62,11 @@ public class PanzerFlameT1 extends Transport {
         super.all_action(i);
         //super.motor_player();
         //super.motor_bot_bypass(i,Main.enemy_obj,Main.player_obj);
-        super.behavior_bot(this.enemy_spisok, i);
-        super.bot_flame_fire(i, spisok,enemy_spisok);
+        super.behavior_bot(this.enemyList, i);
+        super.bot_flame_fire(i, allyList, enemyList);
         super.tower_ii(i);
         super.build_corpus();
-        super.corpus_corpus_def_xy(this.spisok);
+        super.corpus_corpus_def_xy(this.allyList);
         super.tower_xy();
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);

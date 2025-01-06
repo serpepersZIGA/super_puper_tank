@@ -3,10 +3,8 @@ package Content.Transport.Tower;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.method.RenderMethod;
-import com.mygdx.game.main.Main;
 import com.mygdx.game.transport.Transport;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class TowerMortarEnemy extends Transport {
@@ -18,7 +16,7 @@ public class TowerMortarEnemy extends Transport {
         this.tower_y_const = y_const;
         this.damage_fragment = damage_fragment;
         this.penetration_fragment = penetration_fragment;
-        this.spisok = spisok;
+        this.allyList = spisok;
         this.sound_fire = sound;
         this.speed_tower = speed_rotation;
         this.difference = -difference;
@@ -51,7 +49,7 @@ public class TowerMortarEnemy extends Transport {
         this.aim_y = aim_y;
         tower_xy_2();
         tower_ii_2();
-        bot_fragmentation_bull_fire(i, this.spisok.get(i).tower_obj, this.enemy_spisok);
+        bot_fragmentation_bull_fire(i, this.allyList.get(i).tower_obj, this.enemyList);
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }

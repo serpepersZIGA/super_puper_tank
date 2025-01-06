@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import Content.Bull.BullFlame;
 import Content.Bull.BullMortar;
 import Content.Bull.BullPacket;
+import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.build.Building;
 import Content.Bull.BullTank;
@@ -23,19 +24,32 @@ import java.util.ArrayList;
 
 import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.main.Main.*;
+import static com.mygdx.game.method.pow2.pow2;
+import static com.mygdx.game.transport.Transport.ai_sost;
 import static java.lang.StrictMath.*;
 
 public abstract class Soldat implements Serializable {
     public String name;
-    public float x,y,speed,rotation,speed_rotation,damage,penetration,t_damage,damage_fragmentation,penetration_fragmentation,range_see = 650;
+    public float x,y,speed,rotation,speed_rotation = 5,damage,penetration,t_damage,damage_fragmentation,penetration_fragmentation,range_see = 1400;
     public int width,height,width_2,height_2,size,time,time_max,x_rend,y_rend,width_render,height_render;
     public byte clear_sost,team,trigger_attack;
+    public ArrayList<int[]>path = new ArrayList<>();
+    protected float g;
     public Sprite soldat_image;
+    public ArrayList<Transport>allyList,enemyList;
+    public float SpeedCollision;
     public void data(){
+        if(allyList == EnemyList){
+            enemyList = PlayerList;
+        }
+        else {
+            enemyList = EnemyList;
+        }
         this.width_render = (int)(width*ZoomWindowX);
         this.height_render = (int)(height*ZoomWindowY);
         this.width_2 = width/2;
         this.height_2 = height/2;
+        SpeedCollision = speed*4;
     }
 
     public void all_action(int i){
@@ -44,11 +58,10 @@ public abstract class Soldat implements Serializable {
     }
     public void update(){
         center_render();
-        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,(float)this.rotation+180,this.soldat_image);
+        RenderMethod.transorm_img(this.x_rend,this.y_rend,this.width_render,this.height_render,this.rotation+180,this.soldat_image);
     }
-    public void move_soldat(ArrayList<Transport>player, int i, double g, double g_left, double g_right) {
-        double h = sqrt(pow(this.x - player.get(i).x, 2) + pow(this.y - player.get(i).y, 2));
-            if ( h> 130 && g > g_left && g < g_right) {
+    public void move_soldat(float h, float g, float g_left, float g_right) {
+            if (h> 130 && g > g_left && g < g_right) {
                 move_invert();
             }
             if (h < 150 && g > g_left && g < g_right) {
@@ -60,6 +73,11 @@ public abstract class Soldat implements Serializable {
                 this.rotation -= this.speed_rotation;
             }
     }
+    public void move_soldatPath(float g, double g_left, double g_right) {
+        if (g > g_left && g < g_right) {
+            move_invert();
+        }
+    }
     public void clear(ArrayList<Soldat>obj,int i){
         if(this.clear_sost == 1){
             for(int i1 =0;i1<12;i1++){
@@ -67,9 +85,9 @@ public abstract class Soldat implements Serializable {
             obj.remove(i);
         }
     }
-    public void fire_bull(double g,double g_left,double g_right){
+    public void fire_bull(float g){
         this.time -=1;
-        if(this.time < 0 && g>g_left && g<g_right){
+        if(this.time < 0 && abs(g-rotation)<20){
             this.time = this.time_max;
             Main.BullList.add(new BullTank(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
@@ -78,9 +96,9 @@ public abstract class Soldat implements Serializable {
             bull_packets(i1,i2);
         }
     }
-    public void fire_flame(double g,double g_left,double g_right){
+    public void fire_flame(float g){
         this.time -=1;
-        if(this.time < 0 && g>g_left && g<g_right){
+        if(this.time < 0 && abs(g-rotation)<20){
             this.time = this.time_max;
             Main.BullList.add(new BullFlame(this.x,  this.y,-this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
             Main.BullList.add(new BullFlame(this.x, this.y, -this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
@@ -92,9 +110,9 @@ public abstract class Soldat implements Serializable {
             bull_packets(i1+1,i2+1);
         }
     }
-    public void fire_mortar(double g,double g_left,double g_right){
+    public void fire_mortar(float g){
         this.time -=1;
-        if(this.time < 0 && g>g_left && g<g_right){
+        if(this.time < 0 && abs(g-rotation)<20){
             this.time = this.time_max;
             ///int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
@@ -107,8 +125,8 @@ public abstract class Soldat implements Serializable {
         }
     }
     public void bull_packets(int i1,int i2){
-        PacketBull.get(i1).x = (float) this.x;
-        PacketBull.get(i1).y = (float) this.y;
+        PacketBull.get(i1).x = this.x;
+        PacketBull.get(i1).y = this.y;
         PacketBull.get(i1).rotation = BullList.get(i2).rotation;
         PacketBull.get(i1).time = BullList.get(i2).time;
         PacketBull.get(i1).speed = BullList.get(i2).speed;
@@ -116,92 +134,185 @@ public abstract class Soldat implements Serializable {
         PacketBull.get(i1).type = BullList.get(i2).type;
         PacketBull.get(i1).team = this.team;
     }
-    public void ii_soldat(ArrayList<Building> obj_building, ArrayList<Transport>obj_player, int i3, int i2, double g, double g_left, double g_right){
-        byte triger_rotation = 0;
-        if(Main.BuildingList.size()!= 0) {
-            int i = Method.detection_near_soldat_build(Main.SoldatList, i3, obj_building);
-            if (sqrt(pow(this.x - obj_building.get(i).x, 2) + pow(this.y - obj_building.get(i).y, 2)) < obj_building.get(i).width * 1.2) {
-                if (obj_player.get(i2).y < obj_building.get(i).y && this.y > obj_building.get(i).y) {
-                    //System.out.println(2);
-                    move_invert();
-                    triger_rotation = 1;
-                    if (obj_building.get(i).x + obj_building.get(i).width < this.x || obj_building.get(i).x > this.x) {
-                        if (0 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (0 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    } else if (this.x < obj_building.get(i).x + obj_building.get(i).width_2) {
-                        if (-90 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (-90 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    } else if (this.x > obj_building.get(i).x + obj_building.get(i).width_2) {
-                        if (90 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (90 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    }
-
-                } else if (obj_player.get(i2).y > obj_building.get(i).y && this.y < obj_building.get(i).y) {
-                    //System.out.println(3);
-                    move_invert();
-                    triger_rotation = 1;
-                    if (obj_building.get(i).x + obj_building.get(i).width < this.x || obj_building.get(i).x > this.x) {
-                        if (-180 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (-180 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    } else if (this.x < obj_building.get(i).x + obj_building.get(i).width_2) {
-                        if (-90 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (-90 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    } else if (this.x > obj_building.get(i).x + obj_building.get(i).width_2) {
-                        if (90 < this.rotation) {
-                            this.rotation -= this.speed_rotation;
-                        } else if (90 > this.rotation) {
-                            this.rotation += this.speed_rotation;
-                        }
-                    }
-                }
+    public void ii_soldat(float g, int iAi, int iEnemy){
+        if (ai_sost == 0) {
+            if (null != findIntersection(x,y, enemyList.get(iEnemy).tower_x, enemyList.get(iEnemy).tower_y)) {
+                path.clear();
+                Ai.path_AISoldat(SoldatList.get(iAi), enemyList.get(iEnemy), x, y);
+            } else {
+                path.clear();
             }
         }
-        else{
-            move_soldat(Main.PlayerList, i2, g, g_left, g_right);
+        //System.out.println(path.size());
+        if(path.size() > 0) {
+            float radius = (float) sqrt(pow2((x - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)) + pow2(y - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center));
+            float gr = (float) ((atan2(y - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).y_center,x - BlockList2D.get(path.get(0)[1]).get(path.get(0)[0]).x_center)/3.1415926535*180)-90);
+            SoldatRotatePath(gr);
+           //System.out.println(this.g);
+            if(radius< 70){
+                path.remove(0);
+            }
         }
-        if (triger_rotation == 0) {
-            move_soldat(Main.PlayerList, i2, g, g_left, g_right);
+        else {
+            float radius = (float) sqrt(pow2((x - enemyList.get(iEnemy).tower_x)) + pow2(y - enemyList.get(iEnemy).tower_y));
+            SoldatRotate(g);
+            SoldatMove(g,radius);
         }
 
     }
-    public void move_soldat_ii_bull(int i){
-        if(Main.PlayerList.size() != 0) {
-            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i, Main.PlayerList);
-            if (sp[1] < this.range_see) {
-                int i2 = Method.detection_near_soldat_transport(Main.SoldatList, i, Main.PlayerList);
-                double g = atan2(this.y - Main.PlayerList.get(i2).y, this.x - Main.PlayerList.get(i2).x) / 3.1415926535 * 180;
-                g -= 90;
-                double g_left = this.rotation - 10;
-                double g_right = this.rotation + 10;
-                fire_bull(g, g_left, g_right);
-                if (g > 20 && this.rotation < -160) {
-                    g = -271;
-                    if (this.rotation <= g) {
-                        this.rotation = 89;
+    public void SoldatRotatePath(float TargetRotate){
+        if (abs(TargetRotate-rotation)<5){
+            move_invert();
+            //move_soldatPath(TargetRotate,g_left,g_right);
+        }
+        else if (TargetRotate > this.rotation) {
+            this.rotation += this.speed_rotation;
+        } else if (TargetRotate < this.rotation) {
+            this.rotation -= this.speed_rotation;
+        }
+    }
+    protected float[] findIntersection(float x0, float y0, float dx, float dy) {
+        float x = x0/width_block;
+        float y = y0/height_block;
+        dx = dx/width_block;
+        dy = dy/height_block;
+        float xy_r = (float)(atan2(y-dy, x-dx));
+        float speed_x = (float) cos(xy_r)/2;
+        float speed_y = (float) sin(xy_r)/2;
+//        System.out.println(x+" g "+y);
+//        System.out.println(dx+" h "+dy);
+//        System.out.println(xy_r);
+        if (y > dy) {
+            if (x > dx) {
+                while (x > dx && y > dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" w");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+//                    System.out.println(x+" z "+y);
+//                    System.out.println(dx+" vo "+dy);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
                     }
-                } else if (g < -160 && this.rotation > 20) {
-                    g = 91;
-                    if (this.rotation >= g) {
-                        this.rotation = -269;
+
+                }
+            } else if(x < dx){
+                while (x < dx && y > dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
                     }
                 }
-                ii_soldat(Main.BuildingList, Main.PlayerList, i, i2, g, g_left, g_right);
             }
+            else{
+                while (y > dy) {
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            }
+        } else if(y < dy){
+            if (x > dx) {
+                while (x > dx && y < dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" x");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            } else if (x < dx){
+                while (x < dx && y < dy) {
+                    x -= speed_x;
+                    y -= speed_y;
+
+                    // System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" z");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            }
+            else {
+                while (y < dy) {
+                    y -= speed_y;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" s");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            }
+        }
+        else {
+            if (x > dx) {
+                while (x > dx) {
+                    x -= speed_x;
+                    //System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" x");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            } else if (x < dx){
+                while (x < dx) {
+                    x -= speed_x;
+
+
+                    // System.out.println(x+" "+y+" "+speed_x+" "+speed_y+" "+dx+" "+dy+" "+" "+xy_r+" z");
+                    //double[]xy = Main.rc.get(0).render_obj(x0,y0);
+                    if (BlockList2D.get((int)y).get((int)x).passability) {
+                        return new float[]{x, y};
+                    }
+                }
+            }
+        }
+        return null;
+
+    }
+    public void move_soldat_ii_bull(int i){
+        if(enemyList.size() != 0) {
+            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i,enemyList);
+            if (sp[1] < this.range_see) {
+                float g = (float) (atan2(this.y - enemyList.get(sp[0]).y, this.x - enemyList.get(sp[0]).x) / 3.1415926535 * 180);
+                g -= 90;
+                fire_bull(g);
+                ii_soldat(g, i,sp[0]);
+            }
+        }
+    }
+    public void SoldatRotate(float g){
+        if (g > 20 && this.rotation < -180) {
+            g = -272;
+        }
+        else if (g < -160 && this.rotation > 0) {
+            g = 92;
+        }
+        if (this.rotation > 91) {
+            this.rotation = -269;
+        }
+        else if (this.rotation < -271) {
+            this.rotation = 89;
+        }
+        if (g > this.rotation) {
+            this.rotation += this.speed_rotation;
+        } else if (g < this.rotation) {
+            this.rotation -= this.speed_rotation;
+        }
+    }
+    public void SoldatMove(float g,float radius){
+        if(abs(g-rotation)<20 & radius>250){
+            move_invert();
+        }
+        else if(abs(g-rotation)<20 & radius<200){
+            move();
         }
     }
     public void hustle(ArrayList<Transport>transport){
@@ -227,12 +338,21 @@ public abstract class Soldat implements Serializable {
             }
         }
     }
-    public void collision_build(ArrayList<Building> building){
-        for (Building value : building) {
-            boolean z = rect_bull(value.x, value.y, value.width, value.height,
-                    (int) this.x, (int) this.y, this.size, 0);
-            if (z) {
-                metod_1(value.x, value.y);
+    public void collision_build(){
+        int xBlock= (int) (x/ width_block)-1;
+        int yBlock= (int) (y/ height_block)-1;
+        if(BlockList2D.get(yBlock).get(xBlock).passability){
+            if(x<BlockList2D.get(yBlock).get(xBlock).x_center){
+                x-= SpeedCollision;
+            }
+            else{
+                x+= SpeedCollision;
+            }
+            if(y<BlockList2D.get(yBlock).get(xBlock).y_center){
+                y-= SpeedCollision;
+            }
+            else{
+                y+= SpeedCollision;
             }
         }
     }
@@ -270,52 +390,24 @@ public abstract class Soldat implements Serializable {
         return area1.intersects(circle.getBounds2D());
     }
     public void move_soldat_ii_flame(int i){
-        if(Main.PlayerList.size() != 0) {
-            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i, Main.PlayerList);
+        if(enemyList.size() != 0) {
+            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i,enemyList);
             if (sp[1] < this.range_see) {
-                int i2 = Method.detection_near_soldat_transport(Main.SoldatList, i, Main.PlayerList);
-                double g = atan2(this.y - Main.PlayerList.get(i2).y, this.x - Main.PlayerList.get(i2).x) / 3.1415926535 * 180;
+                float g = (float) (atan2(this.y - enemyList.get(sp[0]).y, this.x - enemyList.get(sp[0]).x) / 3.1415926535 * 180);
                 g -= 90;
-                double g_left = this.rotation - 10;
-                double g_right = this.rotation + 10;
-                fire_flame(g, g_left, g_right);
-                if (g > 0 && this.rotation < -180) {
-                    g = -271;
-                    if (this.rotation <= g) {
-                        this.rotation = 90;
-                    }
-                } else if (g < -180 && this.rotation > 0) {
-                    g = 91;
-                    if (this.rotation >= g) {
-                        this.rotation = -270;
-                    }
-                }
-                ii_soldat(Main.BuildingList, Main.PlayerList, i, i2, g, g_left, g_right);
+                fire_flame(g);
+                ii_soldat(g, i,sp[0]);
             }
         }
     }
     public void move_soldat_ii_mortar(int i){
-        if(Main.PlayerList.size() != 0) {
-            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i, Main.PlayerList);
+        if(enemyList.size() != 0) {
+            int[] sp = Method.detection_near_soldat_transport_i_def(Main.SoldatList, i,enemyList);
             if (sp[1] < this.range_see) {
-                int i2 = Method.detection_near_soldat_transport(Main.SoldatList, i, Main.PlayerList);
-                double g = atan2(this.y - Main.PlayerList.get(i2).y, this.x - Main.PlayerList.get(i2).x) / 3.1415926535 * 180;
+                float g = (float) (atan2(this.y - enemyList.get(sp[0]).y, this.x - enemyList.get(sp[0]).x) / 3.1415926535 * 180);
                 g -= 90;
-                double g_left = this.rotation - 10;
-                double g_right = this.rotation + 10;
-                fire_mortar(g, g_left, g_right);
-                if (g > 0 && this.rotation < -180) {
-                    g = -271;
-                    if (this.rotation <= g) {
-                        this.rotation = 90;
-                    }
-                } else if (g < -180 && this.rotation > 0) {
-                    g = 91;
-                    if (this.rotation >= g) {
-                        this.rotation = -270;
-                    }
-                }
-                ii_soldat(Main.BuildingList, Main.PlayerList, i, i2, g, g_left, g_right);
+                fire_mortar(g);
+                ii_soldat(g, i,sp[0]);
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.mygdx.game.main;
 import Content.Particle.*;
+import Content.Soldat.SoldatBull;
 import Content.Transport.Transport.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -118,6 +119,7 @@ public class Main extends ApplicationAdapter {
 
 	public static void spawn_object(){
 		//PlayerList.add(new PlayerCannonFlame(200,200, PlayerList,true));
+		SoldatList.add(new SoldatBull(1200,200,EnemyList));
 		MapScan.MapInput("Map/maps/MapBase.mapt");
 		MapAllLoad.MapCount();
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));

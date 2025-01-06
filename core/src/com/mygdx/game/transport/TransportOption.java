@@ -6,7 +6,7 @@ public class TransportOption extends Transport{
         this.max_speed = tr.max_speed;this.min_speed = tr.min_speed;
         this.max_hp = tr.max_hp;
         this.damage = tr.damage;
-        this.spisok = tr.spisok;
+        this.allyList = tr.allyList;
         this.armor = tr.armor;
         this.penetration = tr.penetration;
         this.acceleration = tr.acceleration;

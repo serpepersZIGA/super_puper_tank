@@ -17,7 +17,7 @@ public class PlayerCannonFlame extends Transport {
         this.max_speed = 4;this.min_speed = -4;
         this.max_hp = 1200;
         this.damage = 10;
-        this.spisok = tr;
+        this.allyList = tr;
         this.armor = 50;
         this.penetration = 5;
         this.acceleration = 0.2f;
@@ -44,10 +44,10 @@ public class PlayerCannonFlame extends Transport {
         data();
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,-12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok, Main.ContentSound.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.get(0).cannon));
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.spisok, Main.ContentSound.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.get(0).cannon));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();
@@ -59,7 +59,7 @@ public class PlayerCannonFlame extends Transport {
         super.motor_player();
         super.fire_player_flame();
         super.build_corpus();
-        super.corpus_corpus(this.enemy_spisok);
+        super.corpus_corpus(this.enemyList);
         super.tower_xy();
         super.tower_player();
         Main.RC.x = this.tower_x;
@@ -69,7 +69,7 @@ public class PlayerCannonFlame extends Transport {
         tower_iteration();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete(i,this.spisok);
+        super.transport_delete(i,this.allyList);
     }
     @Override
     public void all_action_client(int i) {
@@ -78,15 +78,15 @@ public class PlayerCannonFlame extends Transport {
         super.motor_player();
         super.fire_player_flame();
         super.build_corpus();
-        super.corpus_corpus(this.enemy_spisok);
-        super.corpus_corpus_def_xy(this.spisok);
+        super.corpus_corpus(this.enemyList);
+        super.corpus_corpus_def_xy(this.allyList);
         super.tower_xy();
         center_render();
         RenderMethod.transorm_img(this.x_rend, this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
         tower_iteration_client();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete(i,this.spisok);
+        super.transport_delete(i,this.allyList);
     }
     @Override
     public void all_action_client_1(int i) {

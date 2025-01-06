@@ -16,7 +16,7 @@ public class TrackRemountT1 extends Transport {
         this.damage = 5;
         this.teg_unit = "support";
         this.penetration = 20;
-        this.spisok = tr;
+        this.allyList = tr;
         this.max_hp = 1500;
         this.acceleration = 0.2f;
         this.rotation_tower = 0;

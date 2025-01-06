@@ -23,7 +23,7 @@ public class DebrisTransport extends Transport {
         this.speed_inert = inert_speed;
         this.rotation_inert = inert_rotation;
         this.corpus_img = corpus;
-        this.spisok = Main.DebrisList;
+        this.allyList = Main.DebrisList;
         this.max_hp = 10000;
         this.armor = 5;
         this.teg_unit = "debris";

@@ -17,7 +17,7 @@ public class TrackSoldatT1 extends Transport {
         this.max_speed = 4;
         this.min_speed = -4;
         this.damage = 5;
-        this.spisok = tr;
+        this.allyList = tr;
         this.penetration = 20;
         this.max_hp = 1500;
         this.hp = this.max_hp;
@@ -49,7 +49,7 @@ public class TrackSoldatT1 extends Transport {
     }
     public void all_action(int i){
         super.all_action(i);
-        super.behavior_bot(this.enemy_spisok, i);
+        super.behavior_bot(this.enemyList, i);
         super.build_corpus();
         super.corpus_corpus_def_xy(Main.EnemyList);
         super.spawn_soldat(Main.SoldatList);

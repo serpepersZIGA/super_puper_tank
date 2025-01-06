@@ -15,7 +15,7 @@ public class HelicopterT1 extends Transport {
             this.speed_inert = 0;this.speed = 0;
             this.max_speed = 4;this.min_speed = -4;
             this.damage = 200;
-            this.spisok = tr;
+            this.allyList = tr;
             this.penetration = 20;
             this.max_hp = 850;
             this.armor = 50;
@@ -36,10 +36,10 @@ public class HelicopterT1 extends Transport {
         public void all_action(int i) {
             super.all_action(i);
             super.helicopter_ii(Main.PlayerList,i);
-            super.bot_bull_tank_fire_not_tower(this.spisok,i);
+            super.bot_bull_tank_fire_not_tower(this.allyList,i);
             super.tower_xy();
             super.blade_helicopter();
-            super.transport_delete(i,this.spisok);
+            super.transport_delete(i,this.allyList);
 
         }
         public void update(){
