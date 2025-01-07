@@ -247,7 +247,7 @@ public class Main extends ApplicationAdapter {
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parameter.characters = FreeTypeFontGenerator.DEFAULT_CHARS;
 		parameter.size = size;
-		BitmapFont font = generator.generateFont(parameter); // font size 64 pixels
+		BitmapFont font = generator.generateFont(parameter);
 		generator.dispose();
 		return font;
 	}
@@ -255,11 +255,6 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 		ActionGame.action();
 	}
-
-	//Используется когда клиент отправляет пакет серверу
-
-	//Используется когда клиент покидает сервер.
-
 	@Override
 	public void dispose () {
 		textureBuffer.dispose();
