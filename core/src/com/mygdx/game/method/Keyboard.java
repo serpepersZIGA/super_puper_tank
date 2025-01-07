@@ -140,8 +140,6 @@ public class Keyboard extends InputAdapter{
         return false;
     }
     public void zoom_const(){
-        //ZoomWindowX = (float) screenWidth /1920;
-        //ZoomWindowY = (float) screenHeight /1080;
         for(Particle particle : Main.FlameParticleList){
             particle.size_render = (int)(particle.size* Main.Zoom);
         }

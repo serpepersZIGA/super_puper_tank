@@ -12,9 +12,7 @@ public class ActionMenu extends ActionGame {
     private int timer = 0;
     @Override
     public void action() {
-
-
-            Main.RC.metod();
+        Main.RC.method();
         if(Keyboard.PressW){
             Main.RC.y += 10;
         }

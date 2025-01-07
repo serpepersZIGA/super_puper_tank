@@ -20,7 +20,7 @@ public class RenderCenter {
         block_i_x_max = Main.BlockList2D.get(0).size()-2;
         block_i_y_max = Main.BlockList2D.size()-2;
     }
-    public void metod(){
+    public void method(){
         this.x2 = this.x -this.width_2_zoom;
         this.y2 = this.y -this.height_2_zoom;
         ixCamBuff = (int) (x2/Main.width_block);

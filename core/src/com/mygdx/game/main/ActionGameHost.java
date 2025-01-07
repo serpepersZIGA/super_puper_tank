@@ -1,8 +1,5 @@
 package com.mygdx.game.main;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import Content.Bull.BullFragment;
 import Content.Particle.Acid;
@@ -26,7 +23,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
     private int i;
     private static int timer = 0;
     public void action() {
-        RC.metod();
+        RC.method();
         if(Main.PlayerList.size()==0){
             if(Keyboard.PressW){
                 Main.RC.y += 10;

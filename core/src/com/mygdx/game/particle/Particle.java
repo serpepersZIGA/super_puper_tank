@@ -99,13 +99,13 @@ public abstract class Particle {
     }
     protected void liquid_physic(){
         radCollision = (int) sqrt(pow2(x-xCollision)+pow2(y-yCollision));
-             if (radCollision < this.size_3) {
-                 this.x -= speed_x;
-                 this.y -= speed_y;
-             } else if (radCollision < this.size && radCollision > this.size_2) {
-                 this.x += speed_x;
-                 this.y += speed_y;
-             }
+        if (radCollision < this.size_3) {
+            this.x -= speed_x;
+            this.y -= speed_y;
+        } else if (radCollision < this.size && radCollision > this.size_2) {
+            this.x += speed_x;
+            this.y += speed_y;
+        }
     }
     protected void center_render(){
         float[]xy = Main.RC.render_objZoom(this.x,this.y);

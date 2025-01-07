@@ -3,7 +3,6 @@ package com.mygdx.game.main;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
-import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
 
 import static com.mygdx.game.main.Main.*;
@@ -18,7 +17,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
     int i;
     private static int timer = 0;
     public void action() {
-        Main.RC.metod();
+        Main.RC.method();
         if(Main.PlayerList.size()==0){
             if(Keyboard.PressW){
                 Main.RC.y += 10;

@@ -210,7 +210,7 @@ public class Main extends ApplicationAdapter {
 		KeyboardObj = new Keyboard();
 		Keyboard.ZoomMaxMin();
 		Gdx.input.setInputProcessor(KeyboardObj);
-		field(120, 120);
+		field(160, 160);
 		Option = new Option();
 		spawn_object();
 		KeyboardObj.zoom_const();
@@ -236,12 +236,6 @@ public class Main extends ApplicationAdapter {
 
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
 		viewport = new StretchViewport(ZoomWindowX, ZoomWindowY, camera);
-
-
-
-
-
-
 	}
 
 
