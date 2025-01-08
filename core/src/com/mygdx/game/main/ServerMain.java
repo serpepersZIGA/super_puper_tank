@@ -88,7 +88,7 @@ public class ServerMain extends Listener {
 
     }
     public void connected(Connection c){
-        System.out.println("На сервер подключился "+c.getRemoteAddressTCP().getHostString());
+        System.out.println("На сервер подключился " + c.getRemoteAddressTCP().getHostString());
 
         for (int i = 0;i<Main.BuildingList.size();i++){
             PacketBuildServer(i);
@@ -100,7 +100,6 @@ public class ServerMain extends Listener {
 
     }
     public void PacketBuildServer(int i){
-        //PacketBuildingServer packB = new PacketBuildingServer();
         PacketBuildingServer.BuildPack.add(new BuildPacket());
         PacketBuildingServer.BuildPack.get(i).name = BuildingList.get(i).name;
         PacketBuildingServer.BuildPack.get(i).x = BuildingList.get(i).x;
@@ -110,31 +109,7 @@ public class ServerMain extends Listener {
     //Используется когда клиент отправляет пакет серверу
     public void received(Connection c, Object p){
         if(p instanceof Packet_client) {
-//            Main.PressWClient = ((Packet_client) p).press_w;
-//            Main.PressAClient = ((Packet_client) p).press_a;
-//            Main.PressSClient = ((Packet_client) p).press_s;
-//            Main.PressDClient = ((Packet_client) p).press_d;
-//            Main.MouseXClient = ((Packet_client) p).mouse_x;
-//            Main.MouseYClient = ((Packet_client) p).mouse_y;
-//            Main.RightMouseClient = ((Packet_client) p).right_mouse;
-//            Main.LeftMouseClient = ((Packet_client) p).left_mouse;
             Clients.add((Packet_client) p);
-//            for(int i2 = 0;i2<PlayerList.size();i2++) {
-//                if (!PlayerList.get(i2).host) {
-//                    Main.PlayerList.get(i2).rotation_tower = ((Packet_client) p).rotation_tower_client;
-//
-//                    if (Main.PlayerList.get(i2).tower_obj.size() < ((Packet_client) p).rot_tower.size()) {
-//                        for (int i = 0; i < Main.PlayerList.get(i2).tower_obj.size(); i++) {
-//                            Main.PlayerList.get(i2).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
-//                        }
-//                    } else {
-//                        for (int i = 0; i < ((Packet_client) p).rot_tower.size(); i++) {
-//                            Main.PlayerList.get(i2).tower_obj.get(i).rotation_tower = ((Packet_client) p).rot_tower.get(i);
-//                        }
-//
-//                    }
-//                }
-//            }
         }
         else if(p instanceof PlayerSpawnData){
             nConnect += 1;
@@ -147,7 +122,5 @@ public class ServerMain extends Listener {
     }
 
     //Используется когда клиент покидает сервер.
-    public void disconnected(Connection c){
-        System.out.println("Клиент покинул сервер!");
-    }
+    public void disconnected(Connection c){System.out.println("Клиент покинул сервер!");}
 }

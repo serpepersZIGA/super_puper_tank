@@ -55,6 +55,6 @@ public class BullFlame extends Bull {
     public void update(){
         Main.Render.setColor(r,g,b,1);
         center_render();
-        Main.Render.circle(this.x_rend,this.y_rend,this.size_render,this.size_render);
+        Main.Render.circle(this.x_rend,this.y_rend,this.size_render,this.size);
     }
 }

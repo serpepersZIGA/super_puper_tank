@@ -53,6 +53,7 @@ public class PanzerFlameT1 extends Transport {
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();
+        this.host = true;
 
 
     }

@@ -72,6 +72,7 @@ public class PlayerCannonAcid extends Transport {
     }
     @Override
     public void all_action_client(int i) {
+        super.all_action_client(i);
         super.client_control();
         super.motor_player();
         super.fire_player_acid();

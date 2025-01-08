@@ -1441,18 +1441,22 @@ public abstract class Transport{
             }
         }
     }
+    public void HPSynchronization(){
+        this.green_len = (float) this.hp /this.max_hp * Option.size_x_indicator;
+    }
     public void all_action(int i){
         damage_temperature();
         inertia_xy();
     }
     public void all_action_client(int i){
+        HPSynchronization();
 
     }
     public void all_action_client_1(int i){
-
+        HPSynchronization();
     }
     public void all_action_client_2(int i){
-
+        HPSynchronization();
     }
     public void tower_action_client(int i,float x,float y,float rotation,boolean sost_fire_bot){
 
