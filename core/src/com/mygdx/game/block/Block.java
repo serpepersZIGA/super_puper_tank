@@ -80,6 +80,10 @@ public abstract class Block {
         int[]xy = Main.RC.render_objZoom(this.x,this.y);
         render_block.render(xy[0],xy[1]);
     }
+    public void updateTick(int ix,int iy){
+        int[]xy = Main.RC.render_objZoom(this.x,this.y);
+        render_block.renderTick(xy[0],xy[1],ix,iy);
+    }
     public void render(){
     }
     public void all_action(){

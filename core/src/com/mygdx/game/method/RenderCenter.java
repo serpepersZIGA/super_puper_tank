@@ -68,12 +68,12 @@ public class RenderCenter {
         } else {
             for (int iy = render_y_min; iy < render_y_max; iy++) {
                 for (int ix = render_x_min; ix < render_x_max; ix++) {
-                    Main.BlockList2D.get(iy).get(ix).update();
-                    if (Main.BlockList2D.get(iy).get(ix).render_block == UpdateRegister.DirtUpdate) {
-                        if (rand.rand(20) == 1) {
-                            Main.BlockList2D.get(iy).get(ix).render_block = UpdateRegister.GrassUpdate;
-                        }
-                    }
+                    Main.BlockList2D.get(iy).get(ix).updateTick(ix,iy);
+//                    if (Main.BlockList2D.get(iy).get(ix).render_block == UpdateRegister.DirtUpdate) {
+//                        if (rand.rand(20) == 1) {
+//                            Main.BlockList2D.get(iy).get(ix).render_block = UpdateRegister.GrassUpdate;
+//                        }
+//                    }
                 }
             }
             Main.TickBlock = 0;

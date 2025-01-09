@@ -10,7 +10,4 @@ public class BlockMap extends Block {
         block_xy();
         this.render_block = UpdateRegister.GrassUpdate;
     }
-    public void all_action(){
-        super.update();
-    }
 }
