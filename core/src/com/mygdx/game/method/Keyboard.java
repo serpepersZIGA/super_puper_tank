@@ -146,8 +146,13 @@ public class Keyboard extends InputAdapter{
 
         RC.WidthRenderZoom = RC.WidthRender /Main.Zoom;
         RC.HeightRenderZoom = RC.HeightRender /Main.Zoom;
+        RC.WidthRenderZoom2 = RC.WidthRenderZoom /2;
+        RC.HeightRenderZoom2 = RC.HeightRenderZoom /2;
         RC.width_2_zoom = RC.width_2/Main.Zoom;
         RC.height_2_zoom = RC.height_2/Main.Zoom;
+        RC.CameraMapConf();
+        RC.cam_x_width = (int) (RC.WidthRenderZoom/Main.width_block);
+        RC.cam_y_height= (int) (RC.HeightRenderZoom/Main.height_block);
 
         Main.width_block_zoom = (int) (Main.width_block_render * Main.Zoom);
         Main.height_block_zoom = (int) (Main.height_block_render * Main.Zoom);

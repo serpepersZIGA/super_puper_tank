@@ -2,6 +2,7 @@ package com.mygdx.game.block;
 
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
+import com.mygdx.game.method.rand;
 
 import static com.mygdx.game.main.Main.ContentImage;
 
