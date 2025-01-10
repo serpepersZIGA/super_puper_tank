@@ -122,7 +122,14 @@ public class Main extends ApplicationAdapter {
 		SoldatList.add(new SoldatBull(1200,200,EnemyList));
 		MapScan.MapInput("Map/maps/MapBase.mapt");
 		MapAllLoad.MapCount();
-		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		//EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
 		LiquidList.add(new Acid(200,200));
 		LiquidList.add(new Blood(200,200));
