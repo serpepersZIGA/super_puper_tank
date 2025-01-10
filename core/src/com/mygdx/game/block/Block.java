@@ -90,7 +90,7 @@ public abstract class Block {
 
     }
     protected final void UpdateAir(){
-        if(radius != 0) {
+        if(radius < lighting_zoom) {
             rad = radius/lighting_zoom;
             Main.Render.setColor(r/rad,g/rad,b/rad,lightFlame);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
