@@ -15,5 +15,4 @@ public class PackerServer {
     public ArrayList<SoldatPacket>soldat;
     public ArrayList<DebrisPacket>debris;
     public float TotalLight;
-    //public ArrayList<Soldat>soldat;
 }
