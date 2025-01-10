@@ -91,8 +91,8 @@ public class Main extends ApplicationAdapter {
 	public static BitmapFont font,font2;
 	public static byte ConfigMenu;
 	public static InputWindow InputWindow;
-	public static int xMaxAir ;
-	public static int yMaxAir ;
+	public static int xMaxAir;
+	public static int yMaxAir;
 	public static int xMap ;
 	public static int yMap ;
 	public static Texture textureBuffer;

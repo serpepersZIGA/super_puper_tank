@@ -17,6 +17,7 @@ public class FlameSpawn extends Particle {
         rgb = RGBFlame;
 
 
+
     }
     public void all_action(int i){
         spawn_flame();

@@ -1,5 +1,6 @@
 package com.mygdx.game.block;
 
+import Content.Block.Air;
 import Content.Particle.FlameSpawn;
 import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
@@ -10,6 +11,7 @@ import java.awt.geom.Area;
 import java.util.*;
 
 import static com.mygdx.game.block.UpdateRegister.VoidUpdate;
+import static com.mygdx.game.main.Main.AirList;
 import static com.mygdx.game.main.Main.FlameSpawnList;
 import static com.mygdx.game.method.CycleTimeDay.*;
 import static com.mygdx.game.method.pow2.pow2;
@@ -19,12 +21,10 @@ import static java.sql.Types.NULL;
 public abstract class Block {
     public int x,y;
     public int x_rend,y_rend,x_center,y_center;
-    public int radius;
+    public float radius;
 
     public UpdateBlock render_block;
-    public ArrayList<Integer> h = new ArrayList<>();
     private int i;
-    private ArrayList<float[]> rgbl = new ArrayList<>();
     public boolean passability;
     private float r;
     private float g;
@@ -90,17 +90,10 @@ public abstract class Block {
 
     }
     protected final void UpdateAir(){
-        if(h.size() != 0) {
-            for (i = 0;i<h.size();i++) {
-                r += rgbl.get(i)[0] * Main.radius_air_max_zoom / h.get(i);
-                g += rgbl.get(i)[1] * Main.radius_air_max_zoom / h.get(i);
-                b += rgbl.get(i)[2] * Main.radius_air_max_zoom / h.get(i);
-            }
-            rad = ((float) radius/lighting_zoom);
+        if(radius != 0) {
+            rad = radius/lighting_zoom;
             Main.Render.setColor(r/rad,g/rad,b/rad,lightFlame);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
-            rgbl.clear();
-            h.clear();
             r = 0;g =0;b=0;
         } else{
             Main.Render.setColor(0, 0, 0,lightTotal);
@@ -142,12 +135,14 @@ public abstract class Block {
         }
         for (int i = y_min; i < y_max; i++) {
                 for (int i2 = x_min; i2 < x_max; i2++) {
-                    int gh = (int) sqrt(pow2(xZOOM - Main.AirList.get(i).get(i2).x) + pow2(yZOOM - Main.AirList.get(i).get(i2).y));
+                    int gh = (int) sqrt(pow2(xZOOM - AirList.get(i).get(i2).x) + pow2(yZOOM - AirList.get(i).get(i2).y));
                     if (gh < lighting_zoom) {
-                        Main.AirList.get(i).get(i2).rgbl.add(RGB);
-                        Main.AirList.get(i).get(i2).h.add(gh);
-                        if (Main.AirList.get(i).get(i2).radius == NULL || Main.AirList.get(i).get(i2).radius > gh) {
-                            Main.AirList.get(i).get(i2).radius = gh;
+                        AirList.get(i).get(i2).r += RGB[0] * (Main.radius_air_max_zoom / gh);
+                        AirList.get(i).get(i2).g += RGB[1] * (Main.radius_air_max_zoom / gh);
+                        AirList.get(i).get(i2).b += RGB[2] * (Main.radius_air_max_zoom / gh);
+                        if (AirList.get(i).get(i2).radius == NULL || AirList.get(i).get(i2).radius > gh) {
+                            AirList.get(i).get(i2).radius = gh;
+
                         }
                     }
 
