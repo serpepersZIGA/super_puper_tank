@@ -40,14 +40,14 @@ public class PlayerCannonFlame extends Transport {
         this.width_tower = 35;
         this.height_tower = 55;
         this.speed_tower = 1;this.speed_rotation = 1;
-        this.sound_fire = Main.ContentSound.get(0).flame_attack;
+        this.sound_fire = Main.ContentSound.flame_attack;
         data();
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,-12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.cannon));
         this.tower_obj.add(new TowerMortarPlayer(18,55,52,12,40,2,
                 65,12,15,15, this.id_unit,
-                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.get(0).cannon));
+                (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.cannon));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();

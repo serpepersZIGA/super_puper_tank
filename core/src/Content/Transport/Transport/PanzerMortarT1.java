@@ -50,14 +50,14 @@ public class PanzerMortarT1 extends Transport {
         this.width_tower = 35;
         this.height_tower = 55;
         this.speed_tower = 1;this.speed_rotation = 1;
-        this.sound_fire = Main.ContentSound.get(0).cannon;
+        this.sound_fire = Main.ContentSound.cannon;
         data();
 //        this.tower_obj.add(new tower_flame_enemy(18,55,52,-12,4,2,65,12,2, this.id_unit,
 //                (byte)1,(byte)2,Main.content_base.tower_player_auxiliart_1,this.spisok, Main.sa.get(0).flame_attack));
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.get(0).flame_attack));
+                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         const_tower_x = 17;
         const_tower_y = 20;
         center_render();

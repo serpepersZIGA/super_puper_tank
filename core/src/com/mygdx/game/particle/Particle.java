@@ -51,7 +51,7 @@ public abstract class Particle {
             rad = 1-((float) sqrt(pow2(xy[0]) + pow2(xy[1]))/SoundConst);
             sound_time = 0;
             if(rad>0) {
-                SoundPlay.sound(Main.ContentSound.get(0).flame_sound,rad);
+                SoundPlay.sound(Main.ContentSound.flame_sound,rad);
             }
         }
     }

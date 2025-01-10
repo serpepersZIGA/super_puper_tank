@@ -69,10 +69,6 @@ public abstract class Block {
 
         // Вычисление пересечения двух преобразованных прямоугольников
         area1.intersect(area2);
-
-        // Проверка наличия пересечения
-        //Rectangle intersection = area1.getBounds();
-        //System.out.println("Прямоугольники пересекаются. Результат: " + intersection);
         return !area1.isEmpty();
     }
 

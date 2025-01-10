@@ -40,13 +40,13 @@ public class PlayerCannonBullTank extends Transport {
         this.x_tower = 15;
         this.y_tower = 20;
         this.t = 0;
-        this.sound_fire = Main.ContentSound.get(0).cannon;
+        this.sound_fire = Main.ContentSound.cannon;
         this.speed_tower = 1;this.speed_rotation = 1;
         data();
         const_tower_x = 17;
         const_tower_y = 20;
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
-                this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.get(0).flame_attack));
+                this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.flame_attack));
 
     }
     public void all_action(int i) {

@@ -58,7 +58,7 @@ public class Main extends ApplicationAdapter {
 	public static LinkedList<Particle> FlameSpawnList = new LinkedList<>();
 	public static ArrayList<Transport> DebrisList = new ArrayList<>();
 
-	public static ArrayList<DataSound> ContentSound = new ArrayList<>();
+	public static DataSound ContentSound;
 	public static ArrayList<ArrayList<Block>> AirList = new ArrayList<>();
 	public static ArrayList<ArrayList<Block>> BlockList2D = new ArrayList<>();
 
@@ -195,11 +195,11 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
+		ContentSound = new DataSound();
 		new PlayerSpawnListData();
 		CycleDayNight = new CycleTimeDay(10,10,5,5,0.5f,0.9f);
 		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
-		ContentSound.add(new DataSound());
 		Render = new ShapeRenderer();
 		RC = new RenderCenter(0,0);
 		Batch = new SpriteBatch();
@@ -257,6 +257,7 @@ public class Main extends ApplicationAdapter {
 	}
 	@Override
 	public void dispose () {
+		ContentSound.dispose();
 		textureBuffer.dispose();
 		BlockList2D.clear();
 		BuildingList.clear();
@@ -292,6 +293,8 @@ public class Main extends ApplicationAdapter {
 				throw new RuntimeException(e);
 			}
 		}
+		Gdx.app.exit();
+		System.exit(0);
 		super.dispose();
 	}
 }

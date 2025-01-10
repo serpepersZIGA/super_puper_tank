@@ -89,16 +89,13 @@ public class ClientMain extends Listener{
         }
 
         Client.addListener(Main.Main_client);
-        //IDClient = Client.getID();
     }
 
     @Override
     public void received(Connection c, Object p) {
-        //c.sendUDP(packetMessage);
         Main.IDClient = c.getID();
         if(p instanceof PackerServer) {
             CycleTimeDay.lightTotal = ((PackerServer) p).TotalLight;
-            System.out.println(CycleTimeDay.lightTotal);
             PacketPlayer = ((PackerServer) p).player;
             if (PacketPlayer.size() == PlayerList.size()) {
                 for (i = 0; i < PacketPlayer.size(); i++) {
@@ -133,7 +130,6 @@ public class ClientMain extends Listener{
             } else {
                 EnemyList.clear();
                 for (int i = 0; i < PacketEnemy.size(); i++) {
-                    System.out.println(PacketEnemy.get(i).name);
                     enemy_create(i);
                     enemy_data(i);
                 }
@@ -260,17 +256,12 @@ public class ClientMain extends Listener{
         DebrisList.get(i).y = PacketDebris.get(i).y;
         DebrisList.get(i).rotation_corpus = PacketDebris.get(i).rotation;
     }
-    private void soldat_data(int i){
+    private void soldat_data(int i) {
         SoldatList.get(i).name = PacketSoldat.get(i).name;
         SoldatList.get(i).x = PacketSoldat.get(i).x;
         SoldatList.get(i).y = PacketSoldat.get(i).y;
         SoldatList.get(i).rotation = PacketSoldat.get(i).rotation;
         SoldatList.get(i).team = PacketSoldat.get(i).team;
-    }
-    public void BuildData(int i){
-        BuildingList.get(i).name = PacketBuilding.get(i).name;
-        BuildingList.get(i).x = PacketBuilding.get(i).x;
-        BuildingList.get(i).y = PacketBuilding.get(i).y;
     }
     private void enemy_create(int i){
         switch (PacketEnemy.get(i).name) {
@@ -307,10 +298,6 @@ public class ClientMain extends Listener{
         }
     }
     public void debris_create(int i, float x, float y, float rotation){
-//        System.out.println(packet_enemy.size());
-//        System.out.println(packet_enemy.get(i).name);
-//        System.out.println(packet_enemy.get(i).x);
-//        System.out.println(i);
         switch (PacketDebris.get(i).name) {
             case PanzerFlameT1:
                 DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PanzerFlameT1.corpus_img,

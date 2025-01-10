@@ -38,14 +38,6 @@ public class MapScan {
             } catch (IOException ignored) {
             }
         }
-//        try {
-//            file = Gdx.files.internal(Map);
-//        }
-//        catch (NoSuchFileException e){
-//            MapBaseAdd.AddMap();
-//            file = Gdx.files.internal(Map);
-//            System.out.println();
-//        }
         FileHandle file = Gdx.files.internal(Map);
         TxT = file.readString();
         String TotalTxT = "";
@@ -226,14 +218,6 @@ public class MapScan {
             } catch (IOException ignored) {
             }
         }
-//        try {
-//            file = Gdx.files.internal(Map);
-//        }
-//        catch (NoSuchFileException e){
-//            MapBaseAdd.AddMap();
-//            file = Gdx.files.internal(Map);
-//            System.out.println();
-//        }
         FileHandle file = Gdx.files.internal(Struct);
         TxT = file.readString();
         String TotalTxT = "";

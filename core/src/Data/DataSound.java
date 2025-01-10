@@ -21,8 +21,20 @@ public class DataSound {
         this.motor = Gdx.audio.newSound(Gdx.files.internal("sound/motor.wav"));
         this.motor_helicopter = Gdx.audio.newSound(Gdx.files.internal("sound/motor_helicopter.wav"));
         this.motor_back = Gdx.audio.newSound(Gdx.files.internal("sound/motor_back.wav"));
-
-
-
     }
+    public void dispose(){
+        acid_attack.dispose();
+        break_wooden.dispose();
+        cannon.dispose();
+        flame_attack.dispose();
+        flame_sound.dispose();
+        hit.dispose();
+        hit_not_penetration.dispose();
+        kill.dispose();
+        machinegun.dispose();
+        motor.dispose();
+        motor_helicopter.dispose();
+        motor_back.dispose();
+    }
+
 }
