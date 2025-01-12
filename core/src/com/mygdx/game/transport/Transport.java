@@ -48,6 +48,7 @@ public abstract class Transport{
 
     public byte behavior,behavior_buffer, medic_help, crite_life, team,height = 1,trigger_drive;
     private float g;
+    public static int BorderDetected = 400;
     public boolean host;
 
     private int i;
@@ -1297,7 +1298,6 @@ public abstract class Transport{
 //            }
 //        }
 //    }
-    public static int BorderDetected = 400;
     protected void build_corpus(){
         int render_x_max = (int)((x+BorderDetected/Main.Zoom)/Main.width_block);
         int render_x_min = (int)(((x-BorderDetected/Main.Zoom)/Main.width_block));

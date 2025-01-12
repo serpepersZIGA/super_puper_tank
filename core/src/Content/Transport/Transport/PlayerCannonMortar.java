@@ -24,9 +24,6 @@ public class PlayerCannonMortar extends Transport {
         this.rotation_tower = 0;
         this.rotation_corpus = 0;
         this.team = 1;
-        this.difference = -18;
-        this.tower_x_const = 8;
-        this.tower_y_const = 40;
         this.tower_x = 0;
         this.tower_y = 0;
         this.reload_max = 120;
@@ -52,8 +49,12 @@ public class PlayerCannonMortar extends Transport {
                 (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.machinegun));
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,12,5,2,20,12, this.id_unit,
                 (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.machinegun));
-        const_tower_x = 17;
-        const_tower_y = 20;
+        this.difference = -18;
+        const_tower_x = (int)(width_tower/2);
+        const_tower_y = 21;
+        this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);
+        this.tower_y_const = (int) (corpus_height/2)-(height_tower/2)+7;
+        data();
 
 
     }

@@ -34,11 +34,8 @@ public class PanzerMortarT1 extends Transport {
         this.t = 0;
         this.damage_fragment = 12;
         this.penetration_fragment = 4;
-        this.tower_x_const = 8;
-        this.tower_y_const = 40;
         this.x_tower = 15;
         this.y_tower = 20;
-        this.difference = -18;
         this.distance_target = 150;
         this.distance_target_2 = 30;
 
@@ -58,8 +55,11 @@ public class PanzerMortarT1 extends Transport {
                 (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
                 (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
-        const_tower_x = 17;
-        const_tower_y = 20;
+        this.difference = -18;
+        const_tower_x = (int)(width_tower/2);
+        const_tower_y = 21;
+        this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);
+        this.tower_y_const = (int) (corpus_height/2)-(height_tower/2)+7;
         center_render();
     }
     public void all_action(int i) {

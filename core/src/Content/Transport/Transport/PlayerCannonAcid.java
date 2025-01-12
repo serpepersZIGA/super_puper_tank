@@ -24,7 +24,6 @@ public class PlayerCannonAcid extends Transport {
         this.rotation_tower = 0;
         this.rotation_corpus = 0;
         this.team = 1;
-        this.difference =-18;
         this.tower_x = 0;
         this.tower_y = 0;
         this.reload_max = 2;
@@ -36,8 +35,6 @@ public class PlayerCannonAcid extends Transport {
         this.width_tower = 35;
         this.height_tower = 55;
         this.t = 0;
-        this.tower_x_const = 8;
-        this.tower_y_const = 40;
         this.x_tower = 15;
         this.y_tower = 20;
         this.speed_tower = 1;this.speed_rotation = 3;
@@ -47,8 +44,11 @@ public class PlayerCannonAcid extends Transport {
                 this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
                 this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.flame_attack));
-        const_tower_x = 17;
-        const_tower_y = 20;
+        this.difference = -18;
+        const_tower_x = (int)(width_tower/2);
+        const_tower_y = 21;
+        this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);
+        this.tower_y_const = (int) (corpus_height/2)-(height_tower/2)+7;
         center_render();
 
     }

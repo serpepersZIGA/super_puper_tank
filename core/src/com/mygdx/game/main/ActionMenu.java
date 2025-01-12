@@ -147,7 +147,7 @@ public class ActionMenu extends ActionGame {
                     ActionGame = new ActionGameClient();
                     KeyboardObj.zoom_const();
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    //throw new RuntimeException(e);
                 }
             }
         }
