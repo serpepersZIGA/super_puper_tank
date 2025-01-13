@@ -39,8 +39,8 @@ public class TrackSoldatT1 extends Transport {
         this.time_spawn_soldat_max = 200;
         this.hill = 4;
         this.corpus_img = Main.ContentImage.track_enemy_1lvl;
-        this.corpus_width = 35;
-        this.corpus_height = 100;
+        this.corpus_width = 50;
+        this.corpus_height = 129;
 
 
         this.speed_tower = 1;

@@ -4,14 +4,13 @@ import Content.Particle.Flame;
 import Content.Particle.FlameParticle;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
-import com.mygdx.game.method.Method;
-import com.mygdx.game.method.SoundPlay;
-import com.mygdx.game.method.rand;
+import com.mygdx.game.method.*;
 
 import java.util.LinkedList;
 
 import static com.mygdx.game.method.Option.SoundConst;
 import static com.mygdx.game.method.pow2.pow2;
+import static java.lang.StrictMath.atan2;
 import static java.lang.StrictMath.sqrt;
 
 public abstract class Particle {
@@ -70,42 +69,29 @@ public abstract class Particle {
         this.size_2 = this.size/2;
         this.size_3 = this.size_2-2;
     }
-    private int radCollision;
-    protected float RotationXY;
-    public int xCollision,yCollision;
-    protected void liquid_const(){
-        if(Main.LiquidList.size()> 1) {
-            int[] rg = Method.detection_near_particle_xy_def(Main.LiquidList, Main.LiquidList.size()-1,Main.LiquidList);
-            if (rg[0] != 0) {
-                RotationXY = (int) ((-rg[1]) / 3.1415926535 * 180);
-                //liquid_obj.get(rg[2]).speed_x = move.move_sin2(3, RotationXY);
-                //liquid_obj.get(rg[2]).speed_y = move.move_cos2(3, RotationXY);
-                //this.speed_x = move.move_sin2(3, RotationXY);
-                //this.speed_y = move.move_cos2(3, RotationXY);
-                radCollision = rg[0];
-                xCollision = rg[2];
-                yCollision = rg[3];
-                //Main.LiquidList.get(rg[2]).xCollision = (int) x;
-                //Main.LiquidList.get(rg[2]).yCollision = (int) y;
-                //Main.LiquidList.get(rg[2]).speed_x = -this.speed_x;
-                //Main.LiquidList.get(rg[2]).speed_y = -this.speed_y;
-            }
-            else{
-                xCollision = (int) x;
-                yCollision = (int) y;
+    public void liquid_const(){
+        int i = Main.LiquidList.size()-1;
+        if(i> 1) {
+            int g;
+            float r;
+            int radius = 0;
+            for (int i2 = 0; i2 < Main.LiquidList.size(); i2++) {
+                g = (int)sqrt(pow2.pow2(Main.LiquidList.get(i).x - Main.LiquidList.get(i2).x) + pow2.pow2(Main.LiquidList.get(i).y - Main.LiquidList.get(i2).y));
+                if(g<Main.LiquidList.get(i).size_2+Main.LiquidList.get(i2).size_2){
+                    r = (float) (atan2(Main.LiquidList.get(i).y - Main.LiquidList.get(i2).y, Main.LiquidList.get(i).x - Main.LiquidList.get(i2).x) / 3.14 * 180);
+                    Main.LiquidList.get(i).x -= move.move_sin2(7, r);
+                    Main.LiquidList.get(i).y -= move.move_cos2(7, r);
+                    Main.LiquidList.get(i2).x += move.move_sin2(7, r);
+                    Main.LiquidList.get(i2).y += move.move_cos2(7, r);
+                    if (radius > g || radius == 0) {
+                        if (Main.LiquidList.get(i2).x != Main.LiquidList.get(i).x && Main.LiquidList.get(i2).y != Main.LiquidList.get(i).y) {
+                            radius = g;
+                        }
+                    }
+                }
             }
         }
 
-    }
-    protected void liquid_physic(){
-        radCollision = (int) sqrt(pow2(x-xCollision)+pow2(y-yCollision));
-        if (radCollision < this.size_3) {
-            this.x -= speed_x;
-            this.y -= speed_y;
-        } else if (radCollision < this.size && radCollision > this.size_2) {
-            this.x += speed_x;
-            this.y += speed_y;
-        }
     }
     protected void center_render(){
         float[]xy = Main.RC.render_objZoom(this.x,this.y);

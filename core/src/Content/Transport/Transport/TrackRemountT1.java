@@ -39,7 +39,7 @@ public class TrackRemountT1 extends Transport {
 
         this.x_tower = 15;
         this.y_tower = 20;
-        this.difference = -18;
+        this.difference = 18;
         this.distance_target = 200;
         this.distance_target_2 = 80;
 

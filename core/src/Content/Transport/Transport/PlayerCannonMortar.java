@@ -49,7 +49,7 @@ public class PlayerCannonMortar extends Transport {
                 (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.machinegun));
         this.tower_obj.add(new TowerBullTankPlayer(18,55,52,12,5,2,20,12, this.id_unit,
                 (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.machinegun));
-        this.difference = -18;
+        this.difference = 18;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = 21;
         this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);

@@ -44,7 +44,7 @@ public class PlayerCannonAcid extends Transport {
                 this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlamePlayer(18,55,52,-12,2,2,12,5,2,this.id_unit,this.height,
                 this.team,Main.ContentImage.tower_player_auxiliary_1,this.allyList,Main.ContentSound.flame_attack));
-        this.difference = -18;
+        this.difference = 18;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = 21;
         this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);

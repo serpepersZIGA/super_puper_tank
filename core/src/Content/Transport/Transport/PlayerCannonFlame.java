@@ -49,7 +49,7 @@ public class PlayerCannonFlame extends Transport {
                 65,12,15,15, this.id_unit,
                 (byte)1,(byte)1,Main.ContentImage.tower_player_auxiliary_1,this.allyList, Main.ContentSound.cannon));
 
-        this.difference = -18;
+        this.difference = 18;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = 21;
         this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);

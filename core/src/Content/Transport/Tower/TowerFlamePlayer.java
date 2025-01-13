@@ -17,7 +17,6 @@ public class TowerFlamePlayer extends Transport {
         this.sound_fire = sound;
         this.speed_tower = speed_rotation;
         this.t_damage = t_damage;
-        this.difference = -difference;
         this.reload_max = reload_max;
         this.reload = this.reload_max;
         this.damage = damage;
@@ -27,7 +26,8 @@ public class TowerFlamePlayer extends Transport {
         this.teg_unit = "tower";
         this.height = height;
         this.team = team;
-        this.difference_2 = -difference_2;
+        this.difference = difference;
+        this.difference_2 = difference_2;
         data_tower();
         this.width_tower = 15;
         this.height_tower = 20;

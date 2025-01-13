@@ -40,7 +40,7 @@ public class PlayerCannonBullTank extends Transport {
         this.sound_fire = Main.ContentSound.cannon;
         this.speed_tower = 1;this.speed_rotation = 1;
         data();
-        this.difference = -18;
+        this.difference = 18;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = 21;
         this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);

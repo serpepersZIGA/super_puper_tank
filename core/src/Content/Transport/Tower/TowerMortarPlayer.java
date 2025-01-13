@@ -19,7 +19,6 @@ public class TowerMortarPlayer extends Transport {
         this.speed_tower = speed_rotation;
         this.damage_fragment = damage_fragment;
         this.penetration_fragment = penetration_fragment;
-        this.difference = -difference;
         this.reload_max = reload_max;
         this.reload = this.reload_max;
         this.damage = damage;
@@ -29,7 +28,8 @@ public class TowerMortarPlayer extends Transport {
         this.teg_unit = "tower";
         this.height = height;
         this.team = team;
-        this.difference_2 = -difference_2;
+        this.difference = difference;
+        this.difference_2 = difference_2;
         data_tower();
         this.width_tower = 15;
         this.height_tower = 20;
