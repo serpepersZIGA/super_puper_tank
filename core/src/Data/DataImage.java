@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class DataImage {
     public Sprite tower_player, tower_player_auxiliary_1,tower_enemy, tower_enemy_auxiliary_1;
-    public Sprite corpus_player,corpus_track_remount_enemy,corpus_track_soldat_enemy,corpus_enemy,helicopter_enemy_t1;
+    public Sprite corpus_player,corpus_track_remount_enemy,corpus_track_soldat_enemy,corpus_enemy,helicopter_enemy_t1,
+            helicopter_blade;
     public Sprite build_1, big_build_wood_1;
     public Sprite track_enemy_1lvl;
     public Sprite grass,dirt_2,dirt_3,dirt_4;
@@ -31,6 +32,7 @@ public class DataImage {
         soldat_1 = new Sprite(LoadImage("image/infantry/soldat_enemy.png"));
         helicopter_enemy_t1 = new Sprite(LoadImage("image/enemy/helicopter_corpus.png"));
         track_enemy_1lvl = new Sprite(LoadImage("image/enemy/machine_enemy_1lvl.png"));
+        helicopter_blade = new Sprite(LoadImage("image/other/blade_helicopter.png"));
         new Sprite(LoadImage("image/enemy/machine_enemy_1lvl.png"));
         buff.dispose();
     }
@@ -54,7 +56,8 @@ public class DataImage {
         tower_player_auxiliary_1 = null;
         tower_enemy_auxiliary_1 = null;
         soldat_1 = null;
+        helicopter_enemy_t1 = null;
+        helicopter_blade = null;
         track_enemy_1lvl = null;
-
     }
 }

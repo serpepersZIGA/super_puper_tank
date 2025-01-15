@@ -12,12 +12,12 @@ public class HelicopterT1 extends Transport {
     public HelicopterT1(float x, float y, ArrayList<Transport>tr){
         this.type_unit = UnitType.HelicopterT1;
         this.corpus_img = Main.ContentImage.helicopter_enemy_t1;
-        this.tower_img = Main.ContentImage.helicopter_enemy_t1;
+        this.tower_img = Main.ContentImage.helicopter_blade;
         this.x = x;this.y = y;
         corpus_width = 60;
         corpus_height = 200;
-        width_tower = 60;
-        height_tower = 200;
+        width_tower = 120;
+        height_tower = 120;
         this.speed_inert = 0;this.speed = 0;
         this.max_speed = 6;this.min_speed = -6;
         this.damage = 200;
@@ -26,9 +26,6 @@ public class HelicopterT1 extends Transport {
         this.max_hp = 850;
         this.armor = 50;
         this.acceleration = 0.5f;
-        this.difference = -22;
-        this.tower_x_const = -12;
-        this.tower_y_const = 20;
         this.height = 2;
         this.behavior = (byte) (2);
         this.reload_max = 180;
@@ -44,17 +41,18 @@ public class HelicopterT1 extends Transport {
 
         this.speed_rotation = 3;
         data();
-        this.difference = 18;
+        this.difference = 42;
+        speed_tower = 10;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = (int)(height_tower/2);
-        this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);
-        this.tower_y_const = (int) (corpus_height/2)-(height_tower/2)+7;
+        this.tower_x_const = (int) (corpus_width/2)-(width_tower/2)+1;
+        this.tower_y_const = (int) (corpus_height/2)-(height_tower/2);
         center_render();
     }
     public void all_action(int i) {
         super.all_action(i);
         super.helicopter_ii(this.enemyList,i);
-        super.bot_bull_tank_fire_not_tower(this.allyList,i);
+        super.bot_bull_tank_fire_not_tower(i);
         super.tower_xy();
         super.blade_helicopter();
         center_render();

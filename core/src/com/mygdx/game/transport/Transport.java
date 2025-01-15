@@ -356,27 +356,22 @@ public abstract class Transport{
 
     private void bot_fire(int i, ArrayList<Transport>obj_1, ArrayList<Transport>obj_2){
         guidance = reload_bot();
-
-            if (obj_2.size() != 0) {
-                try {
-                    int i2 = Method.detection_near_transport_i(obj_1, i, obj_2);
-                    this.sost_fire_bot = fire_bot(obj_2.get(i2).tower_x, obj_2.get(i2).tower_y);
-                } catch (Exception ignored) {
-
-                }
-            }
-    }
-    private void enemy_fire_not_tower(ArrayList<Transport>tr, int i){
-        if(this.enemyList.size() != 0) {
-            int i2 = Method.detection_near_transport_i(tr, i,this.enemyList);
-            this.sost_fire_bot = fire_bot_not_tower(this.enemyList.get(i2).x,this.enemyList.get(i2).y);
+        if (obj_2.size() != 0) {
+            int i2 = Method.detection_near_transport_i(obj_1, i, obj_2);
+            this.sost_fire_bot = fire_bot(obj_2.get(i2).tower_x, obj_2.get(i2).tower_y);
         }
     }
-    protected void bot_bull_tank_fire_not_tower(ArrayList<Transport>tr, int i){
-        enemy_fire_not_tower(tr,i);
-        if(this.sost_fire_bot && this.trigger_attack){
+    private boolean enemy_fire_not_tower(int i){
+        if(this.enemyList.size() != 0) {
+            int i2 = Method.detection_near_transport_i(this.allyList, i,this.enemyList);
+            return fire_bot_not_tower(this.enemyList.get(i2).x,this.enemyList.get(i2).y);
+        }
+        return false;
+    }
+    protected void bot_bull_tank_fire_not_tower(int i){
+        if(enemy_fire_not_tower(i)){
             SoundPlay.sound( this.sound_fire,1-((float) sqrt(pow2(this.x_rend) + pow2(this.y_rend))/200));
-            Main.BullList.add(new BullTank(this.tower_x,this.tower_y,this.rotation_corpus,this.damage,this.penetration,this.team,this.height));
+            Main.BullList.add(new BullTank(this.tower_x,this.tower_y,-this.rotation_corpus+180,this.damage,this.penetration,this.team,this.height));
 
         }
     }
@@ -395,7 +390,7 @@ public abstract class Transport{
         }
     }
     protected void blade_helicopter(){
-        this.rotation_tower += 10;
+        this.rotation_tower += speed_tower;
     }
     //public void
     protected void bot_fragmentation_bull_fire(int i, ArrayList<Transport>obj_1, ArrayList<Transport>obj_2){
@@ -510,8 +505,7 @@ public abstract class Transport{
         Render.rect((this.x_rend- Option.const_reload_x_zoom),(this.y_rend- Option.const_reload_y_zoom),(int)(green_len_reload* Main.Zoom), Option.size_y_indicator_zoom);
     }
     protected void fire_player_bull_tank(){
-        reload_bot();
-        if(this.left_mouse && this.reload <= 0){
+        if(reload_bot() && this.left_mouse){
             for (Transport transport : this.enemyList) {
                 if (sqrt(pow2(this.x - transport.x) + pow2(this.y - transport.y)) < transport.range_see_2) {
                     transport.time_trigger_bull_bot = transport.time_trigger_bull;
@@ -530,8 +524,7 @@ public abstract class Transport{
         }
     }
     protected void fire_player_flame(){
-        reload_bot();
-        if(this.left_mouse && this.reload <= 0){
+        if(reload_bot() && this.left_mouse){
 
             for (Transport enemy : this.enemyList) {
                 if (sqrt(pow2(this.x - enemy.x) + pow2(this.y - enemy.y)) < enemy.range_see_2) {
@@ -559,8 +552,7 @@ public abstract class Transport{
         }
     }
     protected void fire_player_fragmentation_bull(){
-        reload_bot();
-        if(this.left_mouse && this.reload <= 0){
+        if(reload_bot() && this.left_mouse){
             for (Transport transport : this.enemyList) {
                 if (sqrt(pow2(this.x - transport.x) + pow2(this.y - transport.y)) < transport.range_see_2) {
                     transport.time_trigger_bull_bot = transport.time_trigger_bull;
@@ -583,8 +575,7 @@ public abstract class Transport{
     }
 
     protected void fire_player_acid(){
-        reload_bot();
-        if(this.left_mouse && this.reload <= 0){
+        if(reload_bot() && this.left_mouse){
             for (Transport transport : enemyList) {
                 if (sqrt(pow2(this.x - transport.x) + pow2(this.y - transport.y)) < transport.range_see_2) {
                     transport.time_trigger_bull_bot = transport.time_trigger_bull;
@@ -622,11 +613,9 @@ public abstract class Transport{
     }
     protected boolean fire_bot_not_tower(double obj_x,double obj_y){
         g = (float) (atan2(this.tower_y - obj_y,this.tower_x-obj_x ) / 3.1415926535f * 180f);
-        g +=90;
+        g -=90;
         sost_fire_bot = abs(g-rotation_corpus)<20;
-        this.reload-= 1;
-        guidance = reload_bot();
-        if(sost_fire_bot && guidance){
+        if(reload_bot() & sost_fire_bot){
             this.reload = this.reload_max;
             return true;
         }

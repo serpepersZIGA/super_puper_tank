@@ -131,6 +131,7 @@ public class Main extends ApplicationAdapter {
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		EnemyList.add(new TrackSoldatT1(2200,2000,Main.EnemyList));
 		EnemyList.add(new HelicopterT1(2200,2000,Main.EnemyList));
+
 		//EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
 		LiquidList.add(new Acid(200,200));
 		LiquidList.add(new Blood(200,200));
