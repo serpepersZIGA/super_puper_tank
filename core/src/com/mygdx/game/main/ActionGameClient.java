@@ -62,6 +62,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
         Batch.begin();
         Render.begin(ShapeRenderer.ShapeType.Filled);
         Main.RC.render_block();
+        if(flame_spawn_time > 0){flame_spawn_time-=1;}
         Batch.end();
         for (i= 0; i< Main.LiquidList.size(); i++){
             Main.LiquidList.get(i).all_action(i);}
@@ -73,7 +74,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
             Main.FlameParticleList.get(i).all_action(i);}
         for (i = 0; i< Main.BullList.size(); i++){
             if(Main.BullList.get(i).height == 1) {
-                Main.BullList.get(i).all_action_client(i);
+                Main.BullList.get(i).all_action(i);
             }
         }
         Render.end();
@@ -107,7 +108,7 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
 
         for (i = 0; i< Main.BullList.size(); i++){
             if(Main.BullList.get(i).height == 2) {
-                Main.BullList.get(i).all_action_client(i);
+                Main.BullList.get(i).all_action(i);
             }
         }
         for (i= 0; i< PlayerList.size(); i++){
@@ -122,7 +123,9 @@ public class ActionGameClient extends com.mygdx.game.main.ActionGame {
             }
         }
         for (i= 0; i< Main.BangList.size(); i++){
-            Main.BangList.get(i).all_action(i);}
+            Main.BangList.get(i).all_action(i);
+        }
+        if(flame_spawn_time < 0){flame_spawn_time=flame_spawn_time_max;}
         Render.end();
         Batch.end();
         client_packet();

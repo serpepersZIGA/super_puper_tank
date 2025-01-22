@@ -27,6 +27,8 @@ import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
 import com.mygdx.game.method.Option;
 import com.mygdx.game.method.RenderCenter;
+import com.mygdx.game.object_map.MapObject;
+import com.mygdx.game.object_map.VoidObject;
 import com.mygdx.game.particle.*;
 import com.mygdx.game.soldat.Soldat;
 import Content.Soldat.SoldatRegister;
@@ -85,6 +87,7 @@ public class Main extends ApplicationAdapter {
 	public static ClientMain Main_client;
 	public static Option Option;
 	public static PackerServer PacketServer;
+	public static MapObject VoidObj;
 	public static PacketBuildingServer PacketBuildingServer;
 	public static Packet_client PacketClient;
 	public static int TickBlock,TickBlockMax = 600;
@@ -102,6 +105,7 @@ public class Main extends ApplicationAdapter {
 	private Viewport viewport;
 	public static PlayerSpawnData SpawnPlayer;
 	public static CycleTimeDay CycleDayNight;
+	public static int flame_spawn_time,flame_spawn_time_max = 20;
 
 
 
@@ -129,8 +133,8 @@ public class Main extends ApplicationAdapter {
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
-		EnemyList.add(new TrackSoldatT1(2200,2000,Main.EnemyList));
-		EnemyList.add(new HelicopterT1(2200,2000,Main.EnemyList));
+		//EnemyList.add(new TrackSoldatT1(2200,2000,Main.EnemyList));
+		//EnemyList.add(new HelicopterT1(2200,2000,Main.EnemyList));
 
 		//EnemyList.add(new TrackRemountT1(2200,2100,Main.EnemyList));
 		LiquidList.add(new Acid(200,200));
@@ -202,11 +206,12 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		VoidObj = new VoidObject();
 		textureBuffer = new Texture("image/infantry/soldat_enemy.png");
 		ContentImage = new DataImage();
 		ContentSound = new DataSound();
 		new PlayerSpawnListData();
-		CycleDayNight = new CycleTimeDay(10,10,5,5,0.5f,0.9f);
+		CycleDayNight = new CycleTimeDay(5,5,3,3,0.4f,0.9f);
 		BuildingRegister = new UpdateBuildingRegister();
 		PacketBuildingServer = new PacketBuildingServer();
 		Render = new ShapeRenderer();

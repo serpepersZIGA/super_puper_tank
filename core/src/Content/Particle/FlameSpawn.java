@@ -10,9 +10,7 @@ public class FlameSpawn extends Particle {
     public FlameSpawn(float x, float y){
         this.x = x;
         this.y = y;
-        time_spawn_max = 5;
         this.time_delete = 400;
-        this.time_spawn = time_spawn_max;
         grass_delete();
         rgb = RGBFlame;
 

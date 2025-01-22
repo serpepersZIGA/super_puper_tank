@@ -5,12 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
+import com.mygdx.game.object_map.MapObject;
+import com.mygdx.game.object_map.ObjectLoad;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.mygdx.game.main.Main.BlockList2D;
+import static com.mygdx.game.object_map.ObjectLoad.MapSpawnObject;
 import static java.nio.file.Files.readAllLines;
 
 public class MapScan {
@@ -108,11 +113,12 @@ public class MapScan {
             } else if (c == ';' & confS) {
                 confS = false;
 
-            } else if (Objects.equals(TotalTxT, "str{")) {
+            }else if (Objects.equals(TotalTxT, "str{")) {
                 StructConf = true;
                 TotalTxT = "";
                 TotalTxT = TotalTxT + c;
-            } else if (c == '}'& StructConf) {
+            }
+            else if (c == '}'& StructConf) {
                 Build = TotalTxT;
                 //StructConf = false;
             } else if (!confS) {
@@ -151,9 +157,9 @@ public class MapScan {
     }
 
     private static void BlockDelete() {
-        for (int i = 0; i < Main.BlockList2D.size(); i++) {
-            for (int i2 = 0; i2 < Main.BlockList2D.get(i).size(); i2++) {
-                Main.BlockList2D.get(i).get(i2).render_block = UpdateRegister.GrassUpdate;
+        for (int i = 0; i < BlockList2D.size(); i++) {
+            for (int i2 = 0; i2 < BlockList2D.get(i).size(); i2++) {
+                BlockList2D.get(i).get(i2).render_block = UpdateRegister.GrassUpdate;
             }
         }
     }
@@ -171,15 +177,63 @@ public class MapScan {
                 case "Asphalt": {
                     AsphaltSpawn(x, y);
                 }
-                break;
             }
         }
-//        if (Objects.equals(Build, "BigBuildingWood1")) {
-//            Main.BuildingList.add(new BigBuildingWood1(x*Main.width_block, y*Main.height_block));
-//        } else if (Objects.equals(Build, "Asphalt")) {
-//            AsphaltSpawn(x, y);
-//        } else if (Objects.equals(Build, "Structure{street1}")) {
-//            SpawnStructure("Structure/street1.str",x, y);}
+    }
+    public static void SpawnObjectBlock(String Obj,int x,int y){
+        int conf = 0;
+        ArrayList<Object>dataObj = new ArrayList<>();
+        StringBuilder result = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader("Map/ObjectMap/"+Obj+".objM"))) {
+            result.append(br.readLine());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            MapBaseAdd.AddMap();
+            try {
+                BufferedReader br = new BufferedReader(new FileReader("Map/ObjectMap/"+Obj+".objM"));
+                result.append(br.readLine());
+            } catch (IOException ignored) {
+            }
+        }
+        FileHandle file = Gdx.files.internal("Map/ObjectMap/"+Obj+".objM");
+        String TxT = file.readString();
+        String TotalTxT = "";
+        String X = "";
+        String Y = "";
+        for (int i = 0; i < TxT.length(); i++) {
+            char c = TxT.charAt(i);
+            if (c == '\n' || c == ',' || c == ' ' || c == '/') {
+                TotalTxT = "";
+            }
+            else if (c == ':') {
+                if (conf == 0) {
+                    TotalTxT = "";
+                    conf += 1;
+                }
+                else if (conf == 1) {
+                    X = TotalTxT;
+                    TotalTxT = "";
+                    x += Integer.parseInt(X);
+                    conf += 1;
+                } else if (conf == 2) {
+                    conf += 1;
+                    Y = TotalTxT;
+                    TotalTxT = "";
+                    y += Integer.parseInt(Y);
+                }
+                else{
+                    conf += 1;
+                    dataObj.add(dataIntilization(TotalTxT));
+                    TotalTxT = "";
+                }
+            } else if (c == ';') {
+                MapSpawnObject("ObjectMap",x,y,dataObj);
+            } else {
+                TotalTxT = TotalTxT+c;
+            }
+        }
+
     }
 
     private static void MapSpawnBlock(String Build, int x, int y, int z, int conf) {
@@ -197,14 +251,18 @@ public class MapScan {
     }
 
     public static void AsphaltSpawn(int x, int y) {
-        Main.BlockList2D.get(y).get(x).render_block = UpdateRegister.UpdateAsphalt1;
+        BlockList2D.get(y).get(x).render_block = UpdateRegister.UpdateAsphalt1;
     }
+
     private static void SpawnStructure(String Struct, int xStr, int yStr) {
         int conf = 0;
         String TxT = "";
         boolean confAsphalt = false;
         boolean confAsphaltX = false;
         boolean confAsphaltY = false;
+        boolean StructConf = false;
+        boolean ObjConf = false;
+        ArrayList<Object>dataObj = new ArrayList<>();
         StringBuilder result = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(Struct))) {
             result.append(br.readLine());
@@ -239,16 +297,24 @@ public class MapScan {
                 if (conf == 0) {
                     Build = TotalTxT;
                     TotalTxT = "";
-                } else if (conf == 1) {
+                    conf += 1;
+                }
+                else if (conf == 1) {
                     X = TotalTxT;
                     TotalTxT = "";
                     x = Integer.parseInt(X);
+                    conf += 1;
                 } else if (conf == 2) {
+                    conf += 1;
                     Y = TotalTxT;
                     TotalTxT = "";
                     y = Integer.parseInt(Y);
                 }
-                conf += 1;
+                else{
+                    conf += 1;
+                    dataObj.add(dataIntilization(TotalTxT));
+                    TotalTxT = "";
+                }
             }  else if (c == '>') {
                 confAsphalt = true;
             } else if (c == 'X' & confAsphalt) {
@@ -256,8 +322,17 @@ public class MapScan {
             } else if (c == 'Y' & confAsphalt) {
                 confAsphaltY = true;
             } else if (c == ';') {
-                if (!confAsphalt) {
-                    MapSpawn(Build, xStr + x, yStr +y,false);
+                if(ObjConf){
+                    SpawnObjectBlock((String) dataObj.get(0),x,y);
+                    ObjConf = false;
+                }
+                else if (!confAsphalt) {
+                    if(conf <4) {
+                        MapSpawn(Build, xStr + x, yStr + y, false);
+                    }
+                    else{
+                        MapSpawnObject(Build, xStr + x, yStr + y, dataObj);
+                    }
                 } else {
                     if (confAsphaltX) {
                         Z = TotalTxT;
@@ -279,13 +354,51 @@ public class MapScan {
                 TotalTxT = "";
                 x = 0;
                 y = 0;
+                dataObj.clear();
                 Build = "";
                 conf = 0;
 
-            } else{
+            }
+            else if (Objects.equals(TotalTxT, "(obj)")) {
+                ObjConf = true;
+                TotalTxT = "";
+                TotalTxT = TotalTxT + c;
+            }
+
+            else if (Objects.equals(TotalTxT, "ObjectMap")) {
+
+            }
+            else{
                 TotalTxT = TotalTxT + c;
             }
         }
 
+    }
+    public static void IncilizationObject(){
+
+    }
+    public static Object dataIntilization(String str){
+        String TotalTxT = "";
+        boolean g = false;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Objects.equals(TotalTxT, "(int)")) {
+                g = true;
+                TotalTxT = "";
+                TotalTxT = TotalTxT+c;
+            }
+            else if(c == ' '){
+
+            }
+            else{
+                TotalTxT = TotalTxT + c;
+            }
+        }
+        if(g) {
+            return Integer.parseInt(TotalTxT);
+        }
+        else{
+            return TotalTxT;
+        }
     }
 }

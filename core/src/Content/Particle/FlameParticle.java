@@ -24,8 +24,8 @@ public class FlameParticle extends Particle {
         super.timer(i, Main.FlameParticleList);
     }
     public void update(){
-        center_render();
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
         Main.Render.setColor(r,g,b,0.4f);
-        Main.Render.circle(this.x_rend,this.y_rend,size_render,size_render);
+        Main.Render.circle(xy[0],xy[1],size_render,size_render);
     }
 }

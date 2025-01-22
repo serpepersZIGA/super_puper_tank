@@ -64,7 +64,7 @@ public class PanzerFlameT1 extends Transport {
         super.behavior_bot(this.enemyList, i);
         super.bot_flame_fire(i, allyList, enemyList);
         super.tower_ii(i);
-        super.build_corpus();
+        super.build_corpus(i);
         super.corpus_corpus_def_xy(this.allyList);
         super.tower_xy();
         center_render();

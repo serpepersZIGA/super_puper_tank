@@ -1,0 +1,3 @@
+ObjectMap:-2:-2:(int)2:(int)2:pepper_object_map:(int)20:(int)20:(int)120:CollisionBreak:true:(int)600:;
+ObjectMap:8:-2:(int)2:(int)2:big_build_wood_1:(int)20:(int)20:(int)120:CollisionSlow:true:(int)120:;
+(obj)ObjectMap:14:10:pepper:;

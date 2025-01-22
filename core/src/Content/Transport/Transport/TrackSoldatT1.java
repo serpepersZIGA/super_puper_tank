@@ -50,7 +50,7 @@ public class TrackSoldatT1 extends Transport {
     public void all_action(int i){
         super.all_action(i);
         super.behavior_bot(this.enemyList, i);
-        super.build_corpus();
+        super.build_corpus(i);
         super.corpus_corpus_def_xy(Main.EnemyList);
         super.spawn_soldat(Main.SoldatList);
         center_render();

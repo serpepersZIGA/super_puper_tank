@@ -48,6 +48,7 @@ public class ActionMenu extends ActionGame {
         catch(Exception ignored){
 
         }
+        if(flame_spawn_time > 0){flame_spawn_time-=1;}
         Batch.begin();
         Render.begin(ShapeRenderer.ShapeType.Filled);
         Main.RC.render_block();
@@ -123,6 +124,7 @@ public class ActionMenu extends ActionGame {
                 ButtonList.get(i).TXTRender2();
             }
         }
+        if(flame_spawn_time <= 0){flame_spawn_time=flame_spawn_time_max;}
         Batch.end();
         if(GameStart) {
             PacketServer = new PackerServer();

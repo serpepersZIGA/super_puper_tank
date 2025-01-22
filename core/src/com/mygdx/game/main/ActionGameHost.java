@@ -8,6 +8,7 @@ import Content.Soldat.SoldatPacket;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
+import com.mygdx.game.object_map.MapObject;
 import com.mygdx.game.transport.DebrisPacket;
 import com.mygdx.game.transport.Transport;
 import com.mygdx.game.transport.TransportPacket;
@@ -17,6 +18,7 @@ import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.main.ServerMain.Server;
 import static Content.Soldat.SoldatRegister.PacketSoldat;
+import static com.mygdx.game.method.CycleTimeDay.lightTotal;
 import static com.mygdx.game.transport.TransportRegister.*;
 
 public class ActionGameHost extends com.mygdx.game.main.ActionGame {
@@ -75,6 +77,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         //Main.player_obj.get(1).all_action_client(Main.left_mouse_client, Main.right_mouse_client, Main.mouse_x_client,
                 //Main.mouse_y_client, Main.press_w_client, Main.press_a_client, Main.press_s_client, Main.press_d_client);
         if(Transport.ai_sost != 0){Transport.ai_sost-=1;}
+        if(flame_spawn_time > 0){flame_spawn_time-=1;}
         Batch.begin();
         Render.begin(ShapeRenderer.ShapeType.Filled);
         Main.RC.render_block();
@@ -147,6 +150,7 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         Batch.end();
         server_packet();
         if(Transport.ai_sost == 0){Transport.ai_sost=400;}
+        if(flame_spawn_time <= 0){flame_spawn_time=flame_spawn_time_max;}
         CycleDayNight.WorkTime();
     }
     private void server_packet() {
@@ -167,9 +171,11 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
         PacketServer.enemy = PacketEnemy;
         PacketServer.bull = PacketBull;
         PacketServer.building = PacketBuilding;
+        PacketServer.mapObject = MapObject.PacketMapObjects;
         PacketServer.TotalLight = CycleTimeDay.lightTotal;
 
         Server.sendToAllUDP(PacketServer);
+        MapObject.PacketMapObjects.clear();
         PacketPlayer.clear();
         PacketEnemy.clear();
         PacketBull.clear();

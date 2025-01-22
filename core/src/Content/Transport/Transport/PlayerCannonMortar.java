@@ -63,7 +63,7 @@ public class PlayerCannonMortar extends Transport {
         super.host_control();
         super.motor_player();
         super.fire_player_fragmentation_bull();
-        super.build_corpus();
+        super.build_corpus(i);
         super.corpus_corpus(this.enemyList);
         super.tower_xy();
         super.tower_player();
@@ -82,7 +82,7 @@ public class PlayerCannonMortar extends Transport {
         super.client_control();
         super.motor_player();
         super.fire_player_fragmentation_bull();
-        super.build_corpus();
+        super.build_corpus(i);
         super.corpus_corpus(this.enemyList);
         super.corpus_corpus_def_xy(this.allyList);
         super.tower_xy();
@@ -95,6 +95,7 @@ public class PlayerCannonMortar extends Transport {
     }
     @Override
     public void all_action_client_1(int i) {
+        super.all_action_client_1(i);
         move_xy_transport();
         super.tower_xy();
         super.tower_player();
@@ -109,6 +110,7 @@ public class PlayerCannonMortar extends Transport {
 
     }
     public void all_action_client_2(int i) {
+        super.all_action_client_2(i);
         super.tower_xy();
         center_render();
         move_xy_transport();

@@ -13,9 +13,8 @@ public class Flame extends Particle {
         this.y = y;
         this.size = 14+rand.rand(10);
         this.size_render = (int)(size*Main.Zoom);
+        time_spawn_max = 60;
         this.time_delete = 60;
-        this.time_spawn_max = 60;
-        this.time_spawn = this.time_spawn_max;
         super.size_update();
         int z =  rand.rand(3);
         switch(z){
@@ -33,9 +32,9 @@ public class Flame extends Particle {
 
     }
     public void update(){
-        center_render();
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
         Main.Render.setColor(r,g,b,1);
-        Main.Render.circle(this.x_rend,this.y_rend,size_render,size_render);
+        Main.Render.circle(xy[0],xy[1],size_render,size_render);
     }
 
 }

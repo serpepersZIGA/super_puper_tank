@@ -159,6 +159,14 @@ public class Keyboard extends InputAdapter{
         radius_air_max_zoom = radius_air_max*Main.Zoom;
         Block.lighting_zoom = lighting*Main.Zoom;
         Block.lighting_zoom_2 = Block.lighting_zoom / 2;
+        for(int iy = 0;iy< BlockList2D.size();iy++){
+            for(int ix = 0;ix< BlockList2D.get(iy).size();ix++) {
+                if(BlockList2D.get(iy).get(ix).objMap != null) {
+                    BlockList2D.get(iy).get(ix).objMap.width_render = (int) (BlockList2D.get(iy).get(ix).objMap.width * Main.Zoom);
+                    BlockList2D.get(iy).get(ix).objMap.height_render = (int) (BlockList2D.get(iy).get(ix).objMap.height * Main.Zoom);
+                }
+            }
+        }
         for(Building building : Main.BuildingList){
             building.width_render = (int)(building.width* Main.Zoom);
             building.height_render = (int)(building.height* Main.Zoom);

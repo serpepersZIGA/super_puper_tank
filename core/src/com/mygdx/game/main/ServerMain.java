@@ -14,6 +14,8 @@ import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
+import com.mygdx.game.object_map.ObjectMapAssets;
+import com.mygdx.game.object_map.PacketMapObject;
 import com.mygdx.game.transport.DebrisPacket;
 import Content.Transport.Transport.DebrisTransport;
 import com.mygdx.game.transport.SpawnPlayer.*;
@@ -74,6 +76,9 @@ public class ServerMain extends Listener {
         Server.getKryo().register(SpawnPlayerCannonBull.class);
         Server.getKryo().register(SpawnPlayerVoid.class);
 
+        Server.getKryo().register(PacketMapObject.class);
+        Server.getKryo().register(ObjectMapAssets.class);
+
         //Регистрируем порт
         try {
             Server.bind(tcpPort, udpPort);
@@ -93,11 +98,29 @@ public class ServerMain extends Listener {
         for (int i = 0;i<Main.BuildingList.size();i++){
             PacketBuildServer(i);
         }
+        for (int iy = 0; iy< BlockList2D.size(); iy++){
+            PacketBuildingServer.ObjectMapPack.add(new ArrayList<>());
+            for (int ix = 0; ix< BlockList2D.get(iy).size(); ix++){
+                PacketObjectMapServer(ix,iy,PacketBuildingServer.ObjectMapPack.get(iy));
+            }
+        }
         PacketBuildingServer.FlameLight = CycleTimeDay.lightFlame;
         Server.sendToAllTCP(PacketBuildingServer);
         ZoomConstTransport();
         KeyboardObj.zoom_const();
 
+    }
+    public void PacketObjectMapServer(int ix,int iy,ArrayList<PacketMapObject>YMap){
+        YMap.add(new PacketMapObject());
+        YMap.get(ix).x = BlockList2D.get(iy).get(ix).objMap.x;
+        YMap.get(ix).y = BlockList2D.get(iy).get(ix).objMap.y;
+        YMap.get(ix).width = BlockList2D.get(iy).get(ix).objMap.width;
+        YMap.get(ix).height = BlockList2D.get(iy).get(ix).objMap.height;
+        YMap.get(ix).ix = ix;
+        YMap.get(ix).iy = iy;
+        YMap.get(ix).lighting = BlockList2D.get(iy).get(ix).objMap.lighting;
+        YMap.get(ix).distance_lighting = BlockList2D.get(iy).get(ix).objMap.distance_lighting;
+        YMap.get(ix).objectAssets = BlockList2D.get(iy).get(ix).objMap.assets;
     }
     public void PacketBuildServer(int i){
         PacketBuildingServer.BuildPack.add(new BuildPacket());

@@ -1,18 +1,16 @@
 package com.mygdx.game.block;
 
-import Content.Block.Air;
-import Content.Particle.FlameSpawn;
-import com.mygdx.game.build.Building;
 import com.mygdx.game.main.Main;
+import com.mygdx.game.object_map.MapObject;
+import com.mygdx.game.object_map.VoidObject;
+import com.mygdx.game.transport.Transport;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.util.*;
 
 import static com.mygdx.game.block.UpdateRegister.VoidUpdate;
 import static com.mygdx.game.main.Main.AirList;
-import static com.mygdx.game.main.Main.FlameSpawnList;
 import static com.mygdx.game.method.CycleTimeDay.*;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
@@ -24,6 +22,7 @@ public abstract class Block {
     public float radius;
 
     public UpdateBlock render_block;
+    public MapObject objMap;
     private int i;
     public boolean passability;
     private float r;
@@ -71,14 +70,17 @@ public abstract class Block {
         area1.intersect(area2);
         return !area1.isEmpty();
     }
+    private static int[]xy;
 
     public void update(){
-        int[]xy = Main.RC.render_objZoom(this.x,this.y);
+        xy = Main.RC.render_objZoom(this.x,this.y);
         render_block.render(xy[0],xy[1]);
+        this.objMap.render();
     }
     public void updateTick(int ix,int iy){
-        int[]xy = Main.RC.render_objZoom(this.x,this.y);
+        xy = Main.RC.render_objZoom(this.x,this.y);
         render_block.renderTick(xy[0],xy[1],ix,iy);
+        this.objMap.render();
     }
     public void render(){
     }
@@ -86,7 +88,7 @@ public abstract class Block {
 
     }
     protected final void UpdateAir(){
-        if(radius < lighting_zoom) {
+        if(radius != 0) {
             rad = radius/lighting_zoom;
             Main.Render.setColor(r/rad,g/rad,b/rad,lightFlame);
             Main.Render.rect(x,y,Main.width_block_air,Main.height_block_air);
@@ -144,6 +146,55 @@ public abstract class Block {
 
                 }
             }
+    }
+    public static void LightingAirObject(int xZOOM, int yZOOM, float[] RGB,float distance){
+        int x_min = (int) ((xZOOM-distance)/Main.width_block_air);
+        int x_max = (int) ((xZOOM+distance)/Main.width_block_air);
+        int y_min = (int) ((yZOOM-distance)/Main.height_block_air);
+        int y_max = (int) ((yZOOM+distance)/Main.height_block_air);
+        if(x_min>Main.xMaxAir){
+            return;
+        }
+        if(x_max<0){
+            return;
+        }
+        if(y_min>Main.yMaxAir){
+            return;
+        }
+        if(y_max<0){
+            return;
+        }
+
+
+        if(x_min<0){
+            x_min = 0;
+        }
+        if (x_max>Main.xMaxAir) {
+            x_max = Main.xMaxAir;
+        }
+
+
+        if(y_min<0){
+            y_min = 0;
+        }
+        if (y_max>Main.yMaxAir) {
+            y_max = Main.yMaxAir;
+        }
+        for (int i = y_min; i < y_max; i++) {
+            for (int i2 = x_min; i2 < x_max; i2++) {
+                int gh = (int) sqrt(pow2(xZOOM - AirList.get(i).get(i2).x) + pow2(yZOOM - AirList.get(i).get(i2).y));
+                if (gh < distance) {
+                    AirList.get(i).get(i2).r += RGB[0] * ( distance / gh);
+                    AirList.get(i).get(i2).g += RGB[1] * ( distance / gh);
+                    AirList.get(i).get(i2).b += RGB[2] * ( distance / gh);
+                    if (AirList.get(i).get(i2).radius == NULL || AirList.get(i).get(i2).radius > gh) {
+                        AirList.get(i).get(i2).radius = gh;
+
+                    }
+                }
+
+            }
+        }
     }
 
 

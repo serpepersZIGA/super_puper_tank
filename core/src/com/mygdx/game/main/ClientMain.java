@@ -4,31 +4,37 @@ import Content.Build.Home1;
 import Content.Bull.*;
 import Content.Particle.*;
 import Content.Transport.Transport.*;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.esotericsoftware.kryonet.Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.mygdx.game.block.Block;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.build.BuildType;
 import com.mygdx.game.build.PacketBuildingServer;
 import com.mygdx.game.method.CycleTimeDay;
+import com.mygdx.game.object_map.ObjectLoad;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
 import Content.Soldat.SoldatPacket;
+import com.mygdx.game.object_map.MapObject;
+import com.mygdx.game.object_map.ObjectMapAssets;
+import com.mygdx.game.object_map.PacketMapObject;
+import com.mygdx.game.object_map.VoidObject;
+import com.mygdx.game.object_map.component_collision_system.CollisionVoid;
 import com.mygdx.game.transport.*;
 import com.mygdx.game.transport.SpawnPlayer.*;
 
 import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
-import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
 import static Content.Soldat.SoldatRegister.PacketSoldat;
+import static com.mygdx.game.object_map.MapObject.PacketMapObjects;
 import static com.mygdx.game.transport.TransportRegister.*;
 
 
@@ -76,6 +82,9 @@ public class ClientMain extends Listener{
         Client.getKryo().register(SpawnPlayerCannonMortar.class);
         Client.getKryo().register(SpawnPlayerCannonBull.class);
         Client.getKryo().register(SpawnPlayerVoid.class);
+
+        Client.getKryo().register(PacketMapObject.class);
+        Client.getKryo().register(ObjectMapAssets.class);
 
         //Запускаем клиент
         Client.start();
@@ -144,9 +153,21 @@ public class ClientMain extends Listener{
                 DebrisList.clear();
                 for (int i = 0; i < PacketDebris.size(); i++) {
                     debris_create(i, PacketDebris.get(i).x, PacketDebris.get(i).y, PacketDebris.get(i).rotation);
+                    debris_data(i);
                 }
                 KeyboardObj.zoom_const();
             }
+
+
+            PacketMapObjects = ((PackerServer) p).mapObject;
+            for (int i = 0; i < PacketMapObjects.size(); i++) {
+                BlockList2D.get(PacketMapObjects.get(i).iy).get(PacketMapObjects.get(i).ix).objMap
+                        = new VoidObject();
+                KeyboardObj.zoom_const();
+            }
+
+
+
 
             PacketSoldat = ((PackerServer) p).soldat;
             if (PacketSoldat.size() == SoldatList.size()) {
@@ -202,8 +223,28 @@ public class ClientMain extends Listener{
             for (int i = 0; i < PacketBuilding.size(); i++) {
                 Building_create(i,PacketBuilding.get(i).x-width_block,PacketBuilding.get(i).y-height_block);
             }
+            ArrayList<ArrayList<PacketMapObject>>objMapList;
+            objMapList = ((PacketBuildingServer) p).ObjectMapPack;
+            for (int iy = 0;iy< objMapList.size();iy++) {
+                for (int ix = 0; ix < objMapList.get(iy).size(); ix++) {
+                    object_create(ix,iy, objMapList.get(iy).get(ix).objectAssets, objMapList.get(iy).get(ix).x,
+                    objMapList.get(iy).get(ix).y,objMapList.get(iy).get(ix).width, objMapList.get(iy).get(ix).height,
+                    objMapList.get(iy).get(ix).lighting,objMapList.get(iy).get(ix).distance_lighting);
+                }
+            }
             Block.passability_detected();
 
+        }
+    }
+    public void object_create(int ix, int iy, ObjectMapAssets assets,int x,int y,int width,int height,
+        boolean light,float distance_lighting) {
+        if(width != 0) {
+        Sprite asset = ObjectLoad.ImageLoad(assets);
+        BlockList2D.get(iy).get(ix).objMap = new MapObject(x-ix* width_block, y-iy* height_block, asset, width, height, 0, ix, iy, new CollisionVoid()
+                , light, distance_lighting, assets);
+        }
+        else{
+            BlockList2D.get(iy).get(ix).objMap = new VoidObject();
         }
     }
     private void bull_data(int i){
@@ -340,6 +381,10 @@ public class ClientMain extends Listener{
             case PlayerMortarT1:
                 DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, PlayerCannonMortar.corpus_img,
                         PlayerCannonMortar.corpus_width, PlayerCannonMortar.corpus_height, UnitType.PlayerMortarT1));
+                break;
+            case HelicopterT1:
+                DebrisList.add(new DebrisTransport(x, y,rotation,0, 0,0, Helicopter_t1.corpus_img,
+                        Helicopter_t1.corpus_width, Helicopter_t1.corpus_height, UnitType.HelicopterT1));
                 break;
         }
     }

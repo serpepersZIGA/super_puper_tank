@@ -45,8 +45,8 @@ public abstract class Soldat implements Serializable {
         else {
             enemyList = EnemyList;
         }
-        this.width_render = (int)(width*ZoomWindowX);
-        this.height_render = (int)(height*ZoomWindowY);
+        this.width_render = (int)(width*Zoom);
+        this.height_render = (int)(height*Zoom);
         this.width_2 = width/2;
         this.height_2 = height/2;
         SpeedCollision = speed*4;

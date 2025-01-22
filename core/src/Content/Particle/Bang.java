@@ -19,9 +19,9 @@ public class Bang extends Particle {
     }
     public void all_action(int i) {
         size_rise();
-        center_render();
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
         Main.Render.setColor(r,g,b,(float)0.4);
-        Main.Render.circle(this.x_rend,this.y_rend,(int)(size* Main.Zoom),(int)(size* Main.Zoom));
+        Main.Render.circle(xy[0],xy[1],(int)(size* Main.Zoom),(int)(size* Main.Zoom));
         timer(i, Main.BangList);
     }
 

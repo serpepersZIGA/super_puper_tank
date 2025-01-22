@@ -1287,7 +1287,7 @@ public abstract class Transport{
 //            }
 //        }
 //    }
-    protected void build_corpus(){
+    protected void build_corpus(int i){
         int render_x_max = (int)((x+BorderDetected/Main.Zoom)/Main.width_block);
         int render_x_min = (int)(((x-BorderDetected/Main.Zoom)/Main.width_block));
         if(render_x_min <0){render_x_min =0;}
@@ -1308,6 +1308,9 @@ public abstract class Transport{
                         }
                         method_1(BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y);
                     }
+                }
+                else{
+                    BlockList2D.get(iy).get(ix).objMap.Collision.collision(allyList.get(i),ix,iy);
                 }
             }
         }

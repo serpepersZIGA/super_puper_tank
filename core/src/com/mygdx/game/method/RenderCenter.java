@@ -39,8 +39,8 @@ public class RenderCenter {
         return new float[]{x_obj,y_obj};
     }
     public int[] WindowSynchronization(int x_obj, int y_obj){
-        x_obj -= (int)this.x2;
-        y_obj -= (int)this.y2;
+        x_obj -= this.x2;
+        y_obj -= this.y2;
         return new int[]{x_obj,y_obj};
     }
     public int[] render_objZoom(int x_obj,int y_obj){
@@ -54,6 +54,7 @@ public class RenderCenter {
         return new float[]{x_obj*Main.Zoom,y_obj*Main.Zoom};
     }
     public void render_block(){
+        Main.TickBlock +=1;
         if(ixCam!= ixCamBuff||iyCam!= iyCamBuff) {
             CameraMapConf();
             ixCam = ixCamBuff;
@@ -82,7 +83,6 @@ public class RenderCenter {
 
     }
     public void CameraMapConf(){
-        Main.TickBlock +=1;
         render_x_max = (int)((x2+ WidthRenderZoom)/Main.width_block+1);
         render_x_min = (int)(((x2)/Main.width_block-1));
 

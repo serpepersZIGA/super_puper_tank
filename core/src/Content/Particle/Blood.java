@@ -19,9 +19,9 @@ public class Blood extends Particle {
     }
     public void all_action(int i){
         super.size_rise_delete(i);
-        center_render();
+        float[]xy = Main.RC.render_objZoom(this.x,this.y);
         Main.Render.setColor(r,g,b,0.1f);
-        Main.Render.circle(this.x_rend,this.y_rend,(int)(size*Main.Zoom),(int)size);
+        Main.Render.circle(xy[0],xy[1],(int)(size*Main.Zoom),(int)size);
     }
 
 }
