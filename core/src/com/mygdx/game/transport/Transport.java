@@ -41,14 +41,15 @@ public abstract class Transport{
             , rotation_corpus,tower_x,tower_y
             , tower_x_const, tower_y_const, tower_width_2, tower_height_2,reload,corpus_width,corpus_height,corpus_width_2,corpus_height_2,
             hill, width_tower, height_tower,aim_x,aim_y,corpus_height_3,corpus_width_3;
-    protected float slowing = 0.05f,speed_minimum;
+    protected float slowing = 0.05f;
+    public static float speed_minimum = 0.5f;
     public int time_max_relocation = 300,time_relocation = 0;
     public float x_relocation,y_relocation,rotation_relocation,priority_paint = 0,ai_x_const = 24f,ai_y_const = 62f;
     public int range_see=800,range_see_2 = (int)(range_see*1.5),time_trigger_bull_bot,time_trigger_bull = 700;
 
     public byte behavior,behavior_buffer, medic_help, crite_life, team,height = 1,trigger_drive;
     private float g;
-    public static int BorderDetected = 400;
+    public static int BorderDetected = 200;
     public boolean host;
 
     private int i;
@@ -305,10 +306,10 @@ public abstract class Transport{
 
         if (this.speed > 0 && !this.press_w && !this.press_s) {
             this.speed -= this.slowing;
-            if (this.speed<speed_minimum){this.speed = 0;}
+            if (this.speed<Transport.speed_minimum){this.speed = 0;}
         } else if (this.speed < 0 && !this.press_w && !this.press_s) {
             this.speed += this.slowing;
-            if (this.speed>speed_minimum){this.speed = 0;}
+            if (this.speed>Transport.speed_minimum){this.speed = 0;}
         }
         move_xy_transport();
     }
