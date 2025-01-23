@@ -323,7 +323,7 @@ public class MapScan {
                 confAsphaltY = true;
             } else if (c == ';') {
                 if(ObjConf){
-                    SpawnObjectBlock((String) dataObj.get(0),x,y);
+                    SpawnObjectBlock((String) dataObj.get(0),x+xStr,y+yStr);
                     ObjConf = false;
                 }
                 else if (!confAsphalt) {
