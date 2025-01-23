@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.mygdx.game.main.Main.BlockList2D;
+import static com.mygdx.game.main.Main.VoidObj;
 import static com.mygdx.game.object_map.ObjectLoad.MapSpawnObject;
 import static java.nio.file.Files.readAllLines;
 
@@ -160,6 +161,7 @@ public class MapScan {
         for (int i = 0; i < BlockList2D.size(); i++) {
             for (int i2 = 0; i2 < BlockList2D.get(i).size(); i2++) {
                 BlockList2D.get(i).get(i2).render_block = UpdateRegister.GrassUpdate;
+                BlockList2D.get(i).get(i2).objMap = VoidObj;
             }
         }
     }
