@@ -1287,20 +1287,22 @@ public abstract class Transport{
 //            }
 //        }
 //    }
+    private static boolean z = false;
+    private static int render_x_max,render_x_min,render_y_max,render_y_min;
     protected void build_corpus(int i){
-        int render_x_max = (int)((x+BorderDetected/Main.Zoom)/Main.width_block);
-        int render_x_min = (int)(((x-BorderDetected/Main.Zoom)/Main.width_block));
+        render_x_max = (int)((x+BorderDetected)/Main.width_block);
+        render_x_min = (int)(((x-BorderDetected)/Main.width_block));
         if(render_x_min <0){render_x_min =0;}
         if(render_x_max >RC.block_i_x_max){render_x_max = RC.block_i_x_max;}
-        int render_y_max = (int)((y+BorderDetected/Main.Zoom)/Main.height_block);
-        int render_y_min = (int)((y-BorderDetected/Main.Zoom)/Main.height_block);
+        render_y_max = (int)((y+BorderDetected)/Main.height_block);
+        render_y_min = (int)((y-BorderDetected)/Main.height_block);
         if(render_y_min <0){render_y_min = 0;}
         if(render_y_max >RC.block_i_y_max){render_y_max = RC.block_i_y_max;}
 
         for (int iy = render_y_min; iy < render_y_max; iy++) {
             for (int ix = render_x_min; ix < render_x_max; ix++) {
                 if (BlockList2D.get(iy).get(ix).passability) {
-                    boolean z = rect_collision((int) this.x, (int) this.y, (int) this.corpus_width, (int) this.corpus_height, this.rotation_corpus, BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y,
+                    z = rect_collision((int) this.x, (int) this.y, (int) this.corpus_width, (int) this.corpus_height, this.rotation_corpus, BlockList2D.get(iy).get(ix).x, BlockList2D.get(iy).get(ix).y,
                             width_block, height_block, 0);
                     if (z) {
                         if (this.speed > 2 || this.speed < -2) {
