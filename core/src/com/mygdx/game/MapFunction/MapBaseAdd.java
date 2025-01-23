@@ -9,6 +9,7 @@ public class MapBaseAdd {
         new File("Map").mkdirs();
         new File("Map/maps").mkdirs();
         new File("Map/Structure").mkdirs();
+        new File("Map/ObjectMap").mkdirs();
         File MapFile = new File("Map/maps/MapBase.mapt");
         File StrFile = new File("Map/Structure/street1.str");
         try {
@@ -24,7 +25,8 @@ public class MapBaseAdd {
                 "str{street1}:23:23:;\n" +
                 "str{street1}:23:40:;\n" +
                 "str{street1}:69:23:;\n" +
-                "str{street1}:69:40:;\n";
+                "str{street1}:69:40:;\n"+
+                "str{pepper1}:12:12:;\n";
         try {
             PrintWriter out = new PrintWriter("Map/maps/MapBase.mapt");
             out.println(dataMap);
@@ -53,6 +55,24 @@ public class MapBaseAdd {
                         "Asphalt:35:1:>Y15;";
         try {
             PrintWriter out = new PrintWriter("Map/Structure/street1.str");
+            out.println(dataStr);
+            out.close();
+        } catch (IOException ignored) {
+        }
+        dataStr =
+                "ObjectMap:0:0:(int)2:(int)2:pepper_object_map:(int)20:(int)20:(int)120:CollisionBreak:true:(int)600:;\n";
+        try {
+            PrintWriter out = new PrintWriter("Map/ObjectMap/pepper.objM");
+            out.println(dataStr);
+            out.close();
+        } catch (IOException ignored) {
+        }
+        dataStr =
+                "(obj)ObjectMap:14:5:pepper:;\n" +
+                        "(obj)ObjectMap:22:10:pepper:;\n" +
+                        "(obj)ObjectMap:14:10:pepper:;\n";
+        try {
+            PrintWriter out = new PrintWriter("Map/Structure/pepper1.str");
             out.println(dataStr);
             out.close();
         } catch (IOException ignored) {
