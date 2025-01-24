@@ -822,7 +822,7 @@ public abstract class Transport{
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
                     path.clear();
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
-                    Ai.path_AI(this.allyList.get(i3), obj_tr.get(i2), xy[0], xy[1]);
+                    Ai.pathAIAStar(this.allyList.get(i3), obj_tr.get(i2), xy[0], xy[1]);
                     trigger_fire = false;
                 } else {
                     path.clear();
@@ -851,7 +851,7 @@ public abstract class Transport{
                 if (null != findIntersection(this.tower_x, this.tower_y, obj_tr.get(i2).tower_x, obj_tr.get(i2).tower_y)) {
                     path.clear();
                     float[] xy = Method.tower_xy_2(this.x, this.y, this.ai_x_const, this.ai_y_const, 0, 0, -this.rotation_corpus);
-                    Ai.path_AI(this.allyList.get(i3), obj_tr.get(i2), xy[0], xy[1]);
+                    Ai.pathAIAStar(this.allyList.get(i3), obj_tr.get(i2), xy[0], xy[1]);
                     trigger_fire = false;
                 } else {
                     path.clear();

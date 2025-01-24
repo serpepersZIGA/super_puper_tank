@@ -138,7 +138,7 @@ public abstract class Soldat implements Serializable {
         if (ai_sost == 0) {
             if (null != findIntersection(x,y, enemyList.get(iEnemy).tower_x, enemyList.get(iEnemy).tower_y)) {
                 path.clear();
-                Ai.path_AISoldat(SoldatList.get(iAi), enemyList.get(iEnemy), x, y);
+                Ai.pathAISoldat(SoldatList.get(iAi), enemyList.get(iEnemy), x, y);
             } else {
                 path.clear();
             }

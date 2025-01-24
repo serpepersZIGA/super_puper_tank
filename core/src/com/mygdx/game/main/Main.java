@@ -128,7 +128,7 @@ public class Main extends ApplicationAdapter {
 		MapAllLoad.MapCount();
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
-//		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
