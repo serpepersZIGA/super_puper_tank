@@ -28,7 +28,6 @@ public class AI {
             y = ai_xy[1];
             TargetLineMin = -1;
             ai.path.add(new int[]{x, y});
-            conf = false;
             while (y != target_xy[1] || x != target_xy[0]) {
                 xTotal = x+1;
                 if (!Main.BlockList2D.get(y).get(xTotal).passability) {
