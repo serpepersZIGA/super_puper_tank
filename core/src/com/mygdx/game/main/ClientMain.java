@@ -21,7 +21,7 @@ import com.mygdx.game.object_map.ObjectLoad;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.soldat.SoldatPacket;
 import com.mygdx.game.object_map.MapObject;
 import com.mygdx.game.object_map.ObjectMapAssets;
 import com.mygdx.game.object_map.PacketMapObject;
@@ -33,7 +33,7 @@ import com.mygdx.game.transport.SpawnPlayer.*;
 import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
-import static Content.Soldat.SoldatRegister.PacketSoldat;
+import static com.mygdx.game.soldat.SoldatRegister.PacketSoldat;
 import static com.mygdx.game.object_map.MapObject.PacketMapObjects;
 import static com.mygdx.game.transport.TransportRegister.*;
 

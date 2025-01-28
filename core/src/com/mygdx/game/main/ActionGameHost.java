@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import Content.Bull.BullFragment;
 import Content.Particle.Acid;
 import Content.Particle.FlameSpawn;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.soldat.SoldatPacket;
 import com.mygdx.game.build.BuildPacket;
 import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.Keyboard;
@@ -17,7 +17,7 @@ import static Content.Bull.BullRegister.PacketBull;
 import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.main.ServerMain.Server;
-import static Content.Soldat.SoldatRegister.PacketSoldat;
+import static com.mygdx.game.soldat.SoldatRegister.PacketSoldat;
 import static com.mygdx.game.transport.TransportRegister.*;
 
 public class ActionGameHost extends com.mygdx.game.main.ActionGame {

@@ -1,4 +1,4 @@
-package Content.Soldat;
+package com.mygdx.game.soldat;
 
 public class SoldatPacket {
     public float x,y,rotation;

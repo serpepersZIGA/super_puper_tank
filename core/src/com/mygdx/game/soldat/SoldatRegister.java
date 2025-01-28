@@ -1,4 +1,6 @@
-package Content.Soldat;
+package com.mygdx.game.soldat;
+
+import com.mygdx.game.soldat.SoldatPacket;
 
 import java.util.ArrayList;
 

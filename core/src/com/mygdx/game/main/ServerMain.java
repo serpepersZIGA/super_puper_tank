@@ -1,8 +1,6 @@
 package com.mygdx.game.main;
 import Content.Bull.*;
 import Content.Particle.*;
-import Content.Transport.Transport.PlayerCannonFlame;
-import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
@@ -13,7 +11,7 @@ import com.mygdx.game.method.CycleTimeDay;
 import com.mygdx.game.method.SoundPlay;
 import Content.Soldat.SoldatBull;
 import Content.Soldat.SoldatFlame;
-import Content.Soldat.SoldatPacket;
+import com.mygdx.game.soldat.SoldatPacket;
 import com.mygdx.game.object_map.ObjectMapAssets;
 import com.mygdx.game.object_map.PacketMapObject;
 import com.mygdx.game.transport.DebrisPacket;
@@ -25,10 +23,8 @@ import com.mygdx.game.transport.UnitType;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.method.Keyboard.ZoomConstTransport;
-import static com.mygdx.game.transport.SpawnPlayer.PlayerSpawnListData.PlayerSpawnCannonVoid;
 
 public class ServerMain extends Listener {
     static Server Server;

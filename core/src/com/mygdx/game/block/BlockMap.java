@@ -1,4 +1,4 @@
-package Content.Block;
+package com.mygdx.game.block;
 
 import com.mygdx.game.block.Block;
 import com.mygdx.game.block.UpdateRegister;

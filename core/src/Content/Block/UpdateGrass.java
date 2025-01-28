@@ -1,5 +1,6 @@
-package com.mygdx.game.block;
+package Content.Block;
 
+import com.mygdx.game.block.UpdateBlock;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.method.RenderMethod;
 import com.mygdx.game.method.rand;
