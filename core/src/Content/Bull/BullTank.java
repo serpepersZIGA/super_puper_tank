@@ -1,9 +1,9 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.main.Main;
 
-public class BullTank extends Bull {
+public class BullTank extends Bullet {
     public BullTank(float x, float y, float rotation, float damage, float penetration, byte type_time, byte height){
         this.x = x;
         this.y = y;

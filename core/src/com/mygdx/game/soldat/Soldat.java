@@ -4,9 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import Content.Bull.BullFlame;
 import Content.Bull.BullMortar;
 import Content.Bull.BullPacket;
-import com.mygdx.game.block.UpdateRegister;
 import com.mygdx.game.main.Main;
-import com.mygdx.game.build.Building;
 import Content.Bull.BullTank;
 import com.mygdx.game.method.RenderMethod;
 import com.mygdx.game.method.Method;
@@ -89,10 +87,10 @@ public abstract class Soldat implements Serializable {
         this.time -=1;
         if(this.time < 0 && abs(g-rotation)<20){
             this.time = this.time_max;
-            Main.BullList.add(new BullTank(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.team,(byte)1));
+            Main.BulletList.add(new BullTank(this.x,this.y,-this.rotation+180,this.damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = BulletList.size()-1;
             bull_packets(i1,i2);
         }
     }
@@ -100,12 +98,12 @@ public abstract class Soldat implements Serializable {
         this.time -=1;
         if(this.time < 0 && abs(g-rotation)<20){
             this.time = this.time_max;
-            Main.BullList.add(new BullFlame(this.x,  this.y,-this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
-            Main.BullList.add(new BullFlame(this.x, this.y, -this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
+            Main.BulletList.add(new BullFlame(this.x,  this.y,-this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
+            Main.BulletList.add(new BullFlame(this.x, this.y, -this.rotation+ -15+rand.rand(30)+180,  this.damage,this.t_damage,this.penetration,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-2;
-            int i2 = BullList.size()-2;
+            int i2 = BulletList.size()-2;
             bull_packets(i1,i2);
             bull_packets(i1+1,i2+1);
         }
@@ -116,22 +114,22 @@ public abstract class Soldat implements Serializable {
             this.time = this.time_max;
             ///int i1 = packet_bull.size();
             //int i2 = bull_obj.size();
-            Main.BullList.add(new BullMortar(this.x,  this.y,-this.rotation+180,this.damage,this.penetration,this.damage_fragmentation,
+            Main.BulletList.add(new BullMortar(this.x,  this.y,-this.rotation+180,this.damage,this.penetration,this.damage_fragmentation,
                     this.penetration_fragmentation,this.team,(byte)1));
             PacketBull.add(new BullPacket());
             int i1 = PacketBull.size()-1;
-            int i2 = BullList.size()-1;
+            int i2 = BulletList.size()-1;
             bull_packets(i1,i2);
         }
     }
     public void bull_packets(int i1,int i2){
         PacketBull.get(i1).x = this.x;
         PacketBull.get(i1).y = this.y;
-        PacketBull.get(i1).rotation = BullList.get(i2).rotation;
-        PacketBull.get(i1).time = BullList.get(i2).time;
-        PacketBull.get(i1).speed = BullList.get(i2).speed;
-        PacketBull.get(i1).height = BullList.get(i2).height;
-        PacketBull.get(i1).type = BullList.get(i2).type;
+        PacketBull.get(i1).rotation = BulletList.get(i2).rotation;
+        PacketBull.get(i1).time = BulletList.get(i2).time;
+        PacketBull.get(i1).speed = BulletList.get(i2).speed;
+        PacketBull.get(i1).height = BulletList.get(i2).height;
+        PacketBull.get(i1).type = BulletList.get(i2).type;
         PacketBull.get(i1).team = this.team;
     }
     public void ii_soldat(float g, int iAi, int iEnemy){

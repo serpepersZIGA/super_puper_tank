@@ -1,11 +1,11 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.method.rand;
 
 import com.mygdx.game.main.Main;
 
-public class BullFragment extends Bull {
+public class BullFragment extends Bullet {
     public int x2,y2;
 
     public BullFragment(float x, float y, float damage, float penetration, byte type_team){

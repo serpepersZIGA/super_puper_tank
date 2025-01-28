@@ -36,6 +36,7 @@ public class TrackRemountT1 extends Transport {
         this.corpus_img = Main.ContentImage.track_enemy_1lvl;
         this.corpus_width = 50;
         this.corpus_height = 129;
+        this.host = true;
 
         this.x_tower = 15;
         this.y_tower = 20;
@@ -55,7 +56,7 @@ public class TrackRemountT1 extends Transport {
         super.corpus_corpus_def_xy(Main.EnemyList);
         center_render();
         RenderMethod.transorm_img(this.x_rend,this.y_rend,this.corpus_width_zoom,this.corpus_height_zoom,this.rotation_corpus,this.corpus_img,const_x_corpus,const_y_corpus);
-        super.transport_delete_2(i,Main.EnemyList);
+        super.transportDeleteBot(i,allyList);
 
     }
     public void all_action_client(int i){

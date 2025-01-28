@@ -44,25 +44,22 @@ public class PanzerFlameT1 extends Transport {
         this.sound_fire = Main.ContentSound.flame_attack;
         data();
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
+                (byte)1,this.team,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
+                (byte)1,this.team,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.difference = 18;
         const_tower_x = (int)(width_tower/2);
         const_tower_y = 21;
         this.tower_x_const = (int) (corpus_width/2)-(width_tower/2);
         this.tower_y_const = (int) (corpus_height/2)-(height_tower/2)+7;
         center_render();
-        this.host = true;
 
 
     }
     public void all_action(int i) {
         super.all_action(i);
-        //super.motor_player();
-        //super.motor_bot_bypass(i,Main.enemy_obj,Main.player_obj);
         super.behavior_bot(this.enemyList, i);
-        super.bot_flame_fire(i, allyList, enemyList);
+        super.bot_flame_fire(allyList.get(i), enemyList);
         super.tower_ii(i);
         super.build_corpus(i);
         super.corpus_corpus_def_xy(this.allyList);
@@ -72,7 +69,7 @@ public class PanzerFlameT1 extends Transport {
         tower_iteration_bot(i);
         RenderMethod.transorm_img(this.x_tower_rend, this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete_2(i,Main.EnemyList);
+        super.transportDeleteBot(i,allyList);
     }
     public void all_action_client(int i) {
         super.tower_xy();

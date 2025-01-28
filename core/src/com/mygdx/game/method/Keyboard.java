@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.mygdx.game.block.Block;
 import com.mygdx.game.build.Building;
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.main.Main;
 import com.mygdx.game.menu.button.Button;
 import com.mygdx.game.particle.Particle;
@@ -190,7 +190,7 @@ public class Keyboard extends InputAdapter{
             particle.size_render = (int)(particle.size* Main.Zoom);
         }
 
-        for(Bull bull : Main.BullList){
+        for(Bullet bull : Main.BulletList){
             bull.size_render = (int)(bull.size* Main.Zoom);
         }
         for(Transport tr : Main.PlayerList){

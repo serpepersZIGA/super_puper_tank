@@ -1,11 +1,11 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 
 import java.util.ArrayList;
 
 public class BullRegister {
-    public static ArrayList<Bull>register_bull = new ArrayList<>();
+    public static ArrayList<Bullet>register_bull = new ArrayList<>();
     public static ArrayList<BullPacket> PacketBull = new ArrayList<>();
     public BullRegister() {
         register_bull.add(new BullFlame(0,0,0,0,0,0, (byte) 0, (byte) 0));

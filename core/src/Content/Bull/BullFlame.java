@@ -1,12 +1,12 @@
 package Content.Bull;
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.method.rand;
 
 import com.mygdx.game.main.Main;
 
 import static Data.DataColor.*;
 
-public class BullFlame extends Bull {
+public class BullFlame extends Bullet {
     public BullFlame(float x, float y, float rotation, float damage, float t_damage, float penetration, byte type_team, byte height){
         this.x = x;
         this.y = y;

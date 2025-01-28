@@ -18,7 +18,6 @@ import static com.mygdx.game.build.BuildRegister.PacketBuilding;
 import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.main.ServerMain.Server;
 import static Content.Soldat.SoldatRegister.PacketSoldat;
-import static com.mygdx.game.method.CycleTimeDay.lightTotal;
 import static com.mygdx.game.transport.TransportRegister.*;
 
 public class ActionGameHost extends com.mygdx.game.main.ActionGame {
@@ -45,15 +44,15 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
                     if (Keyboard.LeftMouse) {
                         Main.FlameSpawnList.add(new FlameSpawn(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2));
                         timer = 30;
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
-                        Main.BullList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
+                        Main.BulletList.add(new BullFragment(Keyboard.MouseX / Zoom + RC.x2,Keyboard.MouseY / Zoom + RC.y2,40,20,(byte)1));
 
 
                     }
@@ -90,9 +89,9 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
             Main.FlameList.get(i).all_action(i);}
         for (i = 0; i< Main.FlameParticleList.size(); i++){
             Main.FlameParticleList.get(i).all_action(i);}
-        for (i = 0; i< Main.BullList.size(); i++){
-            if(Main.BullList.get(i).height == 1) {
-                Main.BullList.get(i).all_action(i);
+        for (i = 0; i< Main.BulletList.size(); i++){
+            if(Main.BulletList.get(i).height == 1) {
+                Main.BulletList.get(i).all_action(i);
             }
         }
         Render.end();
@@ -128,9 +127,9 @@ public class ActionGameHost extends com.mygdx.game.main.ActionGame {
 
         Render.begin(ShapeRenderer.ShapeType.Filled);
 
-        for (i = 0; i< Main.BullList.size(); i++){
-            if(Main.BullList.get(i).height == 2) {
-                Main.BullList.get(i).all_action(i);
+        for (i = 0; i< Main.BulletList.size(); i++){
+            if(Main.BulletList.get(i).height == 2) {
+                Main.BulletList.get(i).all_action(i);
             }
         }
         for (i= 0; i< PlayerList.size(); i++){

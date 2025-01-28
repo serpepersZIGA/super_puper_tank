@@ -36,7 +36,7 @@ public class TowerFlamePlayer extends Transport {
 
 
     }
-    public void tower_action(int i,float x,float y,float rotation,boolean sost_fire_bot) {
+    public void tower_action(int i,int iTower,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -48,7 +48,7 @@ public class TowerFlamePlayer extends Transport {
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
 
     }
-    public void tower_action_client(int i,float x,float y,float rotation,boolean sost_fire_bot) {
+    public void tower_action_client(int i,int iTower,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -59,7 +59,7 @@ public class TowerFlamePlayer extends Transport {
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
 
     }
-    public void tower_action_client_1(int i,float x,float y,float rotation,boolean sost_fire_bot) {
+    public void tower_action_client_1(int i,int iTower,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -68,7 +68,7 @@ public class TowerFlamePlayer extends Transport {
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
-    public void tower_action_client_2(int i,float x,float y,float rotation,boolean sost_fire_bot) {
+    public void tower_action_client_2(int i,int iTower,float x,float y,float rotation,boolean sost_fire_bot) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;

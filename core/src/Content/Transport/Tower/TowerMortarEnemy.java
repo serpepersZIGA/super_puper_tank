@@ -39,7 +39,7 @@ public class TowerMortarEnemy extends Transport {
 
 
     }
-    public void tower_action(int i,float x,float y,float rotation,boolean sost,boolean sost_2,float aim_x,float aim_y) {
+    public void tower_action(int i,int iTower,float x,float y,float rotation,boolean sost,boolean sost_2,float aim_x,float aim_y) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -49,11 +49,11 @@ public class TowerMortarEnemy extends Transport {
         this.aim_y = aim_y;
         tower_xy_2();
         tower_ii_2();
-        bot_fragmentation_bull_fire(i, this.allyList.get(i).tower_obj, this.enemyList);
+        bot_fragmentation_bull_fire(this.allyList.get(i).tower_obj.get(iTower), this.enemyList);
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
-    public void tower_action_client(int i,float x,float y,float rotation,boolean sost,boolean sost_2) {
+    public void tower_action_client(int i,int iTower,float x,float y,float rotation,boolean sost,boolean sost_2) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;

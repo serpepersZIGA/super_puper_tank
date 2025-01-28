@@ -1,9 +1,9 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.main.Main;
 
-public class BullMortar extends Bull {
+public class BullMortar extends Bullet {
     public BullMortar(float x, float y, float rotation, float damage, float penetration, float damage_fragment, float penetration_fragment, byte type_time, byte height){
         this.x = x;this.y = y;
         this.damage = damage;this.penetration = penetration;

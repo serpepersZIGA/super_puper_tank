@@ -1,10 +1,10 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.method.rand;
 import com.mygdx.game.main.Main;
 
-public class BullAcid extends Bull {
+public class BullAcid extends Bullet {
     public BullAcid(float x, float y, float rotation, float damage, float penetration, byte type_team, byte height){
         this.x = x;
         this.y = y;

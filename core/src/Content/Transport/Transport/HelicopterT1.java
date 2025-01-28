@@ -1,7 +1,6 @@
 package Content.Transport.Transport;
 
 import com.mygdx.game.method.RenderMethod;
-import com.mygdx.game.method.rand;
 
 import java.util.ArrayList;
 import com.mygdx.game.main.Main;
@@ -29,6 +28,7 @@ public class HelicopterT1 extends Transport {
         this.height = 2;
         this.behavior = (byte) (2);
         this.reload_max = 180;
+        this.host = true;
 
 
 
@@ -60,7 +60,7 @@ public class HelicopterT1 extends Transport {
         //tower_iteration_bot_client(i);
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete(i,this.allyList);
+        super.transportDeletePlayer(i,this.allyList);
 
     }
     public void all_action_client(int i) {

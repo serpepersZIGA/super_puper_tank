@@ -49,7 +49,7 @@ public class PanzerAcidT1 extends Transport {
 //        this.tower_obj.add(new tower_flame_enemy(18,55,52,-12,4,2,65,12,2, this.id_unit,
 //                (byte)1,(byte)2,Main.content_base.tower_player_auxiliart_1,this.spisok, Main.sa.get(0).flame_attack));
         this.tower_obj.add(new TowerBullTankEnemy(18,55,52,-12,4,2,65,12, this.id_unit,
-                (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
+                (byte)1,this.team,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.tower_obj.add(new TowerFlameEnemy(18,55,52,12,4,2,65,12,2, this.id_unit,
                 (byte)1,(byte)2,Main.ContentImage.tower_enemy_auxiliary_1,this.allyList, Main.ContentSound.flame_attack));
         this.difference = 18;
@@ -65,7 +65,7 @@ public class PanzerAcidT1 extends Transport {
         super.all_action(i);
         //super.motor_player();
         super.behavior_bot(this.enemyList, i);
-        super.bot_acid_fire(i, allyList, enemyList);
+        super.bot_acid_fire(allyList.get(i), enemyList);
         super.tower_ii(i);
         super.build_corpus(i);
         super.corpus_corpus_def_xy(this.allyList);
@@ -75,7 +75,7 @@ public class PanzerAcidT1 extends Transport {
         tower_iteration_bot(i);
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower
         );
-        super.transport_delete_2(i,Main.EnemyList);
+        super.transportDeleteBot(i,allyList);
     }
     public void all_action_client(int i) {
         super.all_action_client(i);

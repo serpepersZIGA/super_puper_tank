@@ -1,19 +1,15 @@
 package com.mygdx.game.method;
 
 import com.mygdx.game.build.Building;
-import com.mygdx.game.main.Main;
-import com.mygdx.game.particle.Particle;
 import com.mygdx.game.soldat.Soldat;
 import com.mygdx.game.transport.Transport;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.StrictMath.atan2;
 import static java.lang.StrictMath.sqrt;
-import static java.sql.Types.NULL;
 
 public class Method {
     public static float tower(double x, double y, double x_2, double y_2, float rotation_tower, float speed_tower) {
@@ -56,11 +52,12 @@ public class Method {
         return tower(x, y, Keyboard.MouseX, Keyboard.MouseY, rotation_tower, speed_tower);
 
     }
-    public static int detection_near_transport_i(ArrayList<Transport> obj_bot, int i, ArrayList<Transport> obj) {
+    public static int detection_near_transport_i(Transport objBot, ArrayList<Transport> obj) {
         int ind = 0;
         int radius = 0;
+        System.out.println();
         for (int i2 = 0; i2 < obj.size(); i2++) {
-            double g = sqrt(pow2.pow2(obj_bot.get(i).x - obj.get(i2).x) + pow2.pow2(obj_bot.get(i).y - obj.get(i2).y));
+            double g = sqrt(pow2.pow2(objBot.x - obj.get(i2).x) + pow2.pow2(objBot.y - obj.get(i2).y));
             if (radius == 0 || radius > g) {
                 ind = i2;
                 radius = (int)g;
@@ -69,14 +66,14 @@ public class Method {
         }
         return ind;
     }
-    public static int[] detection_near_transport_xy_def(ArrayList<Transport> obj_bot, int i, ArrayList<Transport> obj) {
+    public static int[] detection_near_transport_xy_def(Transport objBot, ArrayList<Transport> obj) {
         int ind = 0;
         int radius = 0;
         double g;
         for (int i2 = 0; i2 < obj.size(); i2++) {
-            g = sqrt(pow2.pow2(obj_bot.get(i).x - obj.get(i2).x) + pow2.pow2(obj_bot.get(i).y - obj.get(i2).y));
+            g = sqrt(pow2.pow2(objBot.x - obj.get(i2).x) + pow2.pow2(objBot.y - obj.get(i2).y));
             if (radius > g || radius == 0) {
-                if(obj.get(i2).x != obj_bot.get(i).x && obj.get(i2).y != obj_bot.get(i).y) {
+                if(obj.get(i2).x != objBot.x && obj.get(i2).y != objBot.y) {
                     ind = i2;
                     radius = (int) g;
                 }

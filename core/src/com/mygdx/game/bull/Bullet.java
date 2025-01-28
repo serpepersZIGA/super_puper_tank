@@ -21,7 +21,7 @@ import static com.mygdx.game.main.Main.*;
 import static com.mygdx.game.method.pow2.pow2;
 import static java.lang.StrictMath.sqrt;
 
-public abstract class Bull implements Serializable {
+public abstract class Bullet implements Serializable {
     public float x,y,speed,damage,penetration,rotation,speed_x,speed_y,damage_fragment,penetration_fragment,t_damage;
     public int time,size,amount_fragment,x_rend,y_rend,size_render;
     public float r,g,b,r_wane = (float)(1/255*1.5),g_wane= (float)(1/255*1.5),b_wane= (float)(1/255);
@@ -42,7 +42,7 @@ public abstract class Bull implements Serializable {
         if(this.time<=0){
             Main.BangList.add(new Bang(this.x,this.y,10));
             for(int i3 = 0;i3<this.amount_fragment;i3++){
-            Main.BullList.add(new BullFragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
+            Main.BulletList.add(new BullFragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
             this.clear_sost = 1;}
 
     }
@@ -79,7 +79,7 @@ public abstract class Bull implements Serializable {
     }
     protected final void clear(int i){
         if(this.clear_sost == 1){
-            Main.BullList.remove(i);
+            Main.BulletList.remove(i);
         }
     }
     public void all_action(int i){
@@ -142,7 +142,7 @@ public abstract class Bull implements Serializable {
                 this.clear_sost = 1;
                 Main.BangList.add(new Bang(this.x, this.y, 4));
                 for (int l = 0; l < 20; l++) {
-                    Main.BullList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
+                    Main.BulletList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
                 }
             }
         }
@@ -150,7 +150,7 @@ public abstract class Bull implements Serializable {
             this.clear_sost = 1;
             Main.BangList.add(new Bang(this.x, this.y, 4));
             for (int l = 0; l < 20; l++) {
-                Main.BullList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
+                Main.BulletList.add(new BullFragment(this.x, this.y, damage_fragment, penetration_fragment, type_team));
             }
         }
     }
@@ -171,41 +171,47 @@ public abstract class Bull implements Serializable {
     }
     protected final void corpus_bull_mortar(ArrayList<Transport> obj_2){
         for(i = 0;i<obj_2.size();i++) {
+            if(this.type_team != obj_2.get(i).team) {
 
-            z = rect_bull((int)obj_2.get(i).x, (int)obj_2.get(i).y,(int)obj_2.get(i).corpus_width,(int)obj_2.get(i).corpus_height,(int)this.x,(int)this.y,
-                    this.size,-obj_2.get(i).rotation_corpus);
-            if (z && this.type_team != obj_2.get(i).team) {
-                obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
-                armor_damage(obj_2,i);
-                metod_mortar();
-                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
-                return;
+                z = rect_bull((int) obj_2.get(i).x, (int) obj_2.get(i).y, (int) obj_2.get(i).corpus_width, (int) obj_2.get(i).corpus_height, (int) this.x, (int) this.y,
+                        this.size, -obj_2.get(i).rotation_corpus);
+                if (z) {
+                    obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
+                    armor_damage(obj_2, i);
+                    metod_mortar();
+                    obj_2.get(i).green_len = ((float) obj_2.get(i).hp / obj_2.get(i).max_hp) * Option.size_x_indicator;
+                    return;
+                }
             }
         }
     }
     protected final void corpus_bull(ArrayList<Transport> obj_2){
         for(i = 0;i<obj_2.size();i++) {
+            if(this.type_team != obj_2.get(i).team) {
             z = rect_bull((int)obj_2.get(i).x, (int)obj_2.get(i).y,(int)obj_2.get(i).corpus_width,(int)obj_2.get(i).corpus_height,(int)this.x,(int)this.y,
                     this.size,-obj_2.get(i).rotation_corpus);
-            if (z && this.type_team != obj_2.get(i).team) {
-                obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
-                armor_damage(obj_2,i);
-                this.clear_sost = 1;
-                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
-                return;
+                if (z) {
+                    obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
+                    armor_damage(obj_2, i);
+                    this.clear_sost = 1;
+                    obj_2.get(i).green_len = ((float) obj_2.get(i).hp / obj_2.get(i).max_hp) * Option.size_x_indicator;
+                    return;
+                }
             }
         }
     }
     protected final void corpus_bull_temperature(ArrayList<Transport> obj_2){
         for(i = 0;i<obj_2.size();i++) {
-            z = rect_bull((int)obj_2.get(i).x, (int)obj_2.get(i).y,(int)(obj_2.get(i).corpus_width),(int)(obj_2.get(i).corpus_height),(int)this.x,(int)this.y,
-                    this.size,-obj_2.get(i).rotation_corpus);
-            if (z && this.type_team != obj_2.get(i).team) {
-                obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
-                armor_damage(obj_2,i);
-                metod_temperature(obj_2,i);
-                obj_2.get(i).green_len = ((float)obj_2.get(i).hp/obj_2.get(i).max_hp)* Option.size_x_indicator;
-                return;
+            if(this.type_team != obj_2.get(i).team) {
+                z = rect_bull((int) obj_2.get(i).x, (int) obj_2.get(i).y, (int) (obj_2.get(i).corpus_width), (int) (obj_2.get(i).corpus_height), (int) this.x, (int) this.y,
+                        this.size, -obj_2.get(i).rotation_corpus);
+                if (z) {
+                    obj_2.get(i).time_trigger_bull_bot = obj_2.get(i).time_trigger_bull;
+                    armor_damage(obj_2, i);
+                    metod_temperature(obj_2, i);
+                    obj_2.get(i).green_len = ((float) obj_2.get(i).hp / obj_2.get(i).max_hp) * Option.size_x_indicator;
+                    return;
+                }
             }
         }
     }
@@ -218,7 +224,7 @@ public abstract class Bull implements Serializable {
     }
     protected final void metod_mortar(){
         for(int i3 = 0;i3<this.amount_fragment;i3++){
-            Main.BullList.add(new BullFragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
+            Main.BulletList.add(new BullFragment(this.x,this.y,this.damage_fragment,this.penetration_fragment,this.type_team));}
         Main.BangList.add(new Bang(this.x,this.y,4));
         this.clear_sost = 1;
 

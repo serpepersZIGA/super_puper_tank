@@ -18,7 +18,7 @@ import com.mygdx.game.block.Block;
 import Content.Block.BlockMap;
 import Content.Block.Air;
 import com.mygdx.game.build.*;
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import Data.DataImage;
 import com.mygdx.game.menu.InputWindow;
 import com.mygdx.game.menu.MapAllLoad;
@@ -49,7 +49,7 @@ public class Main extends ApplicationAdapter {
 	public static ArrayList<Transport> PlayerList = new ArrayList<>();
 	public static ArrayList<Transport> EnemyList = new ArrayList<>();
 	public static ArrayList<Building> BuildingList = new ArrayList<>();
-	public static ArrayList<Bull> BullList = new ArrayList<>();
+	public static ArrayList<Bullet> BulletList = new ArrayList<>();
 	public static LinkedList<Particle> FlameStaticList = new LinkedList<>();
 	public static ArrayList<Button>ButtonList = new ArrayList<>();
 	public static LinkedList<Particle> FlameList = new LinkedList<>();
@@ -129,6 +129,11 @@ public class Main extends ApplicationAdapter {
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
+		EnemyList.add(new PanzerFlameT1(1800,2000,Main.EnemyList));
+		EnemyList.add(new PanzerMortarT1(1800,2000,Main.EnemyList));
+		EnemyList.add(new PanzerAcidT1(1800,2000,Main.EnemyList));
+		//PlayerList.add(new PanzerMortarT1(1200,500,Main.PlayerList,(byte)1));
+
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));
 //		EnemyList.add(new PanzerFlameT1(2200,2000,Main.EnemyList));

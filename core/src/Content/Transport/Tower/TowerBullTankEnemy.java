@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class TowerBullTankEnemy extends Transport {
     public TowerBullTankEnemy(float x_const, float y_const, int difference, int difference_2, float reload_max, float speed_rotation, float damage, float penetration,
-                              int ind_unit, byte height, byte team, Sprite tower_image, ArrayList<Transport> spisok, Sound sound){
+                              int ind_unit, byte height, byte team, Sprite tower_image, ArrayList<Transport> List, Sound sound){
         this.tower_x_const = x_const;
         this.tower_y_const = y_const;
-        this.allyList = spisok;
+        this.allyList = List;
         this.sound_fire = sound;
         this.speed_tower = speed_rotation;
         this.reload_max = reload_max;
@@ -35,7 +35,7 @@ public class TowerBullTankEnemy extends Transport {
 
 
     }
-    public void tower_action(int i,float x,float y,float rotation,boolean sost,boolean sost_2,float aim_x,float aim_y) {
+    public void tower_action(int i,int iTower,float x,float y,float rotation,boolean sost,boolean sost_2,float aim_x,float aim_y) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;
@@ -45,11 +45,11 @@ public class TowerBullTankEnemy extends Transport {
         this.aim_y = aim_y;
         tower_xy_2();
         tower_ii_2();
-        bot_bull_tank_fire(i, allyList.get(i).tower_obj, this.enemyList);
+        bot_bull_tank_fire(allyList.get(i).tower_obj.get(iTower), this.enemyList);
         center_render_tower();
         RenderMethod.transorm_img(this.x_tower_rend,this.y_tower_rend,this.width_tower_zoom,this.height_tower_zoom,this.rotation_tower,this.tower_img,const_x_tower,const_y_tower);
     }
-    public void tower_action_client(int i,float x,float y,float rotation,boolean sost,boolean sost_2) {
+    public void tower_action_client(int i,int iTower,float x,float y,float rotation,boolean sost,boolean sost_2) {
         this.x = x;
         this.y = y;
         this.rotation_corpus = rotation;

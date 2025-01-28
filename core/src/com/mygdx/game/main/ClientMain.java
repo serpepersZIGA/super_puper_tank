@@ -186,27 +186,27 @@ public class ClientMain extends Listener{
                 KeyboardObj.zoom_const();
             }
             PacketBull = ((PackerServer) p).bull;
-            i = BullList.size();
+            i = BulletList.size();
             for (int i2 = 0; i2 < PacketBull.size(); i2++) {
                 switch (PacketBull.get(i2).type) {
                     case 1:
-                        BullList.add(new BullFlame(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        BulletList.add(new BullFlame(PacketBull.get(i2).x, PacketBull.get(i2).y,
                             PacketBull.get(i2).rotation, 0.0F, 0.0F, 0, PacketBull.get(i2).team, PacketBull.get(i2).height));
                         break;
                     case 2:
-                        BullList.add(new BullFragment(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        BulletList.add(new BullFragment(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 0.0F, 0.0f, PacketBull.get(i2).height));break;
 
                     case 3:
-                        BullList.add(new BullMortar(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        BulletList.add(new BullMortar(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0f, 0f, 0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 4:
-                        BullList.add(new BullAcid(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        BulletList.add(new BullAcid(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                     case 5:
-                        BullList.add(new BullTank(PacketBull.get(i2).x, PacketBull.get(i2).y,
+                        BulletList.add(new BullTank(PacketBull.get(i2).x, PacketBull.get(i2).y,
                                 PacketBull.get(i2).rotation, 0.0f, 0.0f, PacketBull.get(i2).team
                                 , PacketBull.get(i2).height));break;
                 }
@@ -248,13 +248,13 @@ public class ClientMain extends Listener{
         }
     }
     private void bull_data(int i){
-        BullList.get(this.i).x = PacketBull.get(i).x;
-        BullList.get(this.i).y = PacketBull.get(i).y;
-        BullList.get(this.i).rotation = PacketBull.get(i).rotation;
-        BullList.get(this.i).time = PacketBull.get(i).time;
-        BullList.get(this.i).height = PacketBull.get(i).height;
-        BullList.get(this.i).type = PacketBull.get(i).type;
-        BullList.get(this.i).type_team = PacketBull.get(i).team;
+        BulletList.get(this.i).x = PacketBull.get(i).x;
+        BulletList.get(this.i).y = PacketBull.get(i).y;
+        BulletList.get(this.i).rotation = PacketBull.get(i).rotation;
+        BulletList.get(this.i).time = PacketBull.get(i).time;
+        BulletList.get(this.i).height = PacketBull.get(i).height;
+        BulletList.get(this.i).type = PacketBull.get(i).type;
+        BulletList.get(this.i).type_team = PacketBull.get(i).team;
         this.i += 1;
     }
 

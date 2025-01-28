@@ -1,10 +1,10 @@
 package Content.Bull;
 
-import com.mygdx.game.bull.Bull;
+import com.mygdx.game.bull.Bullet;
 import com.mygdx.game.method.rand;
 
-public class BullOption extends Bull {
-    public BullOption(Bull b){
+public class BullOption extends Bullet {
+    public BullOption(Bullet b){
         this.x = b.x;
         this.y = y;
         this.r = b.r;this.g = b.g;this.b = b.r;

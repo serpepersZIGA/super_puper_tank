@@ -61,9 +61,9 @@ public class ActionMenu extends ActionGame {
             Main.FlameList.get(i).all_action(i);}
         for (i = 0; i< Main.FlameParticleList.size(); i++){
             Main.FlameParticleList.get(i).all_action(i);}
-        for (i = 0; i< Main.BullList.size(); i++){
-            if(Main.BullList.get(i).height == 1) {
-                Main.BullList.get(i).update();
+        for (i = 0; i< Main.BulletList.size(); i++){
+            if(Main.BulletList.get(i).height == 1) {
+                Main.BulletList.get(i).update();
             }
         }
         Render.end();
@@ -88,9 +88,9 @@ public class ActionMenu extends ActionGame {
         Render.end();
         Render.begin(ShapeRenderer.ShapeType.Filled);
 
-        for (i = 0; i< Main.BullList.size(); i++){
-            if(Main.BullList.get(i).height == 2) {
-                Main.BullList.get(i).update();
+        for (i = 0; i< Main.BulletList.size(); i++){
+            if(Main.BulletList.get(i).height == 2) {
+                Main.BulletList.get(i).update();
             }
         }
         for (i= 0; i< PlayerList.size(); i++){
